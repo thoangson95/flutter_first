@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:thoitrang/dangky.dart';
+import 'package:thoitrang/categories.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +15,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // useMaterial3: true,
-        textTheme:
-            GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          // useMaterial3: true,
+          fontFamily: 'UTMAvo'
+          // GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme),
+
+          ),
+      home: const Categories(),
     );
   }
 }
