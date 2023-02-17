@@ -148,10 +148,10 @@ class _Cart extends State<Cart> {
                                 child: TextButton(
                                     style: ButtonStyle(
                                       side: MaterialStateBorderSide.resolveWith((states){
-                                        if(states.contains(MaterialState.hovered)){
+                                        if(states.contains(MaterialState.pressed)){
                                           return BorderSide(width: 1,color: mainColor);
                                         }
-                                        return BorderSide(width: 1);
+                                        return BorderSide(width: 1,color: fade);
                                       }),
                                       shape: MaterialStateProperty.resolveWith((states){
                                         return RoundedRectangleBorder(
