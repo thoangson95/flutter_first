@@ -33,9 +33,18 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
+      appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
+        title: const Text(
+          'Thanh toán',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        centerTitle: true,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,10 +57,9 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-              child: Text(
-                'Đặt Hàng Thành Công'.toUpperCase(),
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              child: const Text(
+                'Đặt Hàng Thành Công',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 textAlign: TextAlign.center,
               ),
             ),
