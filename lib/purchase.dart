@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
 
-class Purchase extends StatefulWidget{
-  const Purchase({super.key});
+class Purchase extends StatefulWidget {
+  const Purchase({super.key, required this.list});
+
+  final List list;
 
   @override
   State<Purchase> createState() => _Purchase();
 }
 
-class _Purchase extends State<Purchase>{
+List tt = [
+  {
+    'Name': 'Giao giờ hành chính',
+    'Desc': 'Phù hợp văn phòng / cơ quan',
+    'Value': 1
+  },
+  {
+    'Name': 'Tất cả ngày trong tuần',
+    'Desc': 'Phù hợp với nhà riêng',
+    'Value': 2
+  },
+  {
+    'Name': 'Giao hàng trong 2h',
+    'Desc': 'Áp dụng địa chỉ giao hàng tại Tp. Hồ Chí Minh',
+    'Value': 3
+  }
+];
 
+class _Purchase extends State<Purchase> {
+  Color mainColor = const Color(0xFFFF7465);
+  bool isChecked = false;
+  int v = tt[0]['Value'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,51 +110,86 @@ class _Purchase extends State<Purchase>{
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          Padding(padding: EdgeInsets.only(bottom: 12)),
                           for (var i in tt)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  width: 18,
-                                  height: 18,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          width: 1,
-                                          color: v == i['Value']
-                                              ? mainColor
-                                              : Colors.transparent)),
-                                  child: IconButton(
-                                    splashColor: Colors.transparent,
-                                    splashRadius: 0.1,
-                                    padding: EdgeInsets.zero,
-                                    onPressed: () {
-                                      v = i["Value"];
-                                      setState(() {});
-                                    },
-                                    icon: Icon(
-                                      Icons.circle,
-                                      color: v == i['Value']
-                                          ? mainColor
-                                          : const Color(0xFFD9D9D9),
-                                      size: 16,
+                            Container(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    width: 18,
+                                    height: 18,
+                                    clipBehavior: Clip.hardEdge,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            width: 1,
+                                            color: v == i['Value']
+                                                ? mainColor
+                                                : Colors.transparent)),
+                                    child: IconButton(
+                                      splashColor: Colors.transparent,
+                                      splashRadius: 0.1,
+                                      padding: EdgeInsets.zero,
+                                      onPressed: () {
+                                        v = i["Value"];
+                                        setState(() {});
+                                      },
+                                      icon: Icon(
+                                        Icons.circle,
+                                        color: v == i['Value']
+                                            ? mainColor
+                                            : const Color(0xFFD9D9D9),
+                                        size: 16,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                  Text(i["Name"],style: TextStyle(fontSize: 13,),),
-                                  Text(i["Desc"],style: TextStyle(fontSize: 10),)
-                                ],)
-                              ],
-                            )
+                                  Padding(padding: EdgeInsets.only(right: 10)),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        i["Name"],
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                      Padding(
+                                          padding: EdgeInsets.only(bottom: 3)),
+                                      Text(
+                                        i["Desc"],
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromRGBO(
+                                                122, 125, 138, 1)),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
                         ],
                       ),
-                    )
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Ghi chú đơn hàng",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: 14)),
+                          
+                        ],
+                      ),
+                    ),
+                    Container(),
+                    Container()
                   ],
                 ),
               ),
@@ -183,5 +240,4 @@ class _Purchase extends State<Purchase>{
       ),
     );
   }
-
 }

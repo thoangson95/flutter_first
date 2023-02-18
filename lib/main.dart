@@ -8,6 +8,30 @@ void main() {
   runApp(const MyApp());
 }
 
+List items = [
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+      {"name": "Áo thun nữ thời trang","pic":"asset/images/Product.png","price":"290.000đ", "amount": 1},
+    ];
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -16,14 +40,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: "UTM Avo",
+        scaffoldBackgroundColor: Colors.white,
         // useMaterial3: true,
-        textTheme:
-            GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme),
       ),
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        '/': (context) => Cart(),
-        '/hai': (context) => Purchase(),
+        '/hai': (context) => Cart(list: items,),
+        '/': (context) => Purchase(list:items),
         '/ba': (context) => SuccessPurchase(),
       },
     );
