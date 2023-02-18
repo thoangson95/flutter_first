@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   font_awesome_flutter: ^10.4.0
+  another_xlider: ^1.1.2
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,8 @@ flutter:
     - assets/dangky_icon/user.png
     - assets/categories_image/avatar.png
     - assets/categories_image/Bag.png
+    - assets/filter_icon/star_empty.png
+    - assets/filter_icon/star.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
