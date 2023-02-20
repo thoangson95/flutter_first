@@ -139,12 +139,15 @@ class _DangkyState extends State<Dangky> {
                             color: Color(0xFF1877F2),
                           ),
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFFFFF),
-                              elevation: 0,
-                              side: const BorderSide(
-                                  width: 1, color: Color(0xFF1877F2)),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
+                            foregroundColor: const Color(0xFF1877F2),
+                            backgroundColor: const Color(0xFFFFFFFF),
+                            elevation: 0,
+                            side: const BorderSide(
+                                width: 1, color: Color(0xFF1877F2)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
                           label: const Text(
                             "Tiếp tục với Facebook",
                             style: TextStyle(

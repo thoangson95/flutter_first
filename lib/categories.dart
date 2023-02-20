@@ -1,5 +1,26 @@
 import 'package:flutter/material.dart';
 
+class DecoratedTabBar extends StatelessWidget implements PreferredSizeWidget {
+  const DecoratedTabBar(
+      {super.key, required this.tabBar, required this.decoration});
+
+  final TabBar tabBar;
+  final BoxDecoration decoration;
+
+  @override
+  Size get preferredSize => tabBar.preferredSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(child: Container(decoration: decoration)),
+        tabBar,
+      ],
+    );
+  }
+}
+
 class Categories extends StatefulWidget {
   const Categories({Key? key}) : super(key: key);
 
@@ -15,28 +36,45 @@ class _CategoriesState extends State<Categories> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const TabBar(
-            indicatorColor: Color(0xFFFF7465),
-            indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(width: 1),
-              insets: EdgeInsets.symmetric(horizontal: 30),
-            ),
-            labelColor: Color(0xFF222222),
-            labelStyle: TextStyle(
-              fontSize: 13,
-              height: 1.3,
-              fontWeight: FontWeight.w700,
-            ),
-            tabs: [
-              Tab(
-                text: "Home",
+          Container(
+            margin: const EdgeInsets.only(bottom: 20),
+            child: const DecoratedTabBar(
+              tabBar: TabBar(
+                indicatorColor: Color(0xFFFF7465),
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Color(0xFFFF7465),
+                  ),
+                  insets: EdgeInsets.symmetric(horizontal: 30),
+                ),
+                labelColor: Color(0xFF222222),
+                labelStyle: TextStyle(
+                  fontSize: 13,
+                  height: 1.3,
+                  fontWeight: FontWeight.w700,
+                ),
+                tabs: [
+                  Tab(
+                    text: "Home",
+                  ),
+                  Tab(
+                    text: "Categories",
+                  )
+                ],
               ),
-              Tab(
-                text: "Categories",
-              )
-            ],
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(0xffD9D9D9),
+                    width: 1,
+                  ),
+                ),
+              ),
+            ),
           ),
-          SizedBox(
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             height: 96 * 4 + 25 * 4,
             child: TabBarView(children: [
               const Center(

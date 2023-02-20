@@ -271,7 +271,11 @@ class _FilterCategoriesState extends State<FilterCategories> {
     "Áo khoác",
     "Jumpsuit",
     "Crop top",
-    "Áo lệch vai"
+    "Áo lệch vai",
+    "Áo khoác",
+    "Áo khoác",
+    "Áo khoác",
+    "Áo khoác",
   ];
 
   @override
@@ -298,6 +302,7 @@ class _FilterCategoriesState extends State<FilterCategories> {
               SizedBox(
                   height: 51 * 4,
                   child: ListView(
+                    scrollDirection: Axis.vertical,
                     children: _listItem
                         .map((e) => Column(
                               children: [

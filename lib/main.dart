@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'package:thoitrang/dangky.dart';
 // import 'package:thoitrang/categories.dart';
 import 'package:thoitrang/filterscreen.dart';
 import 'package:thoitrang/homescreen.dart';
+import 'BottomBarIcon_icons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
       theme: ThemeData(
           // useMaterial3: true,
           fontFamily: 'UTMAvo'
@@ -51,10 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _onItemTapped(int index) {
+    _selectedIndex = index;
     setState(() {
-      _selectedIndex = index;
       _pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.fastOutSlowIn);
     });
   }
 
@@ -80,28 +82,39 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xFFFF7465),
-        selectedIconTheme: const IconThemeData(size: 15),
-        unselectedIconTheme: const IconThemeData(size: 15),
         unselectedItemColor: const Color(0xFFC2C2C2),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
         elevation: 10,
         items: const [
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.house),
+            icon: Icon(
+              BottomBarIcon.home,
+              size: 24,
+            ),
             label: "home",
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.heart),
+            icon: Icon(
+              BottomBarIcon.heart,
+              size: 24,
+            ),
             label: "heart",
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.bell),
+            icon: Icon(
+              BottomBarIcon.bell,
+              size: 24,
+            ),
             label: "bell",
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.user),
+            icon: Icon(
+              BottomBarIcon.user,
+              size: 24,
+            ),
             label: "user",
           ),
         ],

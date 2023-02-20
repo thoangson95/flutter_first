@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'categories.dart';
+import 'package:thoitrang/categories.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -41,6 +41,7 @@ class _HomescreenState extends State<Homescreen> {
         ),
         actions: [
           IconButton(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
             onPressed: () {},
             icon: Image.asset("assets/categories_image/Bag.png"),
             iconSize: 22,
@@ -50,11 +51,11 @@ class _HomescreenState extends State<Homescreen> {
       body: Container(
         color: Colors.white,
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          physics: const ClampingScrollPhysics(),
           children: [
             // 2 dòng chữ
             const Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Text(
                 "Xin Chào Bảo Ngọc",
                 style: TextStyle(
@@ -65,7 +66,7 @@ class _HomescreenState extends State<Homescreen> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Text(
                 "Nhiều mẫu mã đang chờ bạn thị trường thời trang",
                 style: TextStyle(
@@ -78,7 +79,7 @@ class _HomescreenState extends State<Homescreen> {
 
             // Tìm kiếm
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 6),
               height: 46,
               child: TextField(
                 textAlignVertical: TextAlignVertical.center,
@@ -101,7 +102,7 @@ class _HomescreenState extends State<Homescreen> {
             ),
 
             // Tab
-            const Categories()
+            const Categories(),
           ],
         ),
       ),
