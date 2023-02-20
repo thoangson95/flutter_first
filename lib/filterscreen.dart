@@ -33,21 +33,18 @@ class _FilterscreenState extends State<Filterscreen> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        color: Colors.white,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
-            child: Column(
-              children: const [
-                KhoanGia(),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 38),
-                  child: StarRating(),
-                ),
-                FilterCategories(),
-              ],
-            ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+          child: Column(
+            children: const [
+              KhoanGia(),
+              Padding(
+                padding: EdgeInsets.only(bottom: 38),
+                child: StarRating(),
+              ),
+              FilterCategories(),
+            ],
           ),
         ),
       ),

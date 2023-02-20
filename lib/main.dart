@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 import 'package:thoitrang/dangky.dart';
-// import 'package:thoitrang/categories.dart';
 import 'package:thoitrang/filterscreen.dart';
 import 'package:thoitrang/homescreen.dart';
 import 'BottomBarIcon_icons.dart';
@@ -79,48 +77,61 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       extendBody: true,
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        child: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          selectedItemColor: const Color(0xFFFF7465),
-          unselectedItemColor: const Color(0xFFC2C2C2),
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          onTap: _onItemTapped,
-          type: BottomNavigationBarType.fixed,
-          elevation: 10,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                BottomBarIcon.home,
-                size: 24,
-              ),
-              label: "home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                BottomBarIcon.heart,
-                size: 24,
-              ),
-              label: "heart",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                BottomBarIcon.bell,
-                size: 24,
-              ),
-              label: "bell",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                BottomBarIcon.user,
-                size: 24,
-              ),
-              label: "user",
-            ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(blurRadius: 20, color: Color.fromRGBO(0, 0, 0, 0.1))
           ],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          child: BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            selectedItemColor: const Color(0xFFFF7465),
+            unselectedItemColor: const Color(0xFFC2C2C2),
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            onTap: _onItemTapped,
+            type: BottomNavigationBarType.fixed,
+            elevation: 10,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  BottomBarIcon.home,
+                  size: 24,
+                ),
+                label: "home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  BottomBarIcon.heart,
+                  size: 24,
+                ),
+                label: "heart",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  BottomBarIcon.bell,
+                  size: 24,
+                ),
+                label: "bell",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  BottomBarIcon.user,
+                  size: 24,
+                ),
+                label: "user",
+              ),
+            ],
+          ),
         ),
       ),
     );
