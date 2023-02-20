@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thoitrang/purchase.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key, required this.list});
@@ -77,10 +78,10 @@ class _Cart extends State<Cart> {
                                 scale: 1.4,
                                 child: Checkbox(
                                   onChanged: (value) {
-                                    isChecked = !isChecked;
+                                    i['selected'] = !i['selected'];
                                     setState(() {});
                                   },
-                                  value: isChecked,
+                                  value: i['selected'],
                                   fillColor: MaterialStateProperty.resolveWith(
                                       (states) {
                                     return mainColor;
@@ -236,7 +237,7 @@ class _Cart extends State<Cart> {
                               isChecked = !isChecked;
                               setState(() {});
                             },
-                            value: isChecked,
+                            value: false,
                             fillColor:
                                 MaterialStateProperty.resolveWith((states) {
                               return mainColor;
@@ -281,7 +282,15 @@ class _Cart extends State<Cart> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Purchase(list: widget.list),
+                        ),
+                      );
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: mainColor,
                     ),
