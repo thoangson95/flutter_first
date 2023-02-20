@@ -12,52 +12,89 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        appBar: GFAppBar(
+          leading: GFIconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/order-sucsess');
+            },
+            type: GFButtonType.transparent,
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: ListView(
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-              child: Image.asset('assets/images/package.png'),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
               child: const Text(
                 'Quên mật khẩu',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: const Text(
-                'Đơn hàng của bạn đã được đặt thành công để biết thêm chi tiết đi đến đơn đặt hàng của tôi.',
                 style: TextStyle(
-                    fontWeight: FontWeight.normal, fontSize: 12, height: 1.8),
-                textAlign: TextAlign.center,
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: GFButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/product-detail');
-                },
-                blockButton: true,
-                color: GFColors.DANGER,
-                size: GFSize.LARGE,
-                child: const Text(
-                  'Xem đơn hàng',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 75),
+              child: const Text(
+                'Nhập số điện thoại của bạn',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 75),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: [],
+                maxLength: 10,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.phone_outlined),
+                  hintText: "Mobile Number",
+                  counterText: '',
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 13,
+                    color: Color.fromRGBO(121, 121, 121, 1),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Material(
+                color: const Color.fromRGBO(255, 116, 101, 1),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/check-code');
+                  },
+                  child: const SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        'Gửi code',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
           ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        ));
   }
 }

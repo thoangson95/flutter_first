@@ -12,17 +12,19 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Đặt hàng thành công',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+      appBar: GFAppBar(
+        leading: GFIconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
-          textAlign: TextAlign.center,
+          onPressed: () {
+            Navigator.pushNamed(context, '/product-detail');
+          },
+          type: GFButtonType.transparent,
         ),
-        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       body: Center(
         child: Column(
@@ -50,17 +52,27 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: GFButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/forget-password');
-                },
-                blockButton: true,
-                color: GFColors.DANGER,
-                size: GFSize.LARGE,
-                child: const Text(
-                  'Xem đơn hàng',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Material(
+                color: const Color.fromRGBO(255, 116, 101, 1),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/forget-password');
+                  },
+                  child: const SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        'Xem đơn hàng',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
