@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:google_fonts/google_fonts.dart';
-// import 'package:thoitrang/dangky.dart';
+import 'package:thoitrang/dangky.dart';
 // import 'package:thoitrang/categories.dart';
 import 'package:thoitrang/filterscreen.dart';
 import 'package:thoitrang/homescreen.dart';
@@ -21,9 +21,8 @@ class MyApp extends StatelessWidget {
           // useMaterial3: true,
           fontFamily: 'UTMAvo'
           // GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme),
-
           ),
-      home: const Filterscreen(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -71,12 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         children: [
           const Homescreen(),
-          Container(
-            color: Colors.red,
-          ),
-          Container(
-            color: Colors.green,
-          ),
+          const Filterscreen(),
+          const Dangky(),
           Container(
             color: Colors.blue,
           ),

@@ -39,10 +39,64 @@ class _FilterscreenState extends State<Filterscreen> {
           child: Column(
             children: const [
               KhoanGia(),
-              StarRating(),
+              Padding(
+                padding: EdgeInsets.only(bottom: 38),
+                child: StarRating(),
+              ),
               FilterCategories(),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 37),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 150,
+              decoration: const BoxDecoration(
+                color: Color(0xffEFEFEF),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "Xóa",
+                  style: TextStyle(
+                      fontFamily: "UTMAvo",
+                      fontSize: 13,
+                      height: 21 / 13,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xffFF7465)),
+                ),
+              ),
+            ),
+            Container(
+              width: 150,
+              decoration: const BoxDecoration(
+                color: Color(0xffFF7465),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  "Lọc",
+                  style: TextStyle(
+                      fontFamily: "UTMAvo",
+                      fontSize: 13,
+                      height: 21 / 13,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xffffffff)),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -227,6 +281,7 @@ class _FilterCategoriesState extends State<FilterCategories> {
       children: [
         Expanded(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.only(bottom: 16),
@@ -241,11 +296,18 @@ class _FilterCategoriesState extends State<FilterCategories> {
                 ),
               ),
               SizedBox(
-                  height: 50 * 4,
+                  height: 51 * 4,
                   child: ListView(
                     children: _listItem
-                        .map((e) => FilterCategoryItem(
-                              name: e,
+                        .map((e) => Column(
+                              children: [
+                                FilterCategoryItem(
+                                  name: e,
+                                ),
+                                const DashedLine(
+                                  color: Color(0xffD9D9D9),
+                                )
+                              ],
                             ))
                         .toList(),
                   ))
@@ -297,6 +359,38 @@ class _FilterCategoryItemState extends State<FilterCategoryItem> {
               : null,
         ),
       ),
+    );
+  }
+}
+
+class DashedLine extends StatelessWidget {
+  const DashedLine({Key? key, this.height = 1, this.color = Colors.black})
+      : super(key: key);
+  final double height;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final boxWidth = constraints.constrainWidth();
+        const dashWidth = 3.0;
+        final dashHeight = height;
+        final dashCount = (boxWidth / (2 * dashWidth)).floor();
+        return Flex(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          direction: Axis.horizontal,
+          children: List.generate(dashCount, (_) {
+            return SizedBox(
+              width: dashWidth,
+              height: dashHeight,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: color),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }
