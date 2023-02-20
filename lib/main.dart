@@ -19,10 +19,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
       theme: ThemeData(
-          // useMaterial3: true,
-          fontFamily: 'UTMAvo'
-          // GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme),
-          ),
+        // useMaterial3: true,
+        fontFamily: 'UTMAvo',
+      ),
       home: const MyHomePage(),
     );
   }
@@ -79,45 +78,50 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFFFF7465),
-        unselectedItemColor: const Color(0xFFC2C2C2),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        elevation: 10,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              BottomBarIcon.home,
-              size: 24,
+      extendBody: true,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color(0xFFFF7465),
+          unselectedItemColor: const Color(0xFFC2C2C2),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          onTap: _onItemTapped,
+          type: BottomNavigationBarType.fixed,
+          elevation: 10,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                BottomBarIcon.home,
+                size: 24,
+              ),
+              label: "home",
             ),
-            label: "home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              BottomBarIcon.heart,
-              size: 24,
+            BottomNavigationBarItem(
+              icon: Icon(
+                BottomBarIcon.heart,
+                size: 24,
+              ),
+              label: "heart",
             ),
-            label: "heart",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              BottomBarIcon.bell,
-              size: 24,
+            BottomNavigationBarItem(
+              icon: Icon(
+                BottomBarIcon.bell,
+                size: 24,
+              ),
+              label: "bell",
             ),
-            label: "bell",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              BottomBarIcon.user,
-              size: 24,
+            BottomNavigationBarItem(
+              icon: Icon(
+                BottomBarIcon.user,
+                size: 24,
+              ),
+              label: "user",
             ),
-            label: "user",
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
