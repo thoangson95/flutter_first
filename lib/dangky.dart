@@ -55,7 +55,8 @@ class _DangkyState extends State<Dangky> {
                   "Số điện thoại", "assets/dangky_icon/phone.png", 40),
               _buildTextfile(
                   "Email của bạn", "assets/dangky_icon/unlock.png", 40),
-              _buildTextfile("Mật khẩu", "assets/dangky_icon/user.png", 0),
+              _buildTextfile("Mật khẩu", "assets/dangky_icon/user.png", 0,
+                  isPassword: true),
 
               //  phần nút
               Container(
@@ -168,7 +169,8 @@ class _DangkyState extends State<Dangky> {
         ));
   }
 
-  Container _buildTextfile(String label, String urlIcon, double bottomMargin) {
+  Container _buildTextfile(String label, String urlIcon, double bottomMargin,
+      {bool isPassword = false}) {
     return Container(
       height: 40,
       padding: const EdgeInsets.all(0),
@@ -195,6 +197,7 @@ class _DangkyState extends State<Dangky> {
           ),
           Expanded(
               child: TextField(
+            obscureText: isPassword,
             decoration:
                 InputDecoration(border: InputBorder.none, hintText: label),
           ))
