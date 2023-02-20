@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:go_router/go_router.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
   const OrderSuccessScreen({super.key});
@@ -18,9 +19,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/product-detail');
-          },
+          onPressed: () => context.go('/product-detail'),
           type: GFButtonType.transparent,
         ),
         backgroundColor: Colors.white,
@@ -57,9 +56,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                 color: const Color.fromRGBO(255, 116, 101, 1),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/forget-password');
-                  },
+                  onTap: () => context.go('/forget-password'),
                   child: const SizedBox(
                     height: 45,
                     width: double.infinity,
@@ -78,7 +75,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             ),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

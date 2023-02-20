@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:go_router/go_router.dart';
 
 class CheckCodeScreen extends StatefulWidget {
   const CheckCodeScreen({super.key});
@@ -72,9 +73,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, '/forget-password');
-            },
+            onPressed: () => context.go('/forget-password'),
             type: GFButtonType.transparent,
           ),
           backgroundColor: Colors.white,
@@ -142,9 +141,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                 color: const Color.fromRGBO(255, 116, 101, 1),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: InkWell(
-                  onTap: () {
-                    // Navigator.pushNamed(context, '/product-detail');
-                  },
+                  onTap: () => context.go('/account'),
                   child: const SizedBox(
                     height: 45,
                     width: double.infinity,

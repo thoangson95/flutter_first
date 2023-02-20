@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -27,18 +28,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/order-sucsess');
-          },
+          onPressed: () => context.go('/account'),
           type: GFButtonType.transparent,
         ),
         actions: <Widget>[
           IconButton(
             icon: Image.asset('assets/images/icons/bag.png'),
             iconSize: 22,
-            onPressed: () {
-              Navigator.pushNamed(context, '/order-sucsess');
-            },
+            onPressed: () => context.go('/account'),
           )
         ],
         backgroundColor: Colors.white,
@@ -89,9 +86,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ]),
                 ),
                 IconButton(
-                  icon: Image.asset('assets/images/icons/heart.png'),
+                  icon: Image.asset('assets/images/icons/heart_2.png'),
                   iconSize: 22,
-                  onPressed: () {},
+                  onPressed: () => context.go('/account'),
                 ),
               ],
             ),
@@ -182,7 +179,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             child: GFRadio(
                               type: GFRadioType.basic,
                               size: 26,
-                              value: 16,
+                              value: 1,
                               groupValue: groupValue,
                               onChanged: (value) {
                                 setState(() {
@@ -203,7 +200,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             child: GFRadio(
                               type: GFRadioType.basic,
                               size: 26,
-                              value: 17,
+                              value: 2,
                               groupValue: groupValue,
                               onChanged: (value) {
                                 setState(() {
@@ -211,11 +208,53 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 });
                               },
                               inactiveIcon: null,
-                              activeBorderColor: GFColors.DANGER,
-                              customBgColor: GFColors.DANGER,
-                              inactiveBorderColor: Colors.red,
-                              inactiveBgColor: GFColors.DANGER,
-                              activeBgColor: GFColors.DANGER,
+                              activeBorderColor: GFColors.SUCCESS,
+                              customBgColor: GFColors.SUCCESS,
+                              inactiveBorderColor: GFColors.SUCCESS,
+                              inactiveBgColor: GFColors.SUCCESS,
+                              activeBgColor: GFColors.SUCCESS,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 0),
+                            child: GFRadio(
+                              type: GFRadioType.basic,
+                              size: 26,
+                              value: 3,
+                              groupValue: groupValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  groupValue = value;
+                                });
+                              },
+                              inactiveIcon: null,
+                              activeBorderColor: GFColors.PRIMARY,
+                              customBgColor: GFColors.PRIMARY,
+                              inactiveBorderColor: GFColors.PRIMARY,
+                              inactiveBgColor: GFColors.PRIMARY,
+                              activeBgColor: GFColors.PRIMARY,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 0),
+                            child: GFRadio(
+                              type: GFRadioType.basic,
+                              size: 26,
+                              value: 3,
+                              groupValue: groupValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  groupValue = value;
+                                });
+                              },
+                              inactiveIcon: null,
+                              activeBorderColor: GFColors.WARNING,
+                              customBgColor: GFColors.WARNING,
+                              inactiveBorderColor: GFColors.WARNING,
+                              inactiveBgColor: GFColors.WARNING,
+                              activeBgColor: GFColors.WARNING,
                             ),
                           ),
                         ],
@@ -238,9 +277,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: IconButton(
                   icon: Image.asset('assets/images/icons/bag.png'),
                   iconSize: 22,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/order-sucsess');
-                  },
+                  onPressed: () => context.go('product-detail'),
                 ),
               ),
             ),
@@ -249,9 +286,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 color: const Color(0xffff8906),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/order-sucsess');
-                  },
+                  onTap: () => context.go('/order-success'),
                   child: const SizedBox(
                     height: 45,
                     width: double.infinity,
@@ -270,7 +305,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

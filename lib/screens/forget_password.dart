@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:go_router/go_router.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -18,9 +19,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () {
-              Navigator.pushNamed(context, '/order-sucsess');
-            },
+            onPressed: () => context.go('/product-detail'),
             type: GFButtonType.transparent,
           ),
           backgroundColor: Colors.white,
@@ -56,6 +55,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               child: TextField(
                 keyboardType: TextInputType.number,
                 inputFormatters: [],
+                autofocus: true,
                 maxLength: 10,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.phone_outlined),
@@ -75,9 +75,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 color: const Color.fromRGBO(255, 116, 101, 1),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/check-code');
-                  },
+                  onTap: () => context.go('/check-code'),
                   child: const SizedBox(
                     height: 45,
                     width: double.infinity,
