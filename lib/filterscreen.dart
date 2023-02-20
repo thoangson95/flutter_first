@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:another_xlider/another_xlider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dangky.dart';
 
 class Filterscreen extends StatefulWidget {
   const Filterscreen({Key? key}) : super(key: key);
@@ -18,7 +19,9 @@ class _FilterscreenState extends State<Filterscreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: Color(0xff222222),
@@ -63,7 +66,11 @@ class _FilterscreenState extends State<Filterscreen> {
                 ),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Dangky(),
+                  ));
+                },
                 child: const Text(
                   "Xóa",
                   style: TextStyle(
@@ -84,7 +91,11 @@ class _FilterscreenState extends State<Filterscreen> {
                 ),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Dangky(),
+                  ));
+                },
                 child: const Text(
                   "Lọc",
                   style: TextStyle(
@@ -133,7 +144,7 @@ class _KhoanGiaState extends State<KhoanGia> {
               ),
             ),
             Text(
-              '${_minValue}K ~ ${_maxValue}K',
+              '${_minValue.round()}K ~ ${_maxValue.round()}K',
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 14,

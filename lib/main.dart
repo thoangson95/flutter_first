@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:thoitrang/dangky.dart';
-import 'package:thoitrang/filterscreen.dart';
 import 'package:thoitrang/homescreen.dart';
 import 'BottomBarIcon_icons.dart';
 
@@ -10,6 +8,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,8 +68,12 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         children: [
           const Homescreen(),
-          const Filterscreen(),
-          const Dangky(),
+          Container(
+            color: Colors.red,
+          ),
+          Container(
+            color: Colors.green,
+          ),
           Container(
             color: Colors.blue,
           ),

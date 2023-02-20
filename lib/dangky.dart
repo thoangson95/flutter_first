@@ -18,7 +18,9 @@ class _DangkyState extends State<Dangky> {
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             color: const Color(0xFF222222),
           ),
           elevation: 0,

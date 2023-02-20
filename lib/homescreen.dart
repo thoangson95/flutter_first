@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/categories.dart';
+import 'filterscreen.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -42,7 +43,11 @@ class _HomescreenState extends State<Homescreen> {
         actions: [
           IconButton(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const Filterscreen(),
+              ));
+            },
             icon: Image.asset("assets/categories_image/Bag.png"),
             iconSize: 22,
           ),
