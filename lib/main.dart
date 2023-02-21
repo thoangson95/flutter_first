@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final testRoute = GoRouter(
-      initialLocation: '/home',
+      initialLocation: '/sign-in',
       routes: [
         ShellRoute(
           builder: (context, state, child) => ScaffoldWithAppbar(body: child),
@@ -90,25 +90,42 @@ class MyApp extends StatelessWidget {
           ],
         ),
         ShellRoute(
-            builder: (context, state, child) => ScaffoldLayout(body: child),
-            routes: [
-              GoRoute(
-                path: '/home',
-                pageBuilder: (context, state) => CustomTransitionPage(
-                  child: const Homescreen(),
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) =>
-                          SlideTransition(
-                              position: animation.drive(
-                                Tween<Offset>(
-                                  begin: const Offset(1, 0),
-                                  end: Offset.zero,
-                                ).chain(CurveTween(curve: Curves.easeIn)),
-                              ),
-                              child: child),
-                ),
+          builder: (context, state, child) => ScaffoldLayout(body: child),
+          routes: [
+            GoRoute(
+              path: '/home',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const Homescreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
               ),
-            ])
+            ),
+          ],
+        ),
+        GoRoute(
+          path: '/filter',
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Filterscreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
       ],
     );
 
@@ -264,29 +281,34 @@ class _ScaffoldLayoutState extends State<ScaffoldLayout> {
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
         elevation: 0,
-        title: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CircleAvatar(
-              backgroundColor: const Color(0xFFecb1c9),
-              child: Image.asset(
-                "assets/categories_image/avatar.png",
-                width: 40,
-                height: 40,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 14),
-              child: Text(
-                "La Rosa’s",
-                style: TextStyle(
-                  fontSize: 20,
-                  height: 1.35,
-                  color: Colors.black,
+        title: InkWell(
+          onTap: () {
+            context.go("/sign-in");
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircleAvatar(
+                backgroundColor: const Color(0xFFecb1c9),
+                child: Image.asset(
+                  "assets/categories_image/avatar.png",
+                  width: 40,
+                  height: 40,
                 ),
               ),
-            ),
-          ],
+              const Padding(
+                padding: EdgeInsets.only(left: 14),
+                child: Text(
+                  "La Rosa’s",
+                  style: TextStyle(
+                    fontSize: 20,
+                    height: 1.35,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(

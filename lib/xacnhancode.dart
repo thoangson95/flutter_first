@@ -115,7 +115,7 @@ class _XacnhancodeState extends State<Xacnhancode> {
                     ),
                   ),
                   onPressed: () {
-                    context.go('/');
+                    context.go('/home');
                   },
                   child: const Text(
                     "Xác nhận",
