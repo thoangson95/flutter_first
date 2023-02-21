@@ -33,7 +33,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Image.asset('assets/images/icons/bag.png'),
+            icon: Image.asset(
+              'assets/images/icons/bag.png',
+              width: 20,
+            ),
             iconSize: 22,
             onPressed: () => context.go('/account'),
           )

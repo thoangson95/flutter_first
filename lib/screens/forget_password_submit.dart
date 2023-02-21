@@ -117,24 +117,25 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
               ),
             ),
             Container(
-                padding: const EdgeInsets.fromLTRB(20, 25, 20, 50),
-                child: const Text.rich(
-                  textAlign: TextAlign.center,
-                  TextSpan(
-                    text: 'Gửi lại mã sau',
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: ' 59s ',
-                          style: TextStyle(
-                              color: Color.fromRGBO(255, 116, 101, 1))),
-                    ],
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black,
-                    ),
+              padding: const EdgeInsets.fromLTRB(20, 25, 20, 50),
+              child: const Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  text: 'Gửi lại mã sau',
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: ' 59s ',
+                        style:
+                            TextStyle(color: Color.fromRGBO(255, 116, 101, 1))),
+                  ],
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black,
                   ),
-                )),
+                ),
+              ),
+            ),
             Container(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Material(

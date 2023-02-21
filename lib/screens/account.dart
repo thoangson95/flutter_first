@@ -10,83 +10,430 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  final List<String> imageList = [
-    "https://w0.peakpx.com/wallpaper/121/369/HD-wallpaper-beautiful-girl-flower-aesthetic-ultra-girls-flower-girl-style-beautiful-portrait-woman-design-human-background-charming-young-face-female-beauty-model-gerbera-fashion-look-pretty.jpg",
-    "https://w0.peakpx.com/wallpaper/636/411/HD-wallpaper-youth-ultra-girls-girl-style-beautiful-portrait-woman-design-human-background-young-face-female-beauty-model-fashion-cool-look-makeup-pretty-vogue-person-teenager-youth-aesthetic.jpg",
-    "https://w0.peakpx.com/wallpaper/125/492/HD-wallpaper-beautiful-stylish-girl-ultra-girls-girl-style-beautiful-portrait-woman-design-young-wind-urban-beauty-model-fashion-youth-aesthetic.jpg",
-    "https://w0.peakpx.com/wallpaper/159/233/HD-wallpaper-elle-fanning-american-actress.jpg",
+  List<String> images = [
+    "https://static.cafedev.vn/tutorial/flutter/images/flutter-logo.png",
+    "https://static.cafedev.vn/tutorial/flutter/images/flutter-logo.png",
   ];
-  int groupValue = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GFAppBar(
-        leading: GFIconButton(
-          icon: const Icon(
-            Icons.arrow_back,
+      appBar: AppBar(
+        title: const Text(
+          'Tài khoản',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          onPressed: () => context.go('/product-detail'),
-          type: GFButtonType.transparent,
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Image.asset('assets/images/icons/bag.png'),
-            iconSize: 22,
-            onPressed: () => context.go('/product-detail'),
-          )
-        ],
+        centerTitle: true,
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        shape: const Border(
+          bottom: BorderSide(color: Color.fromRGBO(241, 241, 241, 1), width: 1),
+        ),
         elevation: 0,
       ),
       body: ListView(
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: const Text(
-                            'Áo thun nữ thời trang',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black,
+            padding: const EdgeInsets.all(20),
+            child: Container(
+              padding: const EdgeInsets.all(0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GFListTile(
+                              avatar: const GFAvatar(
+                                backgroundImage:
+                                    AssetImage('assets/images/avr.png'),
+                                shape: GFAvatarShape.circle,
+                                backgroundColor: Colors.white,
+                                size: 40,
+                              ),
+                              margin: const EdgeInsets.all(0),
+                              padding:
+                                  const EdgeInsets.only(top: 15, bottom: 20),
+                              onTap: () => context.go('/'),
+                              title: const Text(
+                                'Đoàn Quốc Dũng',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Color.fromRGBO(34, 34, 34, 1),
+                                ),
+                              ),
+                              subTitle: const Text(
+                                'Chỉnh sửa',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                  color: Color.fromRGBO(128, 128, 128, 1),
+                                ),
+                              ),
                             ),
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.navigate_next_rounded),
+                        iconSize: 22,
+                        color: Colors.black,
+                        onPressed: () => context.go('/'),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Giỏ hàng',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        )
-                      ]),
-                ),
-                IconButton(
-                  icon: Image.asset('assets/images/icons/heart.png'),
-                  iconSize: 22,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-            child: Text(
-              '- Sản phẩm: SET ASHE W SKIRT \n'
-              '- Màu sắc: Hồng nhạt, kem, đen, xám , đỏ \n'
-              '- Chất vải: Cotton hàn',
-              softWrap: true,
-              style: TextStyle(
-                fontSize: 12,
-                color: Color.fromARGB(255, 151, 151, 151),
-                height: 2.2,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Đơn hàng',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Phiếu giảm giá & Mã khuyến mại',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(254, 90, 107, 1),
+                                  Color.fromRGBO(255, 102, 147, 1)
+                                ],
+                                transform: GradientRotation(180),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                surfaceTintColor: Colors.transparent,
+                                elevation: 0,
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: Column(
+                                  children: const [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        '10%',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Khi mua đơn hàng 200k',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 11),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                          decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(254, 90, 107, 1),
+                                  Color.fromRGBO(255, 102, 147, 1)
+                                ],
+                                transform: GradientRotation(180),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent,
+                                elevation: 0,
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: Column(
+                                  children: const [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        '20%',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Khi mua đơn hàng 500k',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 11),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Địa chỉ giao hàng',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Đơn hàng',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Hỏi đáp',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    color: Color.fromRGBO(234, 234, 234, 1),
+                  ),
+                  InkWell(
+                    onTap: () => {},
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'Đăng xuất',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color.fromRGBO(34, 34, 34, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.navigate_next_rounded),
+                          iconSize: 22,
+                          color: Colors.black,
+                          onPressed: () => context.go('/'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          const Divider(
-            color: Color.fromRGBO(234, 234, 234, 1),
           ),
         ],
       ),

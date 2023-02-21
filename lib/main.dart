@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/screens/home.dart';
 import 'package:thoitrang/screens/intro.dart';
 import 'package:thoitrang/screens/account.dart';
 import 'package:thoitrang/screens/forget_password.dart';
@@ -19,6 +20,12 @@ final GoRouter _router = GoRouter(
         return const IntroScreen();
       },
       routes: <RouteBase>[
+        GoRoute(
+          path: 'home',
+          builder: (BuildContext context, GoRouterState state) {
+            return const HomeScreen();
+          },
+        ),
         GoRoute(
           path: 'account',
           builder: (BuildContext context, GoRouterState state) {

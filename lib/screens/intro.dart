@@ -33,7 +33,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     color: Colors.white),
                 textAlign: TextAlign.center,
               ),
-              onTap: () => context.go('/account'),
+              onTap: () => context.go('/home'),
             ),
           ],
         ),
