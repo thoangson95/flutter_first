@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:thoitrang/dangky.dart';
+import 'package:thoitrang/filterscreen.dart';
 import 'package:thoitrang/homescreen.dart';
+import 'package:thoitrang/xacnhancode.dart';
 import 'BottomBarIcon_icons.dart';
+import 'quenmatkhau.dart';
+import 'dangnhap.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,16 +17,61 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = GoRouter(
+      initialLocation: '/sign-in',
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const Homescreen(),
+        ),
+        GoRoute(
+          path: '/filter',
+          builder: (context, state) => const Filterscreen(),
+        ),
+        GoRoute(
+          path: '/sign-in',
+          builder: (context, state) => const Dangnhap(),
+        ),
+        GoRoute(
+          path: '/sign-up',
+          builder: (context, state) => const Dangky(),
+        ),
+        GoRoute(
+          path: '/forgot-password',
+          builder: (context, state) => const Quenmatkhau(),
+        ),
+        GoRoute(
+          path: '/verify-code',
+          builder: (context, state) => const Xacnhancode(),
+        ),
+      ],
+    );
+
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
       theme: ThemeData(
+        appBarTheme:
+            const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         // useMaterial3: true,
         fontFamily: 'UTMAvo',
       ),
-      home: const MyHomePage(),
     );
+
+    // return MaterialApp(
+    //   title: 'Flutter Demo',
+    //   debugShowCheckedModeBanner: false,
+    //   debugShowMaterialGrid: false,
+    //   theme: ThemeData(
+    //     appBarTheme:
+    //         const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
+    //     // useMaterial3: true,
+    //     fontFamily: 'UTMAvo',
+    //   ),
+    //   home: const Dangnhap(),
+    // );
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class Dangky extends StatefulWidget {
   const Dangky({Key? key}) : super(key: key);
@@ -19,19 +20,24 @@ class _DangkyState extends State<Dangky> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.of(context).pop();
+              context.pop();
             },
             color: const Color(0xFF222222),
           ),
           elevation: 0,
           backgroundColor: const Color(0xFFFFFFFF),
           centerTitle: true,
-          title: const Align(
+          title: Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "Đăng ký",
-              style: TextStyle(
-                  color: Color(0xFFA4A4A4), fontSize: 14, height: 1.3),
+            child: InkWell(
+              onTap: () {
+                context.go('/sign-in');
+              },
+              child: const Text(
+                "Đăng Nhập",
+                style: TextStyle(
+                    color: Color(0xFFA4A4A4), fontSize: 14, height: 1.3),
+              ),
             ),
           ),
         ),
@@ -107,7 +113,9 @@ class _DangkyState extends State<Dangky> {
                       child: SizedBox(
                         height: 46,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.go('/');
+                          },
                           style: ElevatedButton.styleFrom(
                               elevation: 0,
                               backgroundColor: const Color(0xFFFF7465),

@@ -38,6 +38,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   font_awesome_flutter: ^10.4.0
   go_router: ^6.0.9
+  pin_code_fields: ^7.4.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,8 @@ flutter:
     - assets/categories_image/Bag.png
     - assets/filter_icon/star_empty.png
     - assets/filter_icon/star.png
+    - assets/dangnhap_image/eye.png
+    - assets/dangnhap_image/bottom_img.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
