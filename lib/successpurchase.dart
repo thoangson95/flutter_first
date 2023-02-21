@@ -8,6 +8,7 @@ class SuccessPurchase extends StatelessWidget {
     Color mainColor = const Color(0xFFFF7465);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         leading: IconButton(
           splashRadius: 0.1,
           icon: const Icon(Icons.arrow_back),

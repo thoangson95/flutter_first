@@ -44,6 +44,7 @@ class _Purchase extends State<Purchase> {
       },
       child: Scaffold(
         appBar: AppBar(
+          elevation: 0,
           title: const Text(
             'Thanh toán',
             style: TextStyle(

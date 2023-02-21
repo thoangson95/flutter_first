@@ -34,6 +34,7 @@ class _Cart extends State<Cart> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         leading: IconButton(
           splashRadius: 0.1,
           icon: const Icon(Icons.arrow_back),

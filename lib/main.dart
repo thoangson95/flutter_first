@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thoitrang/cart.dart';
 import 'package:thoitrang/login.dart';
 import 'package:thoitrang/purchase.dart';
+import 'package:thoitrang/redemcode.dart';
 import 'package:thoitrang/splash.dart';
 import 'package:thoitrang/successpurchase.dart';
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
+      debugShowMaterialGrid: true,
       showSemanticsDebugger: false,
       theme: ThemeData(
         fontFamily: "UTM Avo",
@@ -51,6 +52,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', 
       routes: <String, WidgetBuilder>{
         '/': (context) => const SplashScreen(),
+        '/login/redeem': (context) => const Redemcode(phonenumber: "01"),
+        '/login': (context) => const Login(),
         '/mot': (context) => Cart(list: items,),
         '/hai': (context) => Purchase(list:items),
         '/hai/ba': (context) => const SuccessPurchase(),
