@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:slide_indexed_stack/slide_indexed_stack.dart';
+import 'hometab.dart';
 
 class DecoratedTabBar extends StatelessWidget implements PreferredSizeWidget {
   const DecoratedTabBar(
@@ -28,7 +30,24 @@ class Categories extends StatefulWidget {
   State<Categories> createState() => _CategoriesState();
 }
 
-class _CategoriesState extends State<Categories> {
+class _CategoriesState extends State<Categories>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabCtrl;
+  late int _selected_index;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabCtrl = TabController(length: 2, vsync: this);
+    _selected_index = _tabCtrl.index;
+  }
+
+  @override
+  void dispose() {
+    _tabCtrl.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -38,23 +57,29 @@ class _CategoriesState extends State<Categories> {
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 20),
-            child: const DecoratedTabBar(
+            child: DecoratedTabBar(
               tabBar: TabBar(
-                indicatorColor: Color(0xFFFF7465),
-                indicator: UnderlineTabIndicator(
+                indicatorColor: const Color(0xFFFF7465),
+                indicator: const UnderlineTabIndicator(
                   borderSide: BorderSide(
                     width: 2,
                     color: Color(0xFFFF7465),
                   ),
                   insets: EdgeInsets.symmetric(horizontal: 30),
                 ),
-                labelColor: Color(0xFF222222),
-                labelStyle: TextStyle(
+                labelColor: const Color(0xFF222222),
+                labelStyle: const TextStyle(
                   fontSize: 13,
                   height: 1.3,
                   fontWeight: FontWeight.w700,
                 ),
-                tabs: [
+                controller: _tabCtrl,
+                onTap: (value) {
+                  setState(() {
+                    _selected_index = value;
+                  });
+                },
+                tabs: const [
                   Tab(
                     text: "Home",
                   ),
@@ -63,7 +88,7 @@ class _CategoriesState extends State<Categories> {
                   )
                 ],
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: Color(0xffD9D9D9),
@@ -73,17 +98,20 @@ class _CategoriesState extends State<Categories> {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-            height: 96 * 4 + 25 * 4,
-            child: TabBarView(children: [
-              const Center(
-                child: Text("home"),
-              ),
-              Center(
+          // Tab viewer
+          SlideIndexedStack(
+            index: _selected_index,
+            axis: Axis.horizontal,
+            slideOffset: -0.5,
+            duration: const Duration(milliseconds: 300),
+            children: [
+              Hometab(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 child: ListCategories(),
               ),
-            ]),
+            ],
           )
         ],
       ),
@@ -151,7 +179,7 @@ class ListCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: cateList.map((e) {
         return item(e.url, e.name);
       }).toList(),

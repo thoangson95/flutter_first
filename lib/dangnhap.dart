@@ -6,30 +6,9 @@ class Dangnhap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: TextButton(
-              onPressed: () {
-                context.push('/sign-up');
-              },
-              child: const Text(
-                "Đăng ký",
-                style: TextStyle(
-                  fontSize: 14,
-                  height: 19 / 14,
-                  color: Color(0xffA4A4A4),
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-      body: Stack(
+    return Container(
+      decoration: const BoxDecoration(color: Colors.white),
+      child: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -173,7 +152,7 @@ class Dangnhap extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        context.go("/");
+                        context.go('/home');
                       },
                       child: const Text(
                         "Đăng nhập",

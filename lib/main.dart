@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/BottomBarIcon_icons.dart';
 import 'package:thoitrang/dangky.dart';
 import 'package:thoitrang/filterscreen.dart';
 import 'package:thoitrang/homescreen.dart';
 import 'package:thoitrang/xacnhancode.dart';
-import 'BottomBarIcon_icons.dart';
 import 'quenmatkhau.dart';
 import 'dangnhap.dart';
 
@@ -17,38 +17,103 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = GoRouter(
-      initialLocation: '/sign-in',
+    final testRoute = GoRouter(
+      initialLocation: '/home',
       routes: [
-        GoRoute(
-          path: '/',
-          builder: (context, state) => const Homescreen(),
+        ShellRoute(
+          builder: (context, state, child) => ScaffoldWithAppbar(body: child),
+          routes: [
+            GoRoute(
+              path: '/sign-in',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const Dangnhap(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
+              ),
+            ),
+            GoRoute(
+              path: '/sign-up',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const Dangky(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
+              ),
+            ),
+            GoRoute(
+              path: '/forgot-password',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const Quenmatkhau(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
+              ),
+            ),
+            GoRoute(
+              path: '/verify-code',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const Xacnhancode(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
+              ),
+            ),
+          ],
         ),
-        GoRoute(
-          path: '/filter',
-          builder: (context, state) => const Filterscreen(),
-        ),
-        GoRoute(
-          path: '/sign-in',
-          builder: (context, state) => const Dangnhap(),
-        ),
-        GoRoute(
-          path: '/sign-up',
-          builder: (context, state) => const Dangky(),
-        ),
-        GoRoute(
-          path: '/forgot-password',
-          builder: (context, state) => const Quenmatkhau(),
-        ),
-        GoRoute(
-          path: '/verify-code',
-          builder: (context, state) => const Xacnhancode(),
-        ),
+        ShellRoute(
+            builder: (context, state, child) => ScaffoldLayout(body: child),
+            routes: [
+              GoRoute(
+                path: '/home',
+                pageBuilder: (context, state) => CustomTransitionPage(
+                  child: const Homescreen(),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          SlideTransition(
+                              position: animation.drive(
+                                Tween<Offset>(
+                                  begin: const Offset(1, 0),
+                                  end: Offset.zero,
+                                ).chain(CurveTween(curve: Curves.easeIn)),
+                              ),
+                              child: child),
+                ),
+              ),
+            ])
       ],
     );
 
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: testRoute,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
@@ -59,135 +124,201 @@ class MyApp extends StatelessWidget {
         fontFamily: 'UTMAvo',
       ),
     );
-
-    // return MaterialApp(
-    //   title: 'Flutter Demo',
-    //   debugShowCheckedModeBanner: false,
-    //   debugShowMaterialGrid: false,
-    //   theme: ThemeData(
-    //     appBarTheme:
-    //         const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
-    //     // useMaterial3: true,
-    //     fontFamily: 'UTMAvo',
-    //   ),
-    //   home: const Dangnhap(),
-    // );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class ScaffoldWithAppbar extends StatefulWidget {
+  const ScaffoldWithAppbar({Key? key, required this.body}) : super(key: key);
+
+  final Widget body;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<ScaffoldWithAppbar> createState() => _ScaffoldWithAppbarState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
-  late PageController _pageController;
+class _ScaffoldWithAppbarState extends State<ScaffoldWithAppbar> {
+  @override
+  Widget build(BuildContext context) {
+    String curentLocation = GoRouter.of(context).location;
+    List<Widget> listAction = [];
+    Widget? leading;
+    switch (curentLocation) {
+      case '/sign-in':
+        listAction = [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: TextButton(
+              onPressed: () {
+                context.push('/sign-up');
+              },
+              child: const Text(
+                "Đăng ký",
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 19 / 14,
+                  color: Color(0xffA4A4A4),
+                ),
+              ),
+            ),
+          ),
+        ];
+        break;
+      case '/sign-up':
+        listAction = [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: TextButton(
+              onPressed: () {
+                context.go('/sign-in');
+              },
+              child: const Text(
+                "Đăng Nhập",
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 19 / 14,
+                  color: Color(0xffA4A4A4),
+                ),
+              ),
+            ),
+          ),
+        ];
+        break;
+    }
+
+    switch (curentLocation) {
+      case '/sign-up':
+      case '/forgot-password':
+      case '/verify-code':
+        leading = IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            context.pop();
+          },
+          color: const Color(0xFF222222),
+        );
+        break;
+    }
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: curentLocation == '/sign-in' ? false : true,
+      appBar: AppBar(
+        leading: leading,
+        actions: listAction,
+      ),
+      body: widget.body,
+    );
+  }
+}
+
+class ScaffoldLayout extends StatefulWidget {
+  const ScaffoldLayout({Key? key, required this.body}) : super(key: key);
+
+  final Widget body;
 
   @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
+  State<ScaffoldLayout> createState() => _ScaffoldLayoutState();
+}
+
+class _ScaffoldLayoutState extends State<ScaffoldLayout> {
+  List<CustomBottomNavItem> tabs = [
+    const CustomBottomNavItem(
+      icon: Icon(BottomBarIcon.home),
+      initialLocation: '/home',
+      label: "home",
+    ),
+    const CustomBottomNavItem(
+      icon: Icon(BottomBarIcon.heart),
+      initialLocation: '/home',
+      label: "heart",
+    ),
+    const CustomBottomNavItem(
+      icon: Icon(BottomBarIcon.bell),
+      initialLocation: '/home',
+      label: "bell",
+    ),
+    const CustomBottomNavItem(
+      icon: Icon(BottomBarIcon.user),
+      initialLocation: '/home',
+      label: "user",
+    ),
+  ];
+
+  int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
+
+  int _locationToTabIndex(String location) {
+    final index =
+        tabs.indexWhere((t) => location.startsWith(t.initialLocation));
+    return index < 0 ? 0 : index;
   }
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  void _onItemTapped(int index) {
-    _selectedIndex = index;
-    setState(() {
-      _pageController.animateToPage(index,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastOutSlowIn);
-    });
+  void _onItemTapped(BuildContext context, int tabIndex) {
+    if (tabIndex != _currentIndex) {
+      context.go(tabs[tabIndex].initialLocation);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        children: [
-          const Homescreen(),
-          Container(
-            color: Colors.red,
-          ),
-          Container(
-            color: Colors.green,
-          ),
-          Container(
-            color: Colors.blue,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFFFFFFF),
+        elevation: 0,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              backgroundColor: const Color(0xFFecb1c9),
+              child: Image.asset(
+                "assets/categories_image/avatar.png",
+                width: 40,
+                height: 40,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 14),
+              child: Text(
+                "La Rosa’s",
+                style: TextStyle(
+                  fontSize: 20,
+                  height: 1.35,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const Filterscreen(),
+              ));
+            },
+            icon: Image.asset("assets/categories_image/Bag.png"),
+            iconSize: 22,
           ),
         ],
       ),
-      extendBody: true,
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          boxShadow: [
-            BoxShadow(blurRadius: 20, color: Color.fromRGBO(0, 0, 0, 0.1))
-          ],
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-          child: BottomNavigationBar(
-            currentIndex: _selectedIndex,
-            selectedItemColor: const Color(0xFFFF7465),
-            unselectedItemColor: const Color(0xFFC2C2C2),
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            onTap: _onItemTapped,
-            type: BottomNavigationBarType.fixed,
-            elevation: 10,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  BottomBarIcon.home,
-                  size: 24,
-                ),
-                label: "home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  BottomBarIcon.heart,
-                  size: 24,
-                ),
-                label: "heart",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  BottomBarIcon.bell,
-                  size: 24,
-                ),
-                label: "bell",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  BottomBarIcon.user,
-                  size: 24,
-                ),
-                label: "user",
-              ),
-            ],
-          ),
-        ),
+      body: widget.body,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: (value) => _onItemTapped(context, value),
+        iconSize: 24,
+        selectedIconTheme: const IconThemeData(color: Color(0xffFF7465)),
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: tabs,
       ),
     );
   }
+}
+
+class CustomBottomNavItem extends BottomNavigationBarItem {
+  const CustomBottomNavItem(
+      {required this.initialLocation, required Widget icon, String? label})
+      : super(icon: icon, label: label);
+  final String initialLocation;
 }

@@ -19,17 +19,9 @@ class _QuenmatkhauState extends State<Quenmatkhau> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            context.pop();
-          },
-          color: const Color(0xFF222222),
-        ),
-      ),
-      body: SingleChildScrollView(
+    return Container(
+      decoration: const BoxDecoration(color: Colors.white),
+      child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
           child: Column(
