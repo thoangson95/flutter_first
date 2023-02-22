@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/screens/home.dart';
+import 'package:thoitrang/screens/home/home.dart';
 import 'package:thoitrang/screens/intro.dart';
-import 'package:thoitrang/screens/account.dart';
-import 'package:thoitrang/screens/forget_password.dart';
-import 'package:thoitrang/screens/forget_password_submit.dart';
-import 'package:thoitrang/screens/order_success.dart';
-import 'package:thoitrang/screens/product_detail.dart';
+import 'package:thoitrang/screens/account/account.dart';
+import 'package:thoitrang/screens/account/forget_password.dart';
+import 'package:thoitrang/screens/account/forget_password_submit.dart';
+import 'package:thoitrang/screens/order/order_success.dart';
+import 'package:thoitrang/screens/product/product_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,13 +17,13 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const IntroScreen();
+        return const HomeScreen();
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'home',
           builder: (BuildContext context, GoRouterState state) {
-            return const HomeScreen();
+            return const IntroScreen();
           },
         ),
         GoRoute(
@@ -69,9 +69,9 @@ class MyApp extends StatelessWidget {
       routerConfig: _router,
       title: 'Fashion Store',
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
       showSemanticsDebugger: false,
       checkerboardRasterCacheImages: false,
+      debugShowMaterialGrid: false,
       theme: ThemeData(useMaterial3: true, fontFamily: 'UTMAvo'),
     );
   }
