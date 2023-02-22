@@ -4,6 +4,23 @@ import 'package:go_router/go_router.dart';
 class Dangnhap extends StatelessWidget {
   const Dangnhap({Key? key}) : super(key: key);
 
+  // Style chữ từ trên xuống
+  final TextStyle _dangNhapH1 = const TextStyle(
+    fontSize: 30,
+    height: 41 / 30,
+    color: Color(0xff222222),
+  );
+  final TextStyle _quenMatKhau = const TextStyle(
+      color: Color(0xffFF7465),
+      fontSize: 14,
+      height: 19 / 14,
+      decoration: TextDecoration.underline);
+  final TextStyle _nutDangNhap = const TextStyle(
+      fontSize: 14,
+      height: 21 / 14,
+      color: Colors.white,
+      fontWeight: FontWeight.w700);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,13 +37,9 @@ class Dangnhap extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.only(bottom: 50),
-                  child: const Text(
+                  child: Text(
                     "Đăng nhập",
-                    style: TextStyle(
-                      fontSize: 30,
-                      height: 41 / 30,
-                      color: Color(0xff222222),
-                    ),
+                    style: _dangNhapH1,
                   ),
                 ),
 
@@ -120,13 +133,9 @@ class Dangnhap extends StatelessWidget {
                       onTap: () {
                         context.push('/forgot-password');
                       },
-                      child: const Text(
+                      child: Text(
                         "Quên mật khẩu?",
-                        style: TextStyle(
-                            color: Color(0xffFF7465),
-                            fontSize: 14,
-                            height: 19 / 14,
-                            decoration: TextDecoration.underline),
+                        style: _quenMatKhau,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -154,13 +163,9 @@ class Dangnhap extends StatelessWidget {
                       onPressed: () {
                         context.go('/home');
                       },
-                      child: const Text(
+                      child: Text(
                         "Đăng nhập",
-                        style: TextStyle(
-                            fontSize: 14,
-                            height: 21 / 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
+                        style: _nutDangNhap,
                       )),
                 ),
               ],

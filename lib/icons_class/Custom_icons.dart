@@ -1,17 +1,20 @@
-// Place fonts/BottomBarIcon.ttf in your fonts/ directory and
+// Place fonts/Custom.ttf in your fonts/ directory and
 // add the following to your pubspec.yaml
 // flutter:
 //   fonts:
-//    - family: BottomBarIcon
+//    - family: Custom
 //      fonts:
-//       - asset: fonts/BottomBarIcon.ttf
+//       - asset: fonts/Custom.ttf
 import 'package:flutter/widgets.dart';
 
-class BottomBarIcon {
-  BottomBarIcon._();
+class Custom {
+  Custom._();
 
-  static const String _fontFamily = 'BottomBarIcons';
+  static const String _fontFamily = 'Custom';
 
+  static const IconData bag = IconData(0xe906, fontFamily: _fontFamily);
+  static const IconData filter = IconData(0xe904, fontFamily: _fontFamily);
+  static const IconData sort = IconData(0xe905, fontFamily: _fontFamily);
   static const IconData bell = IconData(0xe900, fontFamily: _fontFamily);
   static const IconData heart = IconData(0xe901, fontFamily: _fontFamily);
   static const IconData home = IconData(0xe902, fontFamily: _fontFamily);

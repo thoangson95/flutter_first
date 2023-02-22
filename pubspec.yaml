@@ -97,9 +97,9 @@ flutter:
           style: italic
         - asset: assets/fonts/UTM AvoItalic.ttf
           style: italic
-    - family: BottomBarIcons
+    - family: Custom
       fonts:
-        - asset: assets/bottom_bar_icons/fonts/BottomBarIcon.ttf
+        - asset: assets/icons/fonts/Custom.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:slide_indexed_stack/slide_indexed_stack.dart';
-import 'hometab.dart';
 
 class DecoratedTabBar extends StatelessWidget implements PreferredSizeWidget {
   const DecoratedTabBar(
@@ -30,92 +28,10 @@ class Categories extends StatefulWidget {
   State<Categories> createState() => _CategoriesState();
 }
 
-class _CategoriesState extends State<Categories>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabCtrl;
-  late int _selected_index;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabCtrl = TabController(length: 2, vsync: this);
-    _selected_index = _tabCtrl.index;
-  }
-
-  @override
-  void dispose() {
-    _tabCtrl.dispose();
-    super.dispose();
-  }
-
+class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 20),
-            child: DecoratedTabBar(
-              tabBar: TabBar(
-                indicatorColor: const Color(0xFFFF7465),
-                indicator: const UnderlineTabIndicator(
-                  borderSide: BorderSide(
-                    width: 2,
-                    color: Color(0xFFFF7465),
-                  ),
-                  insets: EdgeInsets.symmetric(horizontal: 30),
-                ),
-                labelColor: const Color(0xFF222222),
-                labelStyle: const TextStyle(
-                  fontSize: 13,
-                  height: 1.3,
-                  fontWeight: FontWeight.w700,
-                ),
-                controller: _tabCtrl,
-                onTap: (value) {
-                  setState(() {
-                    _selected_index = value;
-                  });
-                },
-                tabs: const [
-                  Tab(
-                    text: "Home",
-                  ),
-                  Tab(
-                    text: "Categories",
-                  )
-                ],
-              ),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: Color(0xffD9D9D9),
-                    width: 1,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          // Tab viewer
-          SlideIndexedStack(
-            index: _selected_index,
-            axis: Axis.horizontal,
-            slideOffset: -0.5,
-            duration: const Duration(milliseconds: 300),
-            children: [
-              Hometab(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                child: ListCategories(),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
+    return ListCategories();
   }
 }
 

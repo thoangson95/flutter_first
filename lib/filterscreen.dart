@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:another_xlider/another_xlider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'dangky.dart';
+import 'package:go_router/go_router.dart';
 
 class Filterscreen extends StatefulWidget {
   const Filterscreen({Key? key}) : super(key: key);
@@ -15,12 +15,13 @@ class _FilterscreenState extends State<Filterscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              context.pop();
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -67,9 +68,7 @@ class _FilterscreenState extends State<Filterscreen> {
               ),
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const Dangky(),
-                  ));
+                  context.pop();
                 },
                 child: const Text(
                   "Xóa",
@@ -92,9 +91,7 @@ class _FilterscreenState extends State<Filterscreen> {
               ),
               child: TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const Dangky(),
-                  ));
+                  context.pop();
                 },
                 child: const Text(
                   "Lọc",

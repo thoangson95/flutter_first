@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/BottomBarIcon_icons.dart';
+import 'package:thoitrang/chitietsanpham.dart';
 import 'package:thoitrang/dangky.dart';
 import 'package:thoitrang/filterscreen.dart';
+import 'package:thoitrang/hangmoive.dart';
 import 'package:thoitrang/homescreen.dart';
 import 'package:thoitrang/xacnhancode.dart';
+import 'icons_class/Custom_icons.dart';
 import 'quenmatkhau.dart';
 import 'dangnhap.dart';
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final testRoute = GoRouter(
-      initialLocation: '/sign-in',
+      initialLocation: '/home',
       routes: [
         ShellRoute(
           builder: (context, state, child) => ScaffoldWithAppbar(body: child),
@@ -114,6 +116,43 @@ class MyApp extends StatelessWidget {
           path: '/filter',
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const Filterscreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
+        GoRoute(
+          path: '/product-list',
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Hangmoive(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
+        GoRoute(
+          path: '/product-detail',
+          name: 'chitietsanpham',
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: Chitietsanpham(
+              url: state.queryParams['url'],
+              name: state.queryParams['name'],
+              price: state.queryParams['price'],
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) =>
                     SlideTransition(
@@ -240,22 +279,22 @@ class ScaffoldLayout extends StatefulWidget {
 class _ScaffoldLayoutState extends State<ScaffoldLayout> {
   List<CustomBottomNavItem> tabs = [
     const CustomBottomNavItem(
-      icon: Icon(BottomBarIcon.home),
+      icon: Icon(Custom.home),
       initialLocation: '/home',
       label: "home",
     ),
     const CustomBottomNavItem(
-      icon: Icon(BottomBarIcon.heart),
+      icon: Icon(Custom.heart),
       initialLocation: '/home',
       label: "heart",
     ),
     const CustomBottomNavItem(
-      icon: Icon(BottomBarIcon.bell),
+      icon: Icon(Custom.bell),
       initialLocation: '/home',
       label: "bell",
     ),
     const CustomBottomNavItem(
-      icon: Icon(BottomBarIcon.user),
+      icon: Icon(Custom.user),
       initialLocation: '/home',
       label: "user",
     ),
