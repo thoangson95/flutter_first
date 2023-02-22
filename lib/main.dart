@@ -76,3 +76,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+const color1 = Color(0xFFFF7465);
+const color2 = Color(0xFF373737);
+const color3 = Color(0xFFC2C2C2);
