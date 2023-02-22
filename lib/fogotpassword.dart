@@ -19,7 +19,7 @@ class _FogotpasswordState extends State<Fogotpassword> {
     super.initState();
     _phonenumber = TextEditingController();
   }
-  
+
   @override
   void dispose() {
     super.dispose();
@@ -70,7 +70,7 @@ class _FogotpasswordState extends State<Fogotpassword> {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(top: 30, bottom: 18),
+                        padding: const EdgeInsets.only(top: 30, bottom: 38),
                         child: const Text("Nhập số điện thoại của bạn"),
                       ),
                       Container(
@@ -126,29 +126,35 @@ class _FogotpasswordState extends State<Fogotpassword> {
                           ],
                         ),
                       ),
+                      const Padding(padding: EdgeInsets.only(top: 26)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: maincolor,
-                                  alignment: Alignment.center),
-                              onPressed: () {
-                                if(_phonenumber.text != ''){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Redemcode(phonenumber: _phonenumber.text,),
-                                  ),
-                                );
-                                }
-                              },
-                              child: const Text(
-                                "Gửi code",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                            child: SizedBox(
+                              height: 46,
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: maincolor,
+                                    alignment: Alignment.center),
+                                onPressed: () {
+                                  if (_phonenumber.text != '') {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            Redemcode(
+                                          phonenumber: _phonenumber.text,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: const Text(
+                                  "Gửi code",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/fogotpassword.dart';
+import 'package:thoitrang/home.dart';
 import 'package:thoitrang/register.dart';
 
 class Login extends StatefulWidget {
@@ -54,7 +55,6 @@ class _LoginState extends State<Login> {
           ],
           backgroundColor: Colors.white,
           shadowColor: Colors.transparent,
-          
         ),
         body: Column(
           children: [
@@ -70,7 +70,7 @@ class _LoginState extends State<Login> {
                       style: TextStyle(fontSize: 30),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 20),
+                      margin: const EdgeInsets.only(top: 40),
                       padding: const EdgeInsets.only(bottom: 8, top: 8),
                       decoration: const BoxDecoration(
                         border: Border(
@@ -229,14 +229,25 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: maincolor),
-                            onPressed: () {},
-                            child: const Text(
-                              "Đăng nhập",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                          child: SizedBox(
+                            height: 46,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: maincolor),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        const HomePages(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "Đăng nhập",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),
@@ -250,7 +261,7 @@ class _LoginState extends State<Login> {
               child: Image(
                 width: double.infinity,
                 image: AssetImage("asset/images/login_pic.png"),
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
             ),
           ],

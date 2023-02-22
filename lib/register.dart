@@ -16,7 +16,7 @@ class _RegisterState extends State<Register> {
   bool accepted = false;
   Widget tf(IconData icons, String lable, bool isnumber, bool ispassword) {
     return Container(
-      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      margin: const EdgeInsets.only(top: 8, bottom: 8),
       padding: const EdgeInsets.only(bottom: 10, top: 10),
       decoration: const BoxDecoration(
         border: Border(
@@ -166,7 +166,7 @@ class _RegisterState extends State<Register> {
         ),
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Padding(
-            padding: EdgeInsets.only(left: 20, right: 20,bottom: 2),
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 28),
             child: Text(
               "Đăng ký",
               style: TextStyle(fontSize: 30),
@@ -239,14 +239,17 @@ class _RegisterState extends State<Register> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: maincolor),
-                            onPressed: () {},
-                            child: const Text(
-                              "Đăng ký",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                          child: SizedBox(
+                            height: 46,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: maincolor),
+                              onPressed: () {},
+                              child: const Text(
+                                "Đăng ký",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),

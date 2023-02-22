@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: true,
-      showSemanticsDebugger: false,
+      debugShowMaterialGrid: false,
+      showSemanticsDebugger: !true,
       theme: ThemeData(
         fontFamily: "UTM Avo",
         scaffoldBackgroundColor: Colors.white,

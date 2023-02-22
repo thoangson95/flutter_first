@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen>
       () => Navigator.pushAndRemoveUntil(
           context,
           PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 700),
+            transitionDuration: const Duration(milliseconds: 700),
             pageBuilder: (BuildContext context, Animation animation,
                 Animation secondaryAnimation) {
               return const Login();

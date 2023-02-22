@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,7 +11,9 @@ class Redemcode extends StatefulWidget {
 }
 
 class _RedemcodeState extends State<Redemcode> {
+  bool isresend = false;
   Color maincolor = const Color(0xFFFF7465);
+  int countdown = 60;
   Widget NumberRedeem(int order) {
     return Expanded(
       child: TextField(
@@ -43,13 +47,41 @@ class _RedemcodeState extends State<Redemcode> {
           counterText: "",
           isCollapsed: true,
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
         ),
         cursorColor: Colors.black,
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        setState(
+          () {
+            Timer.periodic(
+              const Duration(seconds: 1),
+              (timer) {
+                countdown--;
+                super.setState(() {});
+                if (countdown <= 0) {
+                  timer.cancel();
+                  isresend = !isresend;
+                }
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -94,36 +126,102 @@ class _RedemcodeState extends State<Redemcode> {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(top: 20, bottom: 18),
+                        padding: const EdgeInsets.only(top: 20, bottom: 42),
                         child:
                             Text("Mã đã được gửi đến số ${widget.phonenumber}"),
                       ),
                       Container(
-                          padding: const EdgeInsets.only(left: 16, right: 16),
-                          child: Row(
-                            children: [
-                              for (int i = 0; i < 4; i++) ...{
-                                NumberRedeem(i),
-                                if (i < 3)
-                                  const SizedBox(
-                                    width: 13,
-                                  )
-                              }
-                            ],
-                          )),
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: Row(
+                          children: [
+                            for (int i = 0; i < 4; i++) ...{
+                              NumberRedeem(i),
+                              if (i < 3)
+                                const SizedBox(
+                                  width: 13,
+                                )
+                            }
+                          ],
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 26)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (isresend) ...{
+                            TextButton(
+                              onPressed: () {
+                                isresend = !isresend;
+                                countdown = 60;
+                                setState(() {
+                                  Timer.periodic(const Duration(seconds: 1),
+                                      (timer) {
+                                    countdown--;
+                                    setState(() {});
+                                    if (countdown <= 0) {
+                                      print(timer.tick);
+                                      timer.cancel();
+                                      isresend = !isresend;
+                                    }
+                                  });
+                                });
+                              },
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.resolveWith(
+                                  (states) {
+                                    return const EdgeInsets.all(0);
+                                  },
+                                ),
+                                minimumSize:
+                                    MaterialStateProperty.resolveWith(
+                                  (states) {
+                                    return Size.zero;
+                                  },
+                                ),
+                                tapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                overlayColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                    return Colors.transparent;
+                                  },
+                                ),
+                              ),
+                              child: Text(
+                                "Gửi lại mã xác nhận",
+                                style: TextStyle(
+                                  color: maincolor,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            )
+                          } else ...{
+                            const Text("Gửi lại mã sau "),
+                            Text(
+                              "${countdown}s",
+                              style: TextStyle(color: maincolor),
+                            ),
+                          }
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 38)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor: maincolor,
-                                  alignment: Alignment.center),
-                              onPressed: () {},
-                              child: const Text(
-                                "Xác nhận",
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                            child: SizedBox(
+                              height: 46,
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: maincolor,
+                                    alignment: Alignment.center),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  "Xác nhận",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
