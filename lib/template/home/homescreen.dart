@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:slide_indexed_stack/slide_indexed_stack.dart';
+import 'package:thoitrang/template/home/hometab.dart';
 
 import 'categories.dart';
-import 'hometab.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'hometab.dart';
-import 'icons_class/Custom_icons.dart';
+import '../../icons_class/Custom_icons.dart';
+import '../home/hometab.dart';
 
 class Hangmoive extends StatelessWidget {
   const Hangmoive({Key? key}) : super(key: key);
@@ -10,7 +10,6 @@ class Hangmoive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {

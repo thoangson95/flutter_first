@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/cart.dart';
-import 'package:thoitrang/chitietsanpham.dart';
-import 'package:thoitrang/dangky.dart';
-import 'package:thoitrang/filterscreen.dart';
-import 'package:thoitrang/hangmoive.dart';
-import 'package:thoitrang/homescreen.dart';
-import 'package:thoitrang/xacnhancode.dart';
+import 'package:thoitrang/template/auth/dangky.dart';
+import 'package:thoitrang/template/auth/dangnhap.dart';
+import 'package:thoitrang/template/auth/quenmatkhau.dart';
+import 'package:thoitrang/template/auth/xacnhancode.dart';
+import 'package:thoitrang/template/order/cart.dart';
+import 'package:thoitrang/template/home/homescreen.dart';
+import 'package:thoitrang/template/order/cartdetail.dart';
+import 'package:thoitrang/template/product/chitietsanpham.dart';
+import 'package:thoitrang/template/product/filterscreen.dart';
+import 'package:thoitrang/template/product/hangmoive.dart';
 import 'icons_class/Custom_icons.dart';
-import 'quenmatkhau.dart';
-import 'dangnhap.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,6 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final rootNavigatorKey = GlobalKey<NavigatorState>();
-  final shellNavigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,10 @@ class MyApp extends StatelessWidget {
       navigatorKey: rootNavigatorKey,
       routes: [
         ShellRoute(
-          navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => ScaffoldWithAppbar(body: child),
           routes: [
             GoRoute(
               path: '/sign-in',
-              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Dangnhap(),
                 transitionsBuilder:
@@ -50,7 +48,6 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/sign-up',
-              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Dangky(),
                 transitionsBuilder:
@@ -67,7 +64,6 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/forgot-password',
-              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Quenmatkhau(),
                 transitionsBuilder:
@@ -84,7 +80,6 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/verify-code',
-              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Xacnhancode(),
                 transitionsBuilder:
@@ -103,11 +98,9 @@ class MyApp extends StatelessWidget {
         ),
         ShellRoute(
           builder: (context, state, child) => ScaffoldLayout(body: child),
-          navigatorKey: shellNavigatorKey,
           routes: [
             GoRoute(
               path: '/home',
-              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Homescreen(),
                 transitionsBuilder:
@@ -198,6 +191,23 @@ class MyApp extends StatelessWidget {
                         child: child),
           ),
         ),
+        GoRoute(
+          path: '/cart-detail',
+          parentNavigatorKey: rootNavigatorKey,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Cartdetail(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
       ],
     );
 
@@ -211,6 +221,7 @@ class MyApp extends StatelessWidget {
             const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         // useMaterial3: true,
         fontFamily: 'UTMAvo',
+        scaffoldBackgroundColor: Colors.white,
       ),
     );
   }
@@ -289,7 +300,6 @@ class _ScaffoldWithAppbarState extends State<ScaffoldWithAppbar> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: curentLocation == '/sign-in' ? false : true,
       appBar: AppBar(
         leading: leading,

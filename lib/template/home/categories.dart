@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:thoitrang/controller/category_controller.dart';
+import 'package:thoitrang/model/category_model.dart';
 
 class DecoratedTabBar extends StatelessWidget implements PreferredSizeWidget {
   const DecoratedTabBar(
@@ -31,7 +33,7 @@ class Categories extends StatefulWidget {
 class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
-    return ListCategories();
+    return const ListCategories();
   }
 }
 
@@ -41,31 +43,20 @@ class CategoryItem {
   CategoryItem({required this.url, required this.name});
 }
 
-class ListCategories extends StatelessWidget {
-  ListCategories({Key? key}) : super(key: key);
+class ListCategories extends StatefulWidget {
+  const ListCategories({Key? key}) : super(key: key);
 
-  final List cateList = [
-    CategoryItem(
-        url:
-            "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
-        name: "Hàng mới về"),
-    CategoryItem(
-        url:
-            "https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
-        name: "Hàng bán chạy"),
-    CategoryItem(
-        url:
-            "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
-        name: "Áo khoác"),
-    CategoryItem(
-        url:
-            "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
-        name: "Jump suit"),
-    CategoryItem(
-        url:
-            "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
-        name: "Hàng mới về"),
-  ];
+  @override
+  State<ListCategories> createState() => _ListCategoriesState();
+}
+
+class _ListCategoriesState extends State<ListCategories> {
+  late Future<List<Category>> listCate;
+  @override
+  void initState() {
+    listCate = fetchListCategory();
+    super.initState();
+  }
 
   Widget item(String url, String name) {
     return Container(
@@ -95,10 +86,29 @@ class ListCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: cateList.map((e) {
-        return item(e.url, e.name);
-      }).toList(),
+    return FutureBuilder(
+      future: listCate,
+      builder: (context, snapshot) {
+        List<Widget> children = [];
+        if (snapshot.hasData) {
+          children = snapshot.data!
+              .take(20)
+              .map((e) => item(e.image, e.name))
+              .toList();
+        } else if (snapshot.hasData) {
+          return Center(
+            child: Text("${snapshot.error}"),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        return Column(
+          children: children,
+        );
+      },
     );
   }
 }

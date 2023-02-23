@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thoitrang/controller/product_contronller.dart';
 
-import 'controller/product_contronller.dart';
-import 'model/product_model.dart';
+import '../../model/product_model.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -22,7 +22,6 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xff333333)),
         title: const Text(

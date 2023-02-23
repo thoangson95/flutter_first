@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:thoitrang/controller/product_contronller.dart';
 import 'package:thoitrang/model/product_model.dart';
 
-import 'icons_class/Custom_icons.dart';
+import '../../icons_class/Custom_icons.dart';
 
 List<String> imageList = [
   "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
