@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:thoitrang/icons_class/Custom_icons.dart';
+import 'package:go_router/go_router.dart';
 
 class Chitietsanpham extends StatelessWidget {
   Chitietsanpham({Key? key, this.url, this.price, this.name}) : super(key: key);
@@ -32,7 +32,7 @@ class Chitietsanpham extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              context.go('/home');
+              context.pop();
             },
             icon: const Icon(
               Icons.arrow_back,

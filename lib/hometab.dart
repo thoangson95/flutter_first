@@ -96,6 +96,7 @@ class _HometabState extends State<Hometab> {
               List<Widget> children = [];
               if (snapshot.hasData) {
                 children = snapshot.data!
+                    .take(20)
                     .map((e) => SpItem(
                           urlImage: e.images[0],
                           name: e.title,
@@ -158,7 +159,7 @@ class _SpItemState extends State<SpItem> {
         children: [
           InkWell(
             onTap: () {
-              context.goNamed("chitietsanpham",
+              context.pushNamed("chitietsanpham",
                   queryParams: {'url': widget.urlImage, 'name': widget.name});
             },
             child: ClipRRect(

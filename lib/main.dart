@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/cart.dart';
 import 'package:thoitrang/chitietsanpham.dart';
 import 'package:thoitrang/dangky.dart';
 import 'package:thoitrang/filterscreen.dart';
@@ -11,21 +12,28 @@ import 'quenmatkhau.dart';
 import 'dangnhap.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final rootNavigatorKey = GlobalKey<NavigatorState>();
+  final shellNavigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     final testRoute = GoRouter(
       initialLocation: '/home',
+      navigatorKey: rootNavigatorKey,
       routes: [
         ShellRoute(
+          navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => ScaffoldWithAppbar(body: child),
           routes: [
             GoRoute(
               path: '/sign-in',
+              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Dangnhap(),
                 transitionsBuilder:
@@ -42,6 +50,7 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/sign-up',
+              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Dangky(),
                 transitionsBuilder:
@@ -58,6 +67,7 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/forgot-password',
+              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Quenmatkhau(),
                 transitionsBuilder:
@@ -74,6 +84,7 @@ class MyApp extends StatelessWidget {
             ),
             GoRoute(
               path: '/verify-code',
+              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Xacnhancode(),
                 transitionsBuilder:
@@ -92,9 +103,11 @@ class MyApp extends StatelessWidget {
         ),
         ShellRoute(
           builder: (context, state, child) => ScaffoldLayout(body: child),
+          navigatorKey: shellNavigatorKey,
           routes: [
             GoRoute(
               path: '/home',
+              parentNavigatorKey: shellNavigatorKey,
               pageBuilder: (context, state) => CustomTransitionPage(
                 child: const Homescreen(),
                 transitionsBuilder:
@@ -113,6 +126,7 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(
           path: '/filter',
+          parentNavigatorKey: rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const Filterscreen(),
             transitionsBuilder:
@@ -129,6 +143,7 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(
           path: '/product-list',
+          parentNavigatorKey: rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const Hangmoive(),
             transitionsBuilder:
@@ -146,12 +161,31 @@ class MyApp extends StatelessWidget {
         GoRoute(
           path: '/product-detail',
           name: 'chitietsanpham',
+          parentNavigatorKey: rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: Chitietsanpham(
               url: state.queryParams['url'],
               name: state.queryParams['name'],
               price: state.queryParams['price'],
             ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
+        GoRoute(
+          path: '/cart',
+          name: 'cart',
+          parentNavigatorKey: rootNavigatorKey,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Cart(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) =>
                     SlideTransition(
@@ -352,9 +386,7 @@ class _ScaffoldLayoutState extends State<ScaffoldLayout> {
           IconButton(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const Filterscreen(),
-              ));
+              context.push("/cart");
             },
             icon: Image.asset("assets/categories_image/Bag.png"),
             iconSize: 22,
