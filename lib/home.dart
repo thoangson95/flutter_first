@@ -138,9 +138,21 @@ class _HomePagesState extends State<HomePages> with TickerProviderStateMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Xin chào Bảo Ngọc"),
+                  const Text(
+                    "Xin chào Bảo Ngọc",
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
+                  ),
                   const Text(
                       "Nhiều mẫu mã đang chờ đợi bạn thị trường thời trang"),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                  ),
                   Container(
                     padding: const EdgeInsets.only(left: 20),
                     height: 46,
@@ -291,7 +303,7 @@ class _HomePagesState extends State<HomePages> with TickerProviderStateMixin {
                                     ),
                                   ],
                                 ),
-                                Padding(padding: EdgeInsets.only(top: 20)),
+                                const Padding(padding: EdgeInsets.only(top: 20)),
                                 GridView.count(
                                   physics: const NeverScrollableScrollPhysics(),
                                   crossAxisCount: 2,
@@ -324,7 +336,8 @@ class _HomePagesState extends State<HomePages> with TickerProviderStateMixin {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
@@ -335,8 +348,10 @@ class _HomePagesState extends State<HomePages> with TickerProviderStateMixin {
                                                       color: Colors.black),
                                                 ),
                                                 IconButton(
-                                                  splashColor: Colors.transparent,
-                                                  highlightColor: Colors.transparent,
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
                                                   constraints:
                                                       const BoxConstraints(),
                                                   padding: EdgeInsets.zero,

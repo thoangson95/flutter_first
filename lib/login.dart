@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/fogotpassword.dart';
-import 'package:thoitrang/home.dart';
 import 'package:thoitrang/register.dart';
+
+import 'navigatorbar.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -240,7 +241,7 @@ class _LoginState extends State<Login> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        const HomePages(),
+                                        const ScaffoldWidget(),
                                   ),
                                 );
                               },

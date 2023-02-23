@@ -14,7 +14,7 @@ class _RedemcodeState extends State<Redemcode> {
   bool isresend = false;
   Color maincolor = const Color(0xFFFF7465);
   int countdown = 60;
-  Widget NumberRedeem(int order) {
+  Widget numberRedeem(int order) {
     return Expanded(
       child: TextField(
         textAlign: TextAlign.center,
@@ -66,7 +66,9 @@ class _RedemcodeState extends State<Redemcode> {
               const Duration(seconds: 1),
               (timer) {
                 countdown--;
-                super.setState(() {});
+                if (mounted) {
+                  super.setState(() {});
+                }
                 if (countdown <= 0) {
                   timer.cancel();
                   isresend = !isresend;
@@ -135,7 +137,7 @@ class _RedemcodeState extends State<Redemcode> {
                         child: Row(
                           children: [
                             for (int i = 0; i < 4; i++) ...{
-                              NumberRedeem(i),
+                              numberRedeem(i),
                               if (i < 3)
                                 const SizedBox(
                                   width: 13,
@@ -159,7 +161,6 @@ class _RedemcodeState extends State<Redemcode> {
                                     countdown--;
                                     setState(() {});
                                     if (countdown <= 0) {
-                                      print(timer.tick);
                                       timer.cancel();
                                       isresend = !isresend;
                                     }
@@ -172,14 +173,12 @@ class _RedemcodeState extends State<Redemcode> {
                                     return const EdgeInsets.all(0);
                                   },
                                 ),
-                                minimumSize:
-                                    MaterialStateProperty.resolveWith(
+                                minimumSize: MaterialStateProperty.resolveWith(
                                   (states) {
                                     return Size.zero;
                                   },
                                 ),
-                                tapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 overlayColor: MaterialStateColor.resolveWith(
                                   (states) {
                                     return Colors.transparent;
