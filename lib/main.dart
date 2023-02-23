@@ -217,8 +217,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
       theme: ThemeData(
-        appBarTheme:
-            const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Color(0xff333333)),
+        ),
         // useMaterial3: true,
         fontFamily: 'UTMAvo',
         scaffoldBackgroundColor: Colors.white,

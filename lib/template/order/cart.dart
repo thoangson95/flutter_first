@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:thoitrang/controller/product_contronller.dart';
 
 import '../../model/product_model.dart';
@@ -23,7 +24,6 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Color(0xff333333)),
         title: const Text(
           'Cart',
           style: TextStyle(
@@ -142,7 +142,9 @@ class _CartState extends State<Cart> {
               height: 42,
               width: 100,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/cart-detail');
+                },
                 style: ElevatedButton.styleFrom(
                     elevation: 0,
                     backgroundColor: const Color(0xFFFF7465),
