@@ -28,7 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () => context.go('/account'),
+          onPressed: () => context.go('/products'),
           type: GFButtonType.transparent,
         ),
         actions: <Widget>[
@@ -38,7 +38,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               width: 20,
             ),
             iconSize: 22,
-            onPressed: () => context.go('/account'),
+            onPressed: () => context.go('/products'),
           )
         ],
         backgroundColor: Colors.white,
@@ -245,7 +245,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             child: GFRadio(
                               type: GFRadioType.basic,
                               size: 26,
-                              value: 3,
+                              value: 4,
                               groupValue: groupValue,
                               onChanged: (value) {
                                 setState(() {

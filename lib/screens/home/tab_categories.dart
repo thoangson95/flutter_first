@@ -1,22 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:go_router/go_router.dart';
 
-class Categories {
-  final String name;
-  final String image;
-
-  Categories({required this.name, required this.image});
-}
-
-final List<Categories> categories = [
-  Categories(name: 'Hàng mới về', image: 'assets/images/banner.png'),
-  Categories(name: 'Hàng bán chạy', image: 'assets/images/banner1.png'),
-  Categories(name: 'Hàng khuyến mãi', image: 'assets/images/banner2.png'),
-  Categories(name: 'Áo khoác', image: 'assets/images/banner3.png'),
-  Categories(name: 'Đầm', image: 'assets/images/banner1.png'),
-  Categories(name: 'Jumpsuit', image: 'assets/images/banner2.png'),
-];
+import '../../models/product.dart';
 
 List<Widget> categoriesWidgets = categories.map((item) {
   return Container(

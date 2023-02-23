@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: GFAppBar(
         automaticallyImplyLeading: false,
         title: Row(
@@ -66,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
                 child: const Text(
-                  'Xin Chào Bảo Ngọc',
+                  'Xin Chào Dũng Royal.',
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,

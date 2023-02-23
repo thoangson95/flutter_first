@@ -6,7 +6,9 @@ import 'package:thoitrang/screens/account/account.dart';
 import 'package:thoitrang/screens/account/forget_password.dart';
 import 'package:thoitrang/screens/account/forget_password_submit.dart';
 import 'package:thoitrang/screens/order/order_success.dart';
+import 'package:thoitrang/screens/product/filter.dart';
 import 'package:thoitrang/screens/product/product_detail.dart';
+import 'package:thoitrang/screens/product/products.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,13 +19,13 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
+        return const IntroScreen();
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'home',
           builder: (BuildContext context, GoRouterState state) {
-            return const IntroScreen();
+            return const HomeScreen();
           },
         ),
         GoRoute(
@@ -33,9 +35,21 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
+          path: 'products',
+          builder: (BuildContext context, GoRouterState state) {
+            return const ProductsScreen();
+          },
+        ),
+        GoRoute(
           path: 'product-detail',
           builder: (BuildContext context, GoRouterState state) {
             return const ProductDetailScreen();
+          },
+        ),
+        GoRoute(
+          path: 'filter',
+          builder: (BuildContext context, GoRouterState state) {
+            return const FilterScreen();
           },
         ),
         GoRoute(
