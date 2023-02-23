@@ -84,7 +84,12 @@ class Hangmoive extends StatelessWidget {
                 childAspectRatio: (165 / 260),
                 // primary: true,
                 shrinkWrap: true,
-                children: imageList.map((e) => SpItem(urlImage: e)).toList(),
+                children: imageList
+                    .map((e) => SpItem(
+                          urlImage: e,
+                          name: "Áo nữ thời trang",
+                        ))
+                    .toList(),
               ),
             )
           ],

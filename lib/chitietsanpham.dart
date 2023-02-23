@@ -47,124 +47,124 @@ class Chitietsanpham extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: 370,
-            child: Image.network(
-              url ?? "",
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // Nội dung
-          Container(
-            padding: const EdgeInsets.only(bottom: 22),
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              border: BorderDirectional(
-                bottom: BorderSide(
-                  width: 1,
-                  color: Color(0xffEAEAEA),
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 370,
+              child: Image.network(
+                url ?? "",
+                fit: BoxFit.cover,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, bottom: 11),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Áo thun nữ thời trang",
-                          style: _titleMain,
-                        ),
-                        const Icon(
-                          Custom.heart,
-                          color: Color(0xffFF7465),
-                        )
-                      ],
-                    ),
-                  ),
 
-                  // Giá
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 19),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "290.000đ",
-                          style: TextStyle(
-                            fontSize: 18,
-                            height: 25 / 18,
-                            color: Color(0xffFF7465),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            StarMetter(
-                              score: 4.4,
-                            ),
-                            const Text(
-                              "356 Reviews",
-                              style: TextStyle(
-                                fontSize: 13,
-                                height: 18 / 13,
-                                color: Color(0xff999999),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+            // Nội dung
+            Container(
+              padding: const EdgeInsets.only(bottom: 22),
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                border: BorderDirectional(
+                  bottom: BorderSide(
+                    width: 1,
+                    color: Color(0xffEAEAEA),
                   ),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      '- Sản phẩm: SET ASHE W SKIRT\n- Màu sắc: Hồng nhạt, kem, đen, xám , đỏ-\n- Chất vải: Cotton hàn',
-                      style: TextStyle(
-                        fontSize: 12,
-                        height: 25 / 12,
-                        color: Color(0xff979797),
+                ),
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20, bottom: 11),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            name ?? "",
+                            style: _titleMain,
+                          ),
+                          const FavoriteIcon(),
+                        ],
                       ),
                     ),
-                  )
-                ],
+
+                    // Giá
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 19),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "290.000đ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              height: 25 / 18,
+                              color: Color(0xffFF7465),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              StarMetter(
+                                score: 4.4,
+                              ),
+                              const Text(
+                                "356 Reviews",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  height: 18 / 13,
+                                  color: Color(0xff999999),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        '- Sản phẩm: SET ASHE W SKIRT\n- Màu sắc: Hồng nhạt, kem, đen, xám , đỏ-\n- Chất vải: Cotton hàn',
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 25 / 12,
+                          color: Color(0xff979797),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
 
-          // Màu sắc
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-            margin: const EdgeInsets.only(top: 21, bottom: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(right: 2),
-                  child: Text(
-                    "Màu sắc",
-                    style: TextStyle(
-                      fontSize: 13,
-                      height: 25 / 13,
-                      color: Color(0xff222222),
+            // Màu sắc
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              margin: const EdgeInsets.only(top: 21, bottom: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 2),
+                    child: Text(
+                      "Màu sắc",
+                      style: TextStyle(
+                        fontSize: 13,
+                        height: 25 / 13,
+                        color: Color(0xff222222),
+                      ),
                     ),
                   ),
-                ),
-                RadioColorPickerControl(listModel: sampleData)
-              ],
-            ),
-          )
-        ],
+                  RadioColorPickerControl(listModel: sampleData)
+                ],
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 37),
@@ -345,6 +345,32 @@ class RadioColorPicker extends StatelessWidget {
         Icons.circle,
         color: _item.buttonColor,
         size: 26,
+      ),
+    );
+  }
+}
+
+class FavoriteIcon extends StatefulWidget {
+  const FavoriteIcon({Key? key}) : super(key: key);
+
+  @override
+  State<FavoriteIcon> createState() => _FavoriteIconState();
+}
+
+class _FavoriteIconState extends State<FavoriteIcon> {
+  bool _isActive = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _isActive = !_isActive;
+        });
+      },
+      child: Icon(
+        _isActive ? Icons.favorite : Custom.heart,
+        color: const Color(0xffFF7465),
       ),
     );
   }

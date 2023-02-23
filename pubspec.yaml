@@ -41,6 +41,12 @@ dependencies:
   pin_code_fields: ^7.4.0
   slide_indexed_stack: ^0.0.1
   getwidget: ^3.0.1
+  http: ^0.13.5
+  shared_preferences: ^2.0.17
+  path_provider: ^2.0.12
+  sqflite: ^2.2.4+1
+  badges: ^3.0.2
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

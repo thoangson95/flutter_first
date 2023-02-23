@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/controller/product_contronller.dart';
+import 'package:thoitrang/model/product_model.dart';
 
 import 'icons_class/Custom_icons.dart';
 
@@ -14,8 +15,26 @@ List<String> imageList = [
   "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
 ];
 
-class Hometab extends StatelessWidget {
+class Hometab extends StatefulWidget {
   const Hometab({Key? key}) : super(key: key);
+
+  @override
+  State<Hometab> createState() => _HometabState();
+}
+
+class _HometabState extends State<Hometab> {
+  late Future<List<Product>> listProduct;
+
+  @override
+  void initState() {
+    super.initState();
+    listProduct = fetchListProduct();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +60,7 @@ class Hometab extends StatelessWidget {
           ),
 
           // Grid
+
           Padding(
             padding: const EdgeInsets.only(top: 20, bottom: 13),
             child: Row(
@@ -70,16 +90,43 @@ class Hometab extends StatelessWidget {
               ],
             ),
           ),
-          GridView.count(
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            childAspectRatio: (165 / 260),
-            // primary: true,
-            shrinkWrap: true,
-            children: imageList.map((e) => SpItem(urlImage: e)).toList(),
-          )
+          FutureBuilder(
+            future: listProduct,
+            builder: (context, snapshot) {
+              List<Widget> children = [];
+              if (snapshot.hasData) {
+                children = snapshot.data!
+                    .map((e) => SpItem(
+                          urlImage: e.images[0],
+                          name: e.title,
+                        ))
+                    .toList();
+              } else if (snapshot.hasError) {
+                children = <Widget>[
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 60,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Text('Error: $snapshot'),
+                  ),
+                ];
+              } else {
+                return const CircularProgressIndicator();
+              }
+              return GridView.count(
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+                childAspectRatio: (165 / 260),
+                shrinkWrap: true,
+                children: children,
+              );
+            },
+          ),
         ],
       ),
     );
@@ -87,9 +134,11 @@ class Hometab extends StatelessWidget {
 }
 
 class SpItem extends StatefulWidget {
-  const SpItem({Key? key, required this.urlImage}) : super(key: key);
+  const SpItem({Key? key, required this.urlImage, required this.name})
+      : super(key: key);
 
   final String urlImage;
+  final String name;
 
   @override
   State<SpItem> createState() => _SpItemState();
@@ -110,7 +159,7 @@ class _SpItemState extends State<SpItem> {
           InkWell(
             onTap: () {
               context.goNamed("chitietsanpham",
-                  queryParams: {'url': widget.urlImage});
+                  queryParams: {'url': widget.urlImage, 'name': widget.name});
             },
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
@@ -129,23 +178,31 @@ class _SpItemState extends State<SpItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  "Áo thun nữ thời trang",
-                  style: TextStyle(
-                    fontSize: 12,
-                    height: 16 / 12,
-                    color: Color(0xff373737),
+                Expanded(
+                  child: Text(
+                    widget.name,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      height: 16 / 12,
+                      color: Color(0xff373737),
+                    ),
+                    maxLines: 1,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      _isFav = !_isFav;
-                    });
-                  },
-                  child: Icon(
-                    _isFav ? Custom.heart : FontAwesomeIcons.heartPulse,
-                    color: const Color(0xffFF7465),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isFav = !_isFav;
+                      });
+                    },
+                    child: Icon(
+                      _isFav ? Custom.heart : Icons.favorite,
+                      color: const Color(0xffFF7465),
+                    ),
                   ),
                 )
               ],

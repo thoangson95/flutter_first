@@ -145,7 +145,7 @@ class _HomescreenState extends State<Homescreen>
                   children: [
                     Visibility(
                       visible: _selected_index == 0,
-                      child: Hometab(),
+                      child: const Hometab(),
                     ),
                     Visibility(
                       visible: _selected_index == 1,
