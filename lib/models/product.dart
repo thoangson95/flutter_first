@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+
 class Product {
   final String name;
   final String image;
@@ -12,6 +16,15 @@ class Product {
     required this.path,
     this.isFavorite = false,
   });
+}
+
+void getHttp() async {
+  try {
+    Response response = await Dio().get("http://www.google.com");
+    print(response);
+  } catch (e) {
+    print(e);
+  }
 }
 
 final List<Product> listProduct = [

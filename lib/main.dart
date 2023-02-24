@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/screens/home/home.dart';
-import 'package:thoitrang/screens/intro.dart';
 import 'package:thoitrang/screens/account/account.dart';
 import 'package:thoitrang/screens/account/forget_password.dart';
 import 'package:thoitrang/screens/account/forget_password_submit.dart';
@@ -9,6 +7,8 @@ import 'package:thoitrang/screens/order/order_success.dart';
 import 'package:thoitrang/screens/product/filter.dart';
 import 'package:thoitrang/screens/product/product_detail.dart';
 import 'package:thoitrang/screens/product/products.dart';
+
+import 'home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,15 +19,9 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const IntroScreen();
+        return const Home();
       },
       routes: <RouteBase>[
-        GoRoute(
-          path: 'home',
-          builder: (BuildContext context, GoRouterState state) {
-            return const HomeScreen();
-          },
-        ),
         GoRoute(
           path: 'account',
           builder: (BuildContext context, GoRouterState state) {
@@ -77,6 +71,7 @@ final GoRouter _router = GoRouter(
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -90,7 +85,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-const color1 = Color(0xFFFF7465);
-const color2 = Color(0xFF373737);
-const color3 = Color(0xFFC2C2C2);

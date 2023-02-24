@@ -22,7 +22,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () => context.go('/home'),
+          onPressed: () => context.go('/'),
           type: GFButtonType.transparent,
         ),
         backgroundColor: Colors.white,

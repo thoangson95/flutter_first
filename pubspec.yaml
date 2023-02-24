@@ -21,6 +21,7 @@ dependencies:
   flutter_layout_grid: ^2.0.1 
   intl: ^0.18.0
   custom_check_box: ^0.0.4
+  dio: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,7 @@ flutter:
   assets:
       - assets/images/
       - assets/images/icons/
+      - assets/images/icons/tab/
 
   uses-material-design: true 
 
