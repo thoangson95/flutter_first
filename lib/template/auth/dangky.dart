@@ -53,10 +53,27 @@ class _DangkyState extends State<Dangky> {
             ),
 
             // Phần inut
-            _buildTextfile("Username", "assets/dangky_icon/mail.png", 40),
-            _buildTextfile("Số điện thoại", "assets/dangky_icon/phone.png", 40),
             _buildTextfile(
-                "Email của bạn", "assets/dangky_icon/unlock.png", 40),
+                "Username",
+                const Icon(
+                  Custom.user,
+                  size: 16,
+                ),
+                40),
+            _buildTextfile(
+                "Số điện thoại",
+                const Icon(
+                  Custom.phone,
+                  size: 16,
+                ),
+                40),
+            _buildTextfile(
+                "Email của bạn",
+                const Icon(
+                  Custom.mail,
+                  size: 16,
+                ),
+                40),
             Container(
               height: 40,
               padding: EdgeInsets.zero,
@@ -214,7 +231,7 @@ class _DangkyState extends State<Dangky> {
     );
   }
 
-  Container _buildTextfile(String label, String urlIcon, double bottomMargin,
+  Container _buildTextfile(String label, Icon icon, double bottomMargin,
       {bool isPassword = false}) {
     return Container(
       height: 40,
@@ -228,18 +245,12 @@ class _DangkyState extends State<Dangky> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(6, 5, 6, 5),
-            margin: const EdgeInsets.only(right: 6),
-            decoration: const BoxDecoration(
-                border: Border(
-                    right: BorderSide(width: 1, color: Color(0xFFD9D9D9)))),
-            child: Image.asset(
-              urlIcon,
-              width: 16,
-              height: 16,
-              fit: BoxFit.fill,
-            ),
-          ),
+              padding: const EdgeInsets.fromLTRB(6, 5, 6, 5),
+              margin: const EdgeInsets.only(right: 6),
+              decoration: const BoxDecoration(
+                  border: Border(
+                      right: BorderSide(width: 1, color: Color(0xFFD9D9D9)))),
+              child: icon),
           Expanded(
               child: TextField(
             obscureText: isPassword,
