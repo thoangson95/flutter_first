@@ -12,6 +12,10 @@ class Custom {
 
   static const String _fontFamily = 'Custom';
 
+  static const IconData unlock = IconData(0xe909, fontFamily: _fontFamily);
+  static const IconData eye = IconData(0xe90a, fontFamily: _fontFamily);
+  static const IconData phone = IconData(0xe90b, fontFamily: _fontFamily);
+  static const IconData mail = IconData(0xe90c, fontFamily: _fontFamily);
   static const IconData location = IconData(0xe907, fontFamily: _fontFamily);
   static const IconData ben = IconData(0xe908, fontFamily: _fontFamily);
   static const IconData bag = IconData(0xe906, fontFamily: _fontFamily);
