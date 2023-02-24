@@ -82,6 +82,7 @@ flutter:
     - assets/filter_icon/star.png
     - assets/dangnhap_image/eye.png
     - assets/dangnhap_image/bottom_img.png
+    - assets/cart_img/cart-success.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

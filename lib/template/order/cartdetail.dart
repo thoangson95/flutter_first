@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:thoitrang/controller/product_contronller.dart';
 import 'package:thoitrang/model/product_model.dart';
 
@@ -274,7 +275,9 @@ class Cartdetail extends StatelessWidget {
               height: 42,
               width: 100,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push("/cart-success");
+                },
                 style: ElevatedButton.styleFrom(
                     elevation: 0,
                     backgroundColor: const Color(0xFFFF7465),

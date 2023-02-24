@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/template/account/account.dart';
 import 'package:thoitrang/template/auth/dangky.dart';
 import 'package:thoitrang/template/auth/dangnhap.dart';
 import 'package:thoitrang/template/auth/quenmatkhau.dart';
@@ -7,6 +8,9 @@ import 'package:thoitrang/template/auth/xacnhancode.dart';
 import 'package:thoitrang/template/order/cart.dart';
 import 'package:thoitrang/template/home/homescreen.dart';
 import 'package:thoitrang/template/order/cartdetail.dart';
+import 'package:thoitrang/template/order/cartsuccess.dart';
+import 'package:thoitrang/template/order/orderdetail.dart';
+import 'package:thoitrang/template/order/orders.dart';
 import 'package:thoitrang/template/product/chitietsanpham.dart';
 import 'package:thoitrang/template/product/filterscreen.dart';
 import 'package:thoitrang/template/product/hangmoive.dart';
@@ -115,6 +119,22 @@ class MyApp extends StatelessWidget {
                             child: child),
               ),
             ),
+            GoRoute(
+              path: '/account',
+              pageBuilder: (context, state) => CustomTransitionPage(
+                child: const Account(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
+              ),
+            ),
           ],
         ),
         GoRoute(
@@ -196,6 +216,57 @@ class MyApp extends StatelessWidget {
           parentNavigatorKey: rootNavigatorKey,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const Cartdetail(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
+        GoRoute(
+          path: '/cart-success',
+          parentNavigatorKey: rootNavigatorKey,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Cartsuccess(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
+        GoRoute(
+          path: '/orders',
+          parentNavigatorKey: rootNavigatorKey,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Orders(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    SlideTransition(
+                        position: animation.drive(
+                          Tween<Offset>(
+                            begin: const Offset(1, 0),
+                            end: Offset.zero,
+                          ).chain(CurveTween(curve: Curves.easeIn)),
+                        ),
+                        child: child),
+          ),
+        ),
+        GoRoute(
+          path: '/order-detail',
+          parentNavigatorKey: rootNavigatorKey,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Orderdetail(),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) =>
                     SlideTransition(
@@ -341,7 +412,7 @@ class _ScaffoldLayoutState extends State<ScaffoldLayout> {
     ),
     const CustomBottomNavItem(
       icon: Icon(Custom.user),
-      initialLocation: '/home',
+      initialLocation: '/account',
       label: "user",
     ),
   ];
@@ -363,59 +434,25 @@ class _ScaffoldLayoutState extends State<ScaffoldLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFFFFFF),
-        elevation: 0,
-        title: InkWell(
-          onTap: () {
-            context.go("/sign-in");
-          },
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircleAvatar(
-                backgroundColor: const Color(0xFFecb1c9),
-                child: Image.asset(
-                  "assets/categories_image/avatar.png",
-                  width: 40,
-                  height: 40,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 14),
-                child: Text(
-                  "La Rosa’s",
-                  style: TextStyle(
-                    fontSize: 20,
-                    height: 1.35,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
+      body: widget.body,
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+            boxShadow: [BoxShadow(color: Color(0xffe5e5e5), blurRadius: 10)]),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
+            onTap: (value) => _onItemTapped(context, value),
+            iconSize: 24,
+            selectedIconTheme: const IconThemeData(color: Color(0xffFF7465)),
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            items: tabs,
           ),
         ),
-        actions: [
-          IconButton(
-            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-            onPressed: () {
-              context.push("/cart");
-            },
-            icon: Image.asset("assets/categories_image/Bag.png"),
-            iconSize: 22,
-          ),
-        ],
-      ),
-      body: widget.body,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        onTap: (value) => _onItemTapped(context, value),
-        iconSize: 24,
-        selectedIconTheme: const IconThemeData(color: Color(0xffFF7465)),
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: tabs,
       ),
     );
   }
