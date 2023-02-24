@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thoitrang/rangesliderborder.dart';
+import 'package:thoitrang/extendcode.dart';
 
 class Filter extends StatefulWidget {
   const Filter({super.key});
@@ -13,6 +13,10 @@ class _FilterState extends State<Filter> {
   Color maincolor = const Color(0xFFFF7465);
   double start = 100;
   double end = 800;
+
+  int isSelect = -1;
+
+  List Categories = ['Áo khoác', 'Jumpsuit', 'Crop Top', 'Áo lệch vai'];
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +96,8 @@ class _FilterState extends State<Filter> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 36,bottom: 22),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 36, bottom: 22),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -156,12 +161,56 @@ class _FilterState extends State<Filter> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          for (int i = 0; i < 100; i++)
+                          for (int i = 0; i < Categories.length; i++) ...{
                             Container(
-                              margin: const EdgeInsets.only(bottom: 10),
-                              color: Colors.black,
-                              child: Text("$i"),
+                              padding: const EdgeInsets.only(left: 10),
+                              height: 50,
+                              child: TextButton(
+                                onPressed: () {
+                                  if (isSelect == i) {
+                                    isSelect = -1;
+                                    setState(() {});
+                                  } else {
+                                    isSelect = i;
+                                    setState(() {});
+                                  }
+                                },
+                                style: ButtonStyle(
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  padding: MaterialStateProperty.resolveWith(
+                                      (states) => EdgeInsets.zero),
+                                  overlayColor: MaterialStateColor.resolveWith(
+                                      (states) => Colors.transparent),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${Categories[i]}",
+                                      style: TextStyle(
+                                          color: isSelect == i
+                                              ? maincolor
+                                              : const Color(0xFF797979),
+                                          fontSize: 13),
+                                    ),
+                                    if (isSelect == i)
+                                      Icon(
+                                        Icons.check,
+                                        color: maincolor,
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            CustomPaint(
+                              painter: YourCustomPaint(
+                                  color: const Color(0xFFD9D9D9),
+                                  width: 1,
+                                  dashSpace: 4),
                             )
+                          }
                         ],
                       ),
                     ),
@@ -170,6 +219,50 @@ class _FilterState extends State<Filter> {
               ],
             ),
           ),
+          Container(
+            padding: const EdgeInsets.only(left: 40, right: 40,bottom: 37),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      foregroundColor:maincolor,
+                      backgroundColor: const Color(0xFFEFEFEF),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap
+                    ),
+                    child: Text(
+                      "Xóa",
+                      style: TextStyle(
+                          color: maincolor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 13,
+                ),
+                Expanded(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: maincolor,
+                      foregroundColor: const Color(0xFFEFEFEF),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      "Lọc",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -3,66 +3,77 @@ import 'package:thoitrang/allproduct.dart';
 
 List items = [
   {
+    "id":1,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":2,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":3,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":4,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":5,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":6,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":7,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":8,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":9,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":10,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",
     "isfavorite": false
   },
   {
+    "id":11,
     "name": "Áo thun nữ thời trang",
     "image": "asset/images/homeitems.png",
     "price": "290,000đ",

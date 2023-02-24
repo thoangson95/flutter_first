@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/filter.dart';
+import 'package:thoitrang/productdetail.dart';
 
 class Allproduct extends StatefulWidget {
   const Allproduct({super.key, required this.items});
@@ -101,7 +102,15 @@ class _AllproductState extends State<Allproduct> {
               children: [
                 for (var i in widget.items)
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              ProductDetail(item: i),
+                        ),
+                      );
+                      setState(() {});
+                    },
                     style: TextButton.styleFrom(
                       foregroundColor: maincolor,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -111,9 +120,12 @@ class _AllproductState extends State<Allproduct> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Image(
-                          fit: BoxFit.cover,
-                          image: AssetImage("${i['image']}"),
+                        Hero(
+                          tag: "${i['id']}",
+                          child: Image(
+                            fit: BoxFit.cover,
+                            image: AssetImage("${i['image']}"),
+                          ),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(top: 12),
