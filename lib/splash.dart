@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:thoitrang/login.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({super.key,required this.list});
+
+  final List list;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen>
             transitionDuration: const Duration(milliseconds: 700),
             pageBuilder: (BuildContext context, Animation animation,
                 Animation secondaryAnimation) {
-              return const Login();
+              return Login(list: widget.list);
             },
             transitionsBuilder: (BuildContext context,
                 Animation<double> animation,

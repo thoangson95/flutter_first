@@ -5,7 +5,9 @@ import 'package:thoitrang/register.dart';
 import 'navigatorbar.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({super.key, required this.list});
+
+  final List list;
 
   @override
   State<Login> createState() => _LoginState();
@@ -241,7 +243,7 @@ class _LoginState extends State<Login> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        const ScaffoldWidget(),
+                                        ScaffoldWidget(list:widget.list),
                                   ),
                                 );
                               },

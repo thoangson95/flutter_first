@@ -51,9 +51,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/', 
       routes: <String, WidgetBuilder>{
-        '/': (context) => const SplashScreen(),
+        '/': (context) => SplashScreen(list: items,),
         '/login/redeem': (context) => const Redemcode(phonenumber: "01"),
-        '/login': (context) => const Login(),
+        '/login': (context) => Login(list:items),
         '/mot': (context) => Cart(list: items,),
         '/hai': (context) => Purchase(list:items),
         '/hai/ba': (context) => const SuccessPurchase(),

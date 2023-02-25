@@ -38,7 +38,7 @@ class _Cart extends State<Cart> {
         leading: IconButton(
           splashRadius: 0.1,
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => {},
+          onPressed: () => {Navigator.pop(context)},
           color: Colors.black,
         ),
         title: const Text(
