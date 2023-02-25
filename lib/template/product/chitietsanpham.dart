@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/icons_class/Custom_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/model/product_model.dart';
+
+import 'package:intl/intl.dart' as intl;
 
 class Chitietsanpham extends StatelessWidget {
-  Chitietsanpham({Key? key, this.url, this.price, this.name}) : super(key: key);
+  Chitietsanpham({Key? key, required this.model}) : super(key: key);
 
-  final String? url;
-  final String? price;
-  final String? name;
+  // final String? url;
+  // final String? price;
+  // final String? name;
+
+  final ProductModel model;
 
   final List<RadioColorPickerModel> sampleData = [
     RadioColorPickerModel(false, const Color(0xff000000)),
@@ -41,7 +46,11 @@ class Chitietsanpham extends StatelessWidget {
           IconButton(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
             onPressed: () {},
-            icon: Image.asset("assets/categories_image/Bag.png"),
+            icon: const Icon(
+              Custom.bag,
+              size: 24,
+              color: Color(0xff130F26),
+            ),
             iconSize: 22,
           ),
         ],
@@ -53,7 +62,7 @@ class Chitietsanpham extends StatelessWidget {
               width: double.infinity,
               height: 370,
               child: Image.network(
-                url ?? "",
+                model.photo ?? "",
                 fit: BoxFit.cover,
               ),
             ),
@@ -81,9 +90,13 @@ class Chitietsanpham extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            name ?? "",
-                            style: _titleMain,
+                          Expanded(
+                            child: Text(
+                              model.namevi ?? "",
+                              style: _titleMain,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
                           ),
                           const FavoriteIcon(),
                         ],
@@ -97,9 +110,9 @@ class Chitietsanpham extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Text(
-                            "290.000đ",
-                            style: TextStyle(
+                          Text(
+                            "${intl.NumberFormat.decimalPattern().format(model.regularPrice)}đ",
+                            style: const TextStyle(
                               fontSize: 18,
                               height: 25 / 18,
                               color: Color(0xffFF7465),
@@ -123,11 +136,11 @@ class Chitietsanpham extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
-                        '- Sản phẩm: SET ASHE W SKIRT\n- Màu sắc: Hồng nhạt, kem, đen, xám , đỏ-\n- Chất vải: Cotton hàn',
-                        style: TextStyle(
+                        model.descvi ?? '',
+                        style: const TextStyle(
                           fontSize: 12,
                           height: 25 / 12,
                           color: Color(0xff979797),

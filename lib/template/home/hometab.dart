@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:thoitrang/controller/product_contronller.dart';
 import 'package:thoitrang/model/product_model.dart';
 
+import 'package:intl/intl.dart' as intl;
+
 import '../../icons_class/Custom_icons.dart';
 
 List<String> imageList = [
@@ -23,7 +25,7 @@ class Hometab extends StatefulWidget {
 }
 
 class _HometabState extends State<Hometab> {
-  late Future<List<Product>> listProduct;
+  late Future<List<ProductModel>> listProduct;
 
   @override
   void initState() {
@@ -98,8 +100,7 @@ class _HometabState extends State<Hometab> {
                 children = snapshot.data!
                     .take(20)
                     .map((e) => SpItem(
-                          urlImage: e.images[0],
-                          name: e.title,
+                          model: e,
                         ))
                     .toList();
               } else if (snapshot.hasError) {
@@ -135,11 +136,9 @@ class _HometabState extends State<Hometab> {
 }
 
 class SpItem extends StatefulWidget {
-  const SpItem({Key? key, required this.urlImage, required this.name})
-      : super(key: key);
+  const SpItem({Key? key, required this.model}) : super(key: key);
 
-  final String urlImage;
-  final String name;
+  final ProductModel model;
 
   @override
   State<SpItem> createState() => _SpItemState();
@@ -159,15 +158,14 @@ class _SpItemState extends State<SpItem> {
         children: [
           InkWell(
             onTap: () {
-              context.pushNamed("chitietsanpham",
-                  queryParams: {'url': widget.urlImage, 'name': widget.name});
+              context.pushNamed("chitietsanpham", extra: widget.model);
             },
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
               child: Image.network(
-                widget.urlImage,
+                widget.model.photo ?? "",
                 fit: BoxFit.cover,
                 height: 200,
               ),
@@ -181,7 +179,7 @@ class _SpItemState extends State<SpItem> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.name,
+                    widget.model.namevi ?? "",
                     style: const TextStyle(
                       fontSize: 12,
                       height: 16 / 12,
@@ -209,9 +207,9 @@ class _SpItemState extends State<SpItem> {
               ],
             ),
           ),
-          const Text(
-            "290.000đ",
-            style: TextStyle(
+          Text(
+            "${intl.NumberFormat.decimalPattern().format(widget.model.regularPrice)}đ",
+            style: const TextStyle(
               fontSize: 14,
               height: 19 / 14,
               color: Color(0xffFF7465),

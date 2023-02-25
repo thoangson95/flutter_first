@@ -11,7 +11,7 @@ class Orderdetail extends StatefulWidget {
 }
 
 class _OrderdetailState extends State<Orderdetail> {
-  late Future<List<Product>> listProduct;
+  late Future<List<ProductModel>> listProduct;
   @override
   void initState() {
     listProduct = fetchListProduct();
@@ -179,7 +179,7 @@ class _OrderdetailState extends State<Orderdetail> {
                                         width: 80,
                                         height: 80,
                                         child: Image.network(
-                                          e.images.first,
+                                          e.photo ?? "",
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -194,7 +194,7 @@ class _OrderdetailState extends State<Orderdetail> {
                                       children: [
                                         // Tiêu đề sản phẩm
                                         Text(
-                                          e.title,
+                                          e.namevi ?? "",
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
                                           style: const TextStyle(
@@ -206,7 +206,7 @@ class _OrderdetailState extends State<Orderdetail> {
 
                                         // Giá sản phẩm
                                         Text(
-                                          "${e.price}\$",
+                                          "${e.regularPrice}\$",
                                           style: const TextStyle(
                                             fontSize: 14,
                                             height: 19 / 14,

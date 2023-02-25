@@ -12,7 +12,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  late Future<List<Product>> listProduct;
+  late Future<List<ProductModel>> listProduct;
   bool _isChecked = false;
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _CartState extends State<Cart> {
                 .map(
                   (e) => Container(
                     margin: const EdgeInsets.only(bottom: 30),
-                    child: CartItem(name: e.title, image: e.images[0]),
+                    child: CartItem(name: e.namevi ?? "", image: e.photo ?? ""),
                   ),
                 )
                 .toList();

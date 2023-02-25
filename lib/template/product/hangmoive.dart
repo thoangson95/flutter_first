@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/controller/product_contronller.dart';
+import 'package:thoitrang/model/product_model.dart';
 
 import '../../icons_class/Custom_icons.dart';
 import '../home/hometab.dart';
 
-class Hangmoive extends StatelessWidget {
+class Hangmoive extends StatefulWidget {
   const Hangmoive({Key? key}) : super(key: key);
+
+  @override
+  State<Hangmoive> createState() => _HangmoiveState();
+}
+
+class _HangmoiveState extends State<Hangmoive> {
+  late Future<List<ProductModel>> listProduct;
+
+  @override
+  void initState() {
+    super.initState();
+    listProduct = fetchListProduct();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,24 +88,46 @@ class Hangmoive extends StatelessWidget {
               ),
             ),
             // Grid sp
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-              child: GridView.count(
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: (165 / 260),
-                // primary: true,
-                shrinkWrap: true,
-                children: imageList
-                    .map((e) => SpItem(
-                          urlImage: e,
-                          name: "Áo nữ thời trang",
-                        ))
-                    .toList(),
-              ),
-            )
+            FutureBuilder(
+              future: listProduct,
+              builder: (context, snapshot) {
+                List<Widget> children = [];
+                if (snapshot.hasData) {
+                  children = snapshot.data!
+                      .take(20)
+                      .map((e) => SpItem(
+                            model: e,
+                          ))
+                      .toList();
+                } else if (snapshot.hasError) {
+                  children = <Widget>[
+                    const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 60,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text('Error: $snapshot'),
+                    ),
+                  ];
+                } else {
+                  return const CircularProgressIndicator();
+                }
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GridView.count(
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: (165 / 260),
+                    shrinkWrap: true,
+                    children: children,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

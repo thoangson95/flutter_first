@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/model/product_model.dart';
 import 'package:thoitrang/template/account/account.dart';
 import 'package:thoitrang/template/auth/dangky.dart';
 import 'package:thoitrang/template/auth/dangnhap.dart';
@@ -174,27 +175,25 @@ class MyApp extends StatelessWidget {
           ),
         ),
         GoRoute(
-          path: '/product-detail',
-          name: 'chitietsanpham',
-          parentNavigatorKey: rootNavigatorKey,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            child: Chitietsanpham(
-              url: state.queryParams['url'],
-              name: state.queryParams['name'],
-              price: state.queryParams['price'],
-            ),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) =>
-                    SlideTransition(
-                        position: animation.drive(
-                          Tween<Offset>(
-                            begin: const Offset(1, 0),
-                            end: Offset.zero,
-                          ).chain(CurveTween(curve: Curves.easeIn)),
-                        ),
-                        child: child),
-          ),
-        ),
+            path: '/product-detail',
+            name: 'chitietsanpham',
+            parentNavigatorKey: rootNavigatorKey,
+            pageBuilder: (context, state) {
+              ProductModel model = state.extra as ProductModel;
+              return CustomTransitionPage(
+                child: Chitietsanpham(model: model),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(1, 0),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeIn)),
+                            ),
+                            child: child),
+              );
+            }),
         GoRoute(
           path: '/cart',
           name: 'cart',

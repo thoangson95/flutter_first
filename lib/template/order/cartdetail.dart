@@ -423,7 +423,7 @@ class CartDetailProductList extends StatefulWidget {
 }
 
 class CartDetailProductListState extends State<CartDetailProductList> {
-  late Future<List<Product>> listProduct;
+  late Future<List<ProductModel>> listProduct;
 
   @override
   void initState() {
@@ -456,7 +456,7 @@ class CartDetailProductListState extends State<CartDetailProductList> {
                               width: 80,
                               height: 80,
                               child: Image.network(
-                                e.images[0],
+                                e.photo ?? "",
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -467,14 +467,14 @@ class CartDetailProductListState extends State<CartDetailProductList> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              e.title,
+                              e.namevi ?? "",
                               style: const TextStyle(
                                   fontSize: 12,
                                   height: 16 / 12,
                                   color: Color(0xff373737)),
                             ),
                             Text(
-                              "${e.price}\$",
+                              "${e.regularPrice}\$",
                               style: const TextStyle(
                                 fontSize: 14,
                                 height: 19 / 14,

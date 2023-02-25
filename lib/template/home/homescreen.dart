@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:slide_indexed_stack/slide_indexed_stack.dart';
+import 'package:thoitrang/icons_class/Custom_icons.dart';
 import 'package:thoitrang/template/home/hometab.dart';
 
 import 'categories.dart';
@@ -73,7 +74,11 @@ class _HomescreenState extends State<Homescreen>
             onPressed: () {
               context.push("/cart");
             },
-            icon: Image.asset("assets/categories_image/Bag.png"),
+            icon: const Icon(
+              Custom.bag,
+              size: 24,
+              color: Color(0xff130F26),
+            ),
             iconSize: 22,
           ),
         ],
