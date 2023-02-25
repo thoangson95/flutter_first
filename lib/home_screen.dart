@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:thoitrang/screens/account/account.dart';
 import 'package:thoitrang/screens/home/home.dart';
 import 'package:thoitrang/screens/product/products.dart';
-import 'package:dio/dio.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,6 +11,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  dynamic modalData;
+
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),

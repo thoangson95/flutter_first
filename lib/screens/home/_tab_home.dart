@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/api/api_request.dart';
+import 'package:thoitrang/models/product.dart';
 import 'package:thoitrang/screens/product/grid_product.dart';
 
 const List<String> imageList = [
@@ -69,7 +71,7 @@ class TabHome extends StatelessWidget {
       ),
       Container(
         padding: const EdgeInsets.all(20),
-        child: const TestAPI(),
+        // child: GridProduct(listProduct: listProduct),
       ),
     ]);
   }

@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'assets/images/icons/bag.png',
               width: 20,
             ),
-            onPressed: () => context.go('/account'),
+            onPressed: () => context.go('/home'),
           )
         ],
         backgroundColor: Colors.white,

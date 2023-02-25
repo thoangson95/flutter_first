@@ -5,6 +5,7 @@ import 'package:thoitrang/screens/account/forget_password.dart';
 import 'package:thoitrang/screens/account/forget_password_submit.dart';
 import 'package:thoitrang/screens/order/order_success.dart';
 import 'package:thoitrang/screens/product/filter.dart';
+import 'package:thoitrang/screens/product/grid_product.dart';
 import 'package:thoitrang/screens/product/product_detail.dart';
 import 'package:thoitrang/screens/product/products.dart';
 
@@ -19,7 +20,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const Home();
+        return const TestAPI();
       },
       routes: <RouteBase>[
         GoRoute(

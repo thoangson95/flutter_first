@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/product.dart';
-import 'grid_product.dart';
-
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
 
@@ -79,7 +76,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
           Container(
             padding: const EdgeInsets.all(20),
-            child: GridProduct(listProduct: listProduct),
+            // child: GridProduct(listProduct: listProduct),
           ),
         ],
       ),
