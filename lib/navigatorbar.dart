@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/allproduct.dart';
 import 'package:thoitrang/cart.dart';
+import 'package:thoitrang/myorder.dart';
 import 'package:thoitrang/productdetail.dart';
 
 List items = [
@@ -574,8 +575,405 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget>
           ),
           centerTitle: true,
         ),
-        body: const Center(
-          child: Text('User'),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(top: 30, bottom: 30),
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 60,
+                          height: 60,
+                          child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage('asset/images/Avatar.png'),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 14),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Thạch Bảo Ngọc',
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Chỉnh sửa',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(128, 128, 128, 1),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child:
+                              Text("Giỏ hàng", style: TextStyle(fontSize: 13)),
+                        ),
+                        Icon(Icons.chevron_right)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const MyOrder(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: const [
+                        Expanded(
+                            child: Text('Đơn hàng',
+                                style: TextStyle(fontSize: 13))),
+                        Icon(Icons.chevron_right)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: Text("Phiếu giảm giá & Mã khuyến mại",
+                              style: TextStyle(fontSize: 13)),
+                        ),
+                        Icon(Icons.chevron_right)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 27, bottom: 27),
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 47,
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black,
+                            gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0xffFE5A6B), Color(0xffFF6693)],
+                            ),
+                          ),
+                          child: TextButton(
+                            style: ButtonStyle(
+                              alignment: Alignment.centerLeft,
+                              overlayColor: MaterialStateColor.resolveWith(
+                                  (states) => Colors.white30),
+                              padding: MaterialStateProperty.resolveWith(
+                                  (states) =>
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0)),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            onPressed: () {},
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "10%",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "Khi mua đơn hàng 200k",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 47,
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black,
+                            gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Color(0xffFE5A6B), Color(0xffFF6693)],
+                            ),
+                          ),
+                          child: TextButton(
+                            style: ButtonStyle(
+                              alignment: Alignment.centerLeft,
+                              overlayColor: MaterialStateColor.resolveWith(
+                                  (states) => Colors.white30),
+                              padding: MaterialStateProperty.resolveWith(
+                                  (states) =>
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0)),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            onPressed: () {},
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  "20%",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  "Khi mua đơn hàng 500k",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: Text("Địa chỉ giao hàng",
+                              style: TextStyle(fontSize: 13)),
+                        ),
+                        Icon(Icons.chevron_right)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child:
+                              Text("Hỏi đáp", style: TextStyle(fontSize: 13)),
+                        ),
+                        Icon(Icons.chevron_right)
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        width: 1,
+                        color: Color.fromRGBO(236, 236, 236, 1),
+                      ),
+                    ),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.black),
+                      overlayColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.transparent),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => EdgeInsets.zero),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: MaterialStateProperty.resolveWith(
+                        (states) => Size.zero,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: Text(
+                            "Đăng xuất",
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ),
+                        Icon(Icons.chevron_right),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     ];

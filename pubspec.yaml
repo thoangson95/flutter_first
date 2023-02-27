@@ -75,6 +75,7 @@ flutter:
     - asset/images/categories3.png
     - asset/images/categories4.png
     - asset/images/prodetail.png
+    - asset/images/Avatar.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -11,9 +11,7 @@ class Filter extends StatefulWidget {
 class _FilterState extends State<Filter> {
   int vote = 0;
   Color maincolor = const Color(0xFFFF7465);
-  double start = 100;
-  double end = 800;
-
+  RangeValues rangevalue = const RangeValues(100, 800);
   int isSelect = -1;
 
   List Categories = ['Áo khoác', 'Jumpsuit', 'Crop Top', 'Áo lệch vai'];
@@ -60,7 +58,7 @@ class _FilterState extends State<Filter> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "${start.toInt()}K ~ ${end.toInt()}K",
+                        "${rangevalue.start.toInt()}K ~ ${rangevalue.end.toInt()}K",
                         style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold),
                       ),
@@ -84,10 +82,9 @@ class _FilterState extends State<Filter> {
                   child: RangeSlider(
                     min: 0,
                     max: 2000,
-                    values: RangeValues(start, end),
+                    values: rangevalue,
                     onChanged: (value) {
-                      start = value.start;
-                      end = value.end;
+                      rangevalue = value;
                       setState(() {});
                     },
                   ),
