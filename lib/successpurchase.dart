@@ -12,7 +12,7 @@ class SuccessPurchase extends StatelessWidget {
         leading: IconButton(
           splashRadius: 0.1,
           icon: const Icon(Icons.arrow_back),
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
           color: Colors.black,
@@ -43,7 +43,9 @@ class SuccessPurchase extends StatelessWidget {
                       borderRadius: BorderRadius.circular(150),
                       color: mainColor,
                     ),
-                    child: const Image(image: AssetImage("asset/images/success.png")),
+                    child: const Image(
+                      image: AssetImage("asset/images/success.png"),
+                    ),
                   ),
                 ),
               ],
@@ -74,15 +76,20 @@ class SuccessPurchase extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      padding: const EdgeInsets.only(top: 12, bottom: 12),
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        bottom: 12,
+                      ),
                       foregroundColor: Colors.white,
                       backgroundColor: mainColor,
                     ),
                     onPressed: () {},
                     child: const Text(
                       "Xem đơn hàng",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

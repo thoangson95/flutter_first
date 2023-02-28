@@ -39,36 +39,201 @@ class _OrderinfoState extends State<Orderinfo> {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(left: 20, right: 20),
-                    color: Colors.red.shade100,
                     child: Column(
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
+                              margin: const EdgeInsets.only(top: 4),
                               height: 16,
                               width: 16,
-                              padding: EdgeInsets.all(3),
+                              padding: const EdgeInsets.all(3),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    width: 1,
-                                    color:
-                                        const Color.fromRGBO(255, 116, 101, 1)),
+                                  width: 1,
+                                  color: const Color.fromRGBO(255, 116, 101, 1),
+                                ),
                                 borderRadius: BorderRadius.circular(150),
                               ),
                               child: Container(
                                 width: 10,
                                 height: 10,
                                 decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(255, 116, 101, 1),
-                                    borderRadius: BorderRadius.circular(150)),
+                                  color: const Color.fromRGBO(255, 116, 101, 1),
+                                  borderRadius: BorderRadius.circular(150),
+                                ),
                               ),
                             ),
+                            const SizedBox(
+                              width: 10,
+                            ),
                             Expanded(
-                              child: Column(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text(
+                                    "Chờ lấy hàng",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                                  Text(
+                                      "Đơn hàng của bạn đã xác nhận đang đợi lấy hàng"),
+                                ],
+                              ),
                             ),
                           ],
-                        )
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.local_shipping,
+                              size: 18,
+                              color: Color.fromRGBO(122, 125, 138, 1),
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text(
+                                    "Chờ lấy hàng",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromRGBO(122, 125, 138, 1),
+                                        fontSize: 15),
+                                  ),
+                                  Text(
+                                    "Đơn hàng của bạn đã được đặt",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(122, 125, 138, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.location_on,
+                              size: 18,
+                              color: Color.fromRGBO(122, 125, 138, 1),
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Text(
+                                    "Chờ lấy hàng",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromRGBO(122, 125, 138, 1),
+                                        fontSize: 15),
+                                  ),
+                                  Text(
+                                    "Đơn hàng của bạn đã được đặt",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(122, 125, 138, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(bottom: 22,top: 20),
+                          child: const Text(
+                            "Sản phẩm",
+                            style: TextStyle(
+                                fontSize: 13, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        for (int i = 0; i < 10; i++) ...{
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 80,
+                                height: 80,
+                                child: Image(
+                                  image: AssetImage("asset/images/Product.png"),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      "Áo thun nữ thời trang",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Color.fromRGBO(55, 55, 55, 1),
+                                      ),
+                                    ),
+                                    Text(
+                                      "290,000đ",
+                                      style: TextStyle(
+                                        color: Color(0xFFFF7465),
+                                      ),
+                                    ),
+                                    Text(
+                                      "x1",
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(122, 125, 138, 1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        },
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                alignment: Alignment.centerRight,
+                                child: const Text(
+                                  "1 mặt hàng: 290,000đ",
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(122, 125, 138, 1),
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -166,7 +331,7 @@ class _OrderinfoState extends State<Orderinfo> {
                       style: TextStyle(
                           color: Color(0xFFFF7465),
                           fontWeight: FontWeight.bold),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -186,10 +351,10 @@ class _OrderinfoState extends State<Orderinfo> {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
