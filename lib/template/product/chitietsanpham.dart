@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thoitrang/icons_class/Custom_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thoitrang/model/product_model.dart';
 
 import 'package:intl/intl.dart' as intl;
+import 'package:thoitrang/network/shared_provider.dart';
+
+import '../showdialog.dart';
 
 class Chitietsanpham extends StatelessWidget {
   Chitietsanpham({Key? key, required this.model}) : super(key: key);
@@ -45,7 +49,9 @@ class Chitietsanpham extends StatelessWidget {
         actions: [
           IconButton(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-            onPressed: () {},
+            onPressed: () {
+              context.push("/cart");
+            },
             icon: const Icon(
               Custom.bag,
               size: 24,
@@ -178,54 +184,75 @@ class Chitietsanpham extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 37),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xffF5F5F5),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+      bottomNavigationBar: Consumer(
+        builder: (context, ref, child) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 37),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xffF5F5F5),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        ref
+                            .read(cartProvider.notifier)
+                            .addToCart(addItem: model, qty: 1);
+                        alert(context, const Text("Thêm thành công"),
+                            const Text("Đã thêm vào giỏ hàng"), [
+                          TextButton(
+                              onPressed: () {
+                                context.pop();
+                              },
+                              child: const Text("ok"))
+                        ]);
+                      },
+                      icon: const Icon(
+                        Custom.bag,
+                        color: Color(0xffFF7465),
+                      ),
+                    ),
                   ),
                 ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Custom.bag,
-                    color: Color(0xffFF7465),
+                Expanded(
+                  child: SizedBox(
+                    height: 46,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ref
+                            .read(cartProvider.notifier)
+                            .addToCart(addItem: model, qty: 1);
+                        context.push("/cart");
+                      },
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: const Color(0xFFFF7465),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: const Text(
+                        "Mua ngay",
+                        style: TextStyle(
+                            color: Color(0xFFFFFFFF),
+                            fontSize: 14,
+                            height: 1.4,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-                ),
-              ),
+                )
+              ],
             ),
-            Expanded(
-              child: SizedBox(
-                height: 46,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: const Color(0xFFFF7465),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: const Text(
-                    "Mua ngay",
-                    style: TextStyle(
-                        color: Color(0xFFFFFFFF),
-                        fontSize: 14,
-                        height: 1.4,
-                        fontWeight: FontWeight.w700),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+          );
+        },
       ),
     );
   }

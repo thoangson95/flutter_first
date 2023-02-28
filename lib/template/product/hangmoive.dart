@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/controller/product_contronller.dart';
 import 'package:thoitrang/model/product_model.dart';
+import 'package:thoitrang/network/shared_provider.dart';
 
 import '../../icons_class/Custom_icons.dart';
 import '../home/hometab.dart';
 
-class Hangmoive extends StatefulWidget {
+class Hangmoive extends ConsumerWidget {
   const Hangmoive({Key? key}) : super(key: key);
 
   @override
-  State<Hangmoive> createState() => _HangmoiveState();
-}
-
-class _HangmoiveState extends State<Hangmoive> {
-  late Future<List<ProductModel>> listProduct;
-
-  @override
-  void initState() {
-    super.initState();
-    listProduct = fetchListProduct();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<List<ProductModel>> listProduct = ref.watch(getProductProvider);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -88,45 +77,30 @@ class _HangmoiveState extends State<Hangmoive> {
               ),
             ),
             // Grid sp
-            FutureBuilder(
-              future: listProduct,
-              builder: (context, snapshot) {
-                List<Widget> children = [];
-                if (snapshot.hasData) {
-                  children = snapshot.data!
+            listProduct.when(
+              data: (data) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: GridView.count(
+                  physics: const NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: (165 / 260),
+                  shrinkWrap: true,
+                  children: data
                       .take(20)
                       .map((e) => SpItem(
                             model: e,
                           ))
-                      .toList();
-                } else if (snapshot.hasError) {
-                  children = <Widget>[
-                    const Icon(
-                      Icons.error_outline,
-                      color: Colors.red,
-                      size: 60,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Text('Error: $snapshot'),
-                    ),
-                  ];
-                } else {
-                  return const CircularProgressIndicator();
-                }
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GridView.count(
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: (165 / 260),
-                    shrinkWrap: true,
-                    children: children,
-                  ),
-                );
-              },
+                      .toList(),
+                ),
+              ),
+              error: (error, stackTrace) => Center(
+                child: Text(error.toString()),
+              ),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           ],
         ),

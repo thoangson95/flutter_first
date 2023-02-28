@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/controller/product_contronller.dart';
-import 'package:thoitrang/model/product_model.dart';
+import 'package:thoitrang/network/shared_provider.dart';
+import 'package:intl/intl.dart' as intl;
 
 class Cartdetail extends StatelessWidget {
   const Cartdetail({Key? key}) : super(key: key);
@@ -175,27 +176,30 @@ class Cartdetail extends StatelessWidget {
                 style: TextStyle(
                     color: Color(0xff171717), fontWeight: FontWeight.w700),
               ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "Tổng tiền hàng",
-                      strutStyle: StrutStyle(
-                          fontSize: 12, height: 20 / 12, leading: 8 / 12),
-                      style: TextStyle(color: Color(0xff7A7D8A)),
-                    ),
-                    Text(
-                      "229.000đ",
-                      strutStyle: StrutStyle(
-                          fontSize: 13, height: 20 / 13, leading: 7 / 13),
-                      style: TextStyle(color: Color(0xffFF7465)),
-                    )
-                  ],
-                ),
-              ),
+              Consumer(builder: (context, ref, child) {
+                final total = ref.watch(cartProvider).total;
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Tổng tiền hàng",
+                        strutStyle: StrutStyle(
+                            fontSize: 12, height: 20 / 12, leading: 8 / 12),
+                        style: TextStyle(color: Color(0xff7A7D8A)),
+                      ),
+                      Text(
+                        "${intl.NumberFormat.decimalPattern().format(total)}đ",
+                        strutStyle: const StrutStyle(
+                            fontSize: 13, height: 20 / 13, leading: 7 / 13),
+                        style: const TextStyle(color: Color(0xffFF7465)),
+                      )
+                    ],
+                  ),
+                );
+              }),
               Container(
                 margin: const EdgeInsets.only(bottom: 15),
                 child: Row(
@@ -415,91 +419,75 @@ class ThoiGianNhanHang extends StatelessWidget {
   }
 }
 
-class CartDetailProductList extends StatefulWidget {
+class CartDetailProductList extends ConsumerStatefulWidget {
   const CartDetailProductList({Key? key}) : super(key: key);
 
   @override
   CartDetailProductListState createState() => CartDetailProductListState();
 }
 
-class CartDetailProductListState extends State<CartDetailProductList> {
-  late Future<List<ProductModel>> listProduct;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    listProduct = fetchListProduct();
-    super.initState();
-  }
-
+class CartDetailProductListState extends ConsumerState<CartDetailProductList> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: listProduct,
-      builder: (context, snapshot) {
-        List<Widget> children = [];
-        if (snapshot.hasData) {
-          children = snapshot.data!
-              .take(5)
-              .map((e) => Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 20),
-                          child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            child: SizedBox(
-                              width: 80,
-                              height: 80,
-                              child: Image.network(
-                                e.photo ?? "",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+    final listProduct = ref
+        .watch(cartProvider)
+        .listCart
+        .where((element) => element.selected == true);
+    return Column(
+      children: listProduct
+          .map((e) => Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                        child: SizedBox(
+                          width: 80,
+                          height: 80,
+                          child: Image.network(
+                            e.productDetail?.photo ?? "",
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              e.namevi ?? "",
-                              style: const TextStyle(
-                                  fontSize: 12,
-                                  height: 16 / 12,
-                                  color: Color(0xff373737)),
-                            ),
-                            Text(
-                              "${e.regularPrice}\$",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                height: 19 / 14,
-                                color: Color(0xffFF7465),
-                              ),
-                            )
-                          ],
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          e.productDetail?.namevi ?? "",
+                          style: const TextStyle(
+                              fontSize: 12,
+                              height: 16 / 12,
+                              color: Color(0xff373737)),
+                        ),
+                        Text(
+                          "${e.productDetail?.regularPrice}\$",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            height: 19 / 14,
+                            color: Color(0xffFF7465),
+                          ),
+                        ),
+                        Text(
+                          "X${e.qty}",
+                          style: const TextStyle(
+                              color: Color(0xff7A7D8A),
+                              fontSize: 13,
+                              height: 20 / 13),
                         )
                       ],
-                    ),
-                  ))
-              .toList();
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text("${snapshot.error}"),
-          );
-        } else {
-          return const Center(
-            child: LinearProgressIndicator(),
-          );
-        }
-        return Column(
-          children: children,
-        );
-      },
+                    )
+                  ],
+                ),
+              ))
+          .toList(),
     );
   }
 }

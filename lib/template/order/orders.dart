@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/controller/product_contronller.dart';
 import 'package:thoitrang/model/product_model.dart';
+import 'package:thoitrang/network/shared_provider.dart';
 
 class Orders extends StatefulWidget {
   const Orders({Key? key}) : super(key: key);
@@ -95,24 +96,13 @@ class _OrdersState extends State<Orders> with SingleTickerProviderStateMixin {
   }
 }
 
-class OrderList extends StatefulWidget {
+class OrderList extends ConsumerWidget {
   const OrderList({Key? key}) : super(key: key);
 
   @override
-  State<OrderList> createState() => _OrderListState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<List<ProductModel>> listProduct = ref.watch(getProductProvider);
 
-class _OrderListState extends State<OrderList> {
-  late Future<List<ProductModel>> listProduct;
-
-  @override
-  void initState() {
-    listProduct = fetchListProduct();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(children: [
@@ -166,113 +156,103 @@ class _OrderListState extends State<OrderList> {
         ),
 
         // Danh sách sản phẩm
-        FutureBuilder(
-          future: listProduct,
-          builder: (context, snapshot) {
-            List<Widget> children = [];
-            if (snapshot.hasData) {
-              children = snapshot.data!
-                  .take(2)
-                  .map((e) => Padding(
-                        padding: const EdgeInsets.only(bottom: 24),
-                        child: InkWell(
-                          onTap: () {
-                            context.push('/order-detail');
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
-                                  child: SizedBox(
-                                    width: 80,
-                                    height: 80,
-                                    child: Image.network(
-                                      e.photo ?? "",
-                                      fit: BoxFit.cover,
+        listProduct.when(
+          data: (data) => Column(
+            children: [
+              Column(
+                children: data
+                    .take(2)
+                    .map((e) => Padding(
+                          padding: const EdgeInsets.only(bottom: 24),
+                          child: InkWell(
+                            onTap: () {
+                              context.push('/order-detail');
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(20)),
+                                    child: SizedBox(
+                                      width: 80,
+                                      height: 80,
+                                      child: Image.network(
+                                        e.photo ?? "",
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Tiêu đề sản phẩm
-                                    Text(
-                                      e.namevi ?? "",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        height: 16 / 12,
-                                        color: Color(0xff373737),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Tiêu đề sản phẩm
+                                      Text(
+                                        e.namevi ?? "",
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          height: 16 / 12,
+                                          color: Color(0xff373737),
+                                        ),
                                       ),
-                                    ),
 
-                                    // Giá sản phẩm
-                                    Text(
-                                      "${e.regularPrice}\$",
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        height: 19 / 14,
-                                        color: Color(0xffFF7465),
+                                      // Giá sản phẩm
+                                      Text(
+                                        "${e.regularPrice}\$",
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          height: 19 / 14,
+                                          color: Color(0xffFF7465),
+                                        ),
                                       ),
-                                    ),
-                                    // Số lượng sản phẩm
-                                    const Text(
-                                      'X1',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        height: 20 / 13,
-                                        color: Color(0xff7A7D8A),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
+                                      // Số lượng sản phẩm
+                                      const Text(
+                                        'X1',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          height: 20 / 13,
+                                          color: Color(0xff7A7D8A),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ))
-                  .toList();
-            } else if (snapshot.hasError) {
-              return Expanded(
-                  child: Center(
-                child: Text("${snapshot.error}"),
-              ));
-            } else {
-              return const Expanded(
-                  child: Center(
-                child: CircularProgressIndicator(),
-              ));
-            }
-            return Column(
-              children: [
-                Column(
-                  children: children,
-                ),
-                // Dòng chữ số lượng mặt hàng
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "${children.length} mặt hàng: 220.00đ",
-                      style: const TextStyle(
-                          color: Color(0xff7A7D8A),
-                          fontSize: 12,
-                          height: 20 / 12),
-                    )
-                  ],
-                )
-              ],
-            );
-          },
+                        ))
+                    .toList(),
+              ),
+              // Dòng chữ số lượng mặt hàng
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "${data.length} mặt hàng: 220.00đ",
+                    style: const TextStyle(
+                        color: Color(0xff7A7D8A),
+                        fontSize: 12,
+                        height: 20 / 12),
+                  )
+                ],
+              )
+            ],
+          ),
+          error: (error, stackTrace) => Center(
+            child: Text(error.toString()),
+          ),
+          loading: () => const Center(
+            child: LinearProgressIndicator(),
+          ),
         ),
       ]),
     );

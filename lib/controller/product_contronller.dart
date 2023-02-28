@@ -1,16 +1,25 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:thoitrang/model/product_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:thoitrang/network/shared_provider.dart';
 
-Future<List<ProductModel>> fetchListProduct() async {
-  final response = await http.get(Uri.parse(
-      'http://demo80.ninavietnam.com.vn/test_app_api/api/product_api.php?type=getProduct'));
-  if (response.statusCode == 200) {
-    // ignore: non_constant_identifier_names
-    Iterable JObj = jsonDecode(response.body);
-    return List<ProductModel>.from(JObj.map((e) => ProductModel.fromJson(e)));
-  } else {
-    throw Exception('Failed to load Product');
+class ProductController {
+  final Dio _dio;
+  ProductController(this._dio);
+
+  Future<List<ProductModel>> fetchListProduct() async {
+    _dio.interceptors.add(CookieManager(await prepareJar()));
+
+    final response = await _dio.get(
+        "http://demo80.ninavietnam.com.vn/test_app_api/api/product_api.php?type=getProduct");
+    if (response.statusCode == 200) {
+      return (jsonDecode(response.data) as List)
+          .map((e) => ProductModel.fromJson(e))
+          .toList();
+    } else {
+      throw Exception('Failed to load Product');
+    }
   }
 }

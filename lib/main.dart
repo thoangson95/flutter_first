@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thoitrang/model/product_model.dart';
 import 'package:thoitrang/template/account/account.dart';
@@ -18,7 +19,7 @@ import 'package:thoitrang/template/product/hangmoive.dart';
 import 'icons_class/Custom_icons.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final testRoute = GoRouter(
-      initialLocation: '/sign-in',
+      initialLocation: '/home',
       navigatorKey: rootNavigatorKey,
       routes: [
         GoRoute(

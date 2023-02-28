@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/controller/product_contronller.dart';
 import 'package:thoitrang/model/product_model.dart';
 
 import 'package:intl/intl.dart' as intl;
+import 'package:thoitrang/network/shared_provider.dart';
 
 import '../../icons_class/Custom_icons.dart';
 
@@ -17,29 +18,13 @@ List<String> imageList = [
   "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
 ];
 
-class Hometab extends StatefulWidget {
+class Hometab extends ConsumerWidget {
   const Hometab({Key? key}) : super(key: key);
 
   @override
-  State<Hometab> createState() => _HometabState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    AsyncValue<List<ProductModel>> listProduct = ref.watch(getProductProvider);
 
-class _HometabState extends State<Hometab> {
-  late Future<List<ProductModel>> listProduct;
-
-  @override
-  void initState() {
-    super.initState();
-    listProduct = fetchListProduct();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Column(
@@ -62,7 +47,6 @@ class _HometabState extends State<Hometab> {
           ),
 
           // Grid
-
           Padding(
             padding: const EdgeInsets.only(top: 20, bottom: 13),
             child: Row(
@@ -92,32 +76,9 @@ class _HometabState extends State<Hometab> {
               ],
             ),
           ),
-          FutureBuilder(
-            future: listProduct,
-            builder: (context, snapshot) {
-              List<Widget> children = [];
-              if (snapshot.hasData) {
-                children = snapshot.data!
-                    .take(20)
-                    .map((e) => SpItem(
-                          model: e,
-                        ))
-                    .toList();
-              } else if (snapshot.hasError) {
-                children = <Widget>[
-                  const Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Error: $snapshot'),
-                  ),
-                ];
-              } else {
-                return const CircularProgressIndicator();
-              }
+
+          listProduct.when(
+            data: (data) {
               return GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
@@ -125,10 +86,22 @@ class _HometabState extends State<Hometab> {
                 mainAxisSpacing: 20,
                 childAspectRatio: (165 / 260),
                 shrinkWrap: true,
-                children: children,
+                children: data
+                    .map((e) => SpItem(
+                          model: e,
+                        ))
+                    .toList(),
               );
             },
-          ),
+            error: (error, stackTrace) {
+              return Center(
+                child: Text(error.toString()),
+              );
+            },
+            loading: () {
+              return const CircularProgressIndicator();
+            },
+          )
         ],
       ),
     );
