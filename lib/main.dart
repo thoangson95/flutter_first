@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/home_screen.dart';
 import 'package:thoitrang/screens/account/account.dart';
 import 'package:thoitrang/screens/account/forget_password.dart';
 import 'package:thoitrang/screens/account/forget_password_submit.dart';
 import 'package:thoitrang/screens/order/order_success.dart';
 import 'package:thoitrang/screens/product/filter.dart';
-import 'package:thoitrang/screens/product/grid_product.dart';
-import 'package:thoitrang/screens/product/product_detail.dart';
 import 'package:thoitrang/screens/product/products.dart';
-
-import 'home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +17,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const TestAPI();
+        return const Home();
       },
       routes: <RouteBase>[
         GoRoute(
@@ -31,14 +28,22 @@ final GoRouter _router = GoRouter(
         ),
         GoRoute(
           path: 'products',
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProductsScreen();
-          },
-        ),
-        GoRoute(
-          path: 'product-detail',
-          builder: (BuildContext context, GoRouterState state) {
-            return const ProductDetailScreen();
+          // builder: (BuildContext context, GoRouterState state) {
+          //   return const ProductsScreen();
+          // },
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const ProductsScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: CurveTween(curve: Curves.easeInOutCirc)
+                      .animate(animation),
+                  child: child,
+                );
+              },
+            );
           },
         ),
         GoRoute(

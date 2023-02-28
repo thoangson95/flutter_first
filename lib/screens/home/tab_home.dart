@@ -69,7 +69,7 @@ class TabHome extends StatelessWidget {
       ),
       Container(
         padding: const EdgeInsets.all(20),
-        child: const TestAPI(),
+        child: const GridProduct(),
       ),
     ]);
   }

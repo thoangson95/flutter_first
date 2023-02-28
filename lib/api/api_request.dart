@@ -1,3 +1,5 @@
+// ignore_for_file: use_rethrow_when_possible
+
 import 'package:dio/dio.dart';
 import 'package:thoitrang/models/product.dart';
 
@@ -13,18 +15,16 @@ class ApiService {
       final products = data.map((item) => Product.fromJson(item)).toList();
       return products;
     } catch (error) {
-      throw error;
+      throw Exception('Lỗi ${error}');
     }
   }
 
-  static Future<List<Product>> fetchProducts() async {
-    try {
-      final response = await _dio.get('');
-      final data = response.data as List<dynamic>;
-      final products = data.map((item) => Product.fromJson(item)).toList();
-      return products;
-    } catch (error) {
-      throw error;
+  static Future<Product> fetchProduct(int id) async {
+    final response = await _dio.get('/$id');
+    if (response.statusCode == 200) {
+      return Product.fromJson(response.data);
+    } else {
+      throw Exception('Failed to load product');
     }
   }
 }

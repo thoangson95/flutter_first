@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/api/api_request.dart';
+import 'package:thoitrang/function.dart';
+import 'package:thoitrang/models/product.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  final String idProduct;
+  const ProductDetailScreen({Key? key, required this.idProduct})
+      : super(key: key);
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -17,7 +22,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     "https://w0.peakpx.com/wallpaper/125/492/HD-wallpaper-beautiful-stylish-girl-ultra-girls-girl-style-beautiful-portrait-woman-design-young-wind-urban-beauty-model-fashion-youth-aesthetic.jpg",
     "https://w0.peakpx.com/wallpaper/159/233/HD-wallpaper-elle-fanning-american-actress.jpg",
   ];
+
+  late final Future<Product> productDetail;
   int groupValue = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    productDetail = ApiService.fetchProduct(int.parse(widget.idProduct));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +41,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () => context.go('/products'),
+          onPressed: () => context.go('/'),
           type: GFButtonType.transparent,
         ),
         actions: <Widget>[
@@ -38,7 +51,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               width: 20,
             ),
             iconSize: 22,
-            onPressed: () => context.go('/products'),
+            onPressed: () => context.go('/'),
           )
         ],
         backgroundColor: Colors.white,
@@ -46,225 +59,257 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          GFCarousel(
-            autoPlay: true,
-            height: 370.0,
-            viewportFraction: 1.0,
-            items: imageList.map(
-              (url) {
-                return Container(
-                  margin: const EdgeInsets.all(0),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(0)),
-                    child: Image.network(url, fit: BoxFit.cover, width: 1200.0),
-                  ),
-                );
-              },
-            ).toList(),
-            onPageChanged: (index) {
-              setState(() {
-                index;
-              });
+          FutureBuilder(
+            future: productDetail,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final product = snapshot.data;
+                if (product != null) {
+                  return Column(
+                    children: [
+                      GFCarousel(
+                        autoPlay: true,
+                        height: 370.0,
+                        viewportFraction: 1.0,
+                        items: imageList.map(
+                          (url) {
+                            return Container(
+                              margin: const EdgeInsets.all(0),
+                              child: ClipRRect(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(0)),
+                                child: Image.network(url,
+                                    fit: BoxFit.cover, width: 1200.0),
+                              ),
+                            );
+                          },
+                        ).toList(),
+                        onPageChanged: (index) {
+                          setState(() {
+                            index;
+                          });
+                        },
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        product.namevi ?? '',
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    )
+                                  ]),
+                            ),
+                            IconButton(
+                              icon: Image.asset(
+                                  'assets/images/icons/heart_2.png'),
+                              iconSize: 22,
+                              onPressed: () => context.go('/'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      formatCurrency(
+                                        int.parse(product.regularPrice ?? ''),
+                                      ),
+                                      style: TextStyle(
+                                          color: Colors.red[500],
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                  ]),
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    RatingBar(
+                                        initialRating: 4.5,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        ratingWidget: RatingWidget(
+                                            full: const Icon(Icons.star,
+                                                color: Colors.orange),
+                                            half: const Icon(Icons.star_half,
+                                                color: Colors.orange),
+                                            empty: const Icon(
+                                                Icons.star_outline,
+                                                color: Colors.orange)),
+                                        onRatingUpdate: (value) {}),
+                                    Text(
+                                      ' 356 Reviews',
+                                      style: TextStyle(
+                                          color: Colors.grey[500],
+                                          fontSize: 13),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        width: double.infinity,
+                        child: Text(
+                          product.descvi ?? '',
+                          softWrap: true,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 151, 151, 151),
+                            height: 2.2,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      const Divider(
+                        color: Color.fromRGBO(234, 234, 234, 1),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Row(
+                          children: [
+                            const Text(
+                              'Màu sắc ',
+                              style: TextStyle(
+                                fontSize: 13,
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(bottom: 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 0),
+                                        child: GFRadio(
+                                          type: GFRadioType.basic,
+                                          size: 26,
+                                          value: 1,
+                                          groupValue: groupValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              groupValue = value;
+                                            });
+                                          },
+                                          inactiveIcon: null,
+                                          customBgColor: GFColors.TRANSPARENT,
+                                          inactiveBorderColor:
+                                              GFColors.TRANSPARENT,
+                                          inactiveBgColor: GFColors.DANGER,
+                                          activeBorderColor: GFColors.WARNING,
+                                          activeBgColor: GFColors.DANGER,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 0),
+                                        child: GFRadio(
+                                          type: GFRadioType.basic,
+                                          size: 26,
+                                          value: 2,
+                                          groupValue: groupValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              groupValue = value;
+                                            });
+                                          },
+                                          inactiveIcon: null,
+                                          activeBorderColor: GFColors.SUCCESS,
+                                          customBgColor: GFColors.SUCCESS,
+                                          inactiveBorderColor: GFColors.SUCCESS,
+                                          inactiveBgColor: GFColors.SUCCESS,
+                                          activeBgColor: GFColors.SUCCESS,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 0),
+                                        child: GFRadio(
+                                          type: GFRadioType.basic,
+                                          size: 26,
+                                          value: 3,
+                                          groupValue: groupValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              groupValue = value;
+                                            });
+                                          },
+                                          inactiveIcon: null,
+                                          activeBorderColor: GFColors.PRIMARY,
+                                          customBgColor: GFColors.PRIMARY,
+                                          inactiveBorderColor: GFColors.PRIMARY,
+                                          inactiveBgColor: GFColors.PRIMARY,
+                                          activeBgColor: GFColors.PRIMARY,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 0),
+                                        child: GFRadio(
+                                          type: GFRadioType.basic,
+                                          size: 26,
+                                          value: 4,
+                                          groupValue: groupValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              groupValue = value;
+                                            });
+                                          },
+                                          inactiveIcon: null,
+                                          activeBorderColor: GFColors.WARNING,
+                                          customBgColor: GFColors.WARNING,
+                                          inactiveBorderColor: GFColors.WARNING,
+                                          inactiveBgColor: GFColors.WARNING,
+                                          activeBgColor: GFColors.WARNING,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Center(child: Text('Sản phẩm đang cập nhật'));
+                }
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             },
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: const Text(
-                            'Áo thun nữ thời trang',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black,
-                            ),
-                          ),
-                        )
-                      ]),
-                ),
-                IconButton(
-                  icon: Image.asset('assets/images/icons/heart_2.png'),
-                  iconSize: 22,
-                  onPressed: () => context.go('/account'),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '290.000đ',
-                          style: TextStyle(
-                              color: Colors.red[500],
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        RatingBar(
-                            initialRating: 4.5,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            itemCount: 5,
-                            itemSize: 20,
-                            ratingWidget: RatingWidget(
-                                full: const Icon(Icons.star,
-                                    color: Colors.orange),
-                                half: const Icon(Icons.star_half,
-                                    color: Colors.orange),
-                                empty: const Icon(Icons.star_outline,
-                                    color: Colors.orange)),
-                            onRatingUpdate: (value) {}),
-                        Text(
-                          ' 356 Reviews',
-                          style:
-                              TextStyle(color: Colors.grey[500], fontSize: 13),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-            child: Text(
-              '- Sản phẩm: SET ASHE W SKIRT \n'
-              '- Màu sắc: Hồng nhạt, kem, đen, xám , đỏ \n'
-              '- Chất vải: Cotton hàn',
-              softWrap: true,
-              style: TextStyle(
-                fontSize: 12,
-                color: Color.fromARGB(255, 151, 151, 151),
-                height: 2.2,
-              ),
-            ),
-          ),
-          const Divider(
-            color: Color.fromRGBO(234, 234, 234, 1),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Row(
-              children: [
-                const Text(
-                  'Màu sắc ',
-                  style: TextStyle(
-                    fontSize: 13,
-                  ),
-                ),
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Container(
-                      padding: const EdgeInsets.only(bottom: 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 0),
-                            child: GFRadio(
-                              type: GFRadioType.basic,
-                              size: 26,
-                              value: 1,
-                              groupValue: groupValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  groupValue = value;
-                                });
-                              },
-                              inactiveIcon: null,
-                              customBgColor: GFColors.TRANSPARENT,
-                              inactiveBorderColor: GFColors.TRANSPARENT,
-                              inactiveBgColor: GFColors.DANGER,
-                              activeBorderColor: GFColors.WARNING,
-                              activeBgColor: GFColors.DANGER,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 0),
-                            child: GFRadio(
-                              type: GFRadioType.basic,
-                              size: 26,
-                              value: 2,
-                              groupValue: groupValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  groupValue = value;
-                                });
-                              },
-                              inactiveIcon: null,
-                              activeBorderColor: GFColors.SUCCESS,
-                              customBgColor: GFColors.SUCCESS,
-                              inactiveBorderColor: GFColors.SUCCESS,
-                              inactiveBgColor: GFColors.SUCCESS,
-                              activeBgColor: GFColors.SUCCESS,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 0),
-                            child: GFRadio(
-                              type: GFRadioType.basic,
-                              size: 26,
-                              value: 3,
-                              groupValue: groupValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  groupValue = value;
-                                });
-                              },
-                              inactiveIcon: null,
-                              activeBorderColor: GFColors.PRIMARY,
-                              customBgColor: GFColors.PRIMARY,
-                              inactiveBorderColor: GFColors.PRIMARY,
-                              inactiveBgColor: GFColors.PRIMARY,
-                              activeBgColor: GFColors.PRIMARY,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 0),
-                            child: GFRadio(
-                              type: GFRadioType.basic,
-                              size: 26,
-                              value: 4,
-                              groupValue: groupValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  groupValue = value;
-                                });
-                              },
-                              inactiveIcon: null,
-                              activeBorderColor: GFColors.WARNING,
-                              customBgColor: GFColors.WARNING,
-                              inactiveBorderColor: GFColors.WARNING,
-                              inactiveBgColor: GFColors.WARNING,
-                              activeBgColor: GFColors.WARNING,
-                            ),
-                          ),
-                        ],
-                      )),
-                ]),
-              ],
-            ),
           ),
         ],
       ),

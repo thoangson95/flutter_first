@@ -1,27 +1,27 @@
 class Product {
-  Product({
-    required this.id,
-    required this.code,
-    required this.namevi,
-    required this.descvi,
-    required this.photo,
-    required this.regularPrice,
-    required this.salePrice,
-    required this.discount,
-    required this.status,
-    required this.idList,
-  });
+  String? id;
+  String? code;
+  String? namevi;
+  String? descvi;
+  String? photo;
+  String? regularPrice;
+  String? salePrice;
+  String? discount;
+  String? status;
+  String? idList;
 
-  late final String id;
-  late final String code;
-  late final String namevi;
-  late final String descvi;
-  late final String photo;
-  late final String regularPrice;
-  late final String salePrice;
-  late final String discount;
-  late final String status;
-  late final String idList;
+  Product({
+    this.id,
+    this.code,
+    this.namevi,
+    this.descvi,
+    this.photo,
+    this.regularPrice,
+    this.salePrice,
+    this.discount,
+    this.status,
+    this.idList,
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -37,7 +37,7 @@ class Product {
   }
 
   Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['code'] = code;
     data['namevi'] = namevi;
@@ -51,67 +51,6 @@ class Product {
     return data;
   }
 }
-
-// class Product {
-//   final String name;
-//   final String image;
-//   final int price;
-//   final String path;
-//   bool isFavorite;
-
-//   Product({
-//     required this.name,
-//     required this.image,
-//     required this.price,
-//     required this.path,
-//     this.isFavorite = false,
-//   });
-// }
-
-// final List<Product> listProduct = [
-//   Product(
-//     name: 'Áo thun nữ thời trang 01',
-//     image: 'assets/images/sp1.png',
-//     price: 125000,
-//     path: '/product-detail',
-//     isFavorite: true,
-//   ),
-//   Product(
-//     name: 'Áo thun nữ thời trang 02',
-//     image: 'assets/images/sp2.png',
-//     price: 125000,
-//     path: '/product-detail',
-//     isFavorite: false,
-//   ),
-//   Product(
-//     name: 'Áo thun nữ thời trang 03',
-//     image: 'assets/images/sp3.png',
-//     price: 125000,
-//     path: '/product-detail',
-//     isFavorite: false,
-//   ),
-//   Product(
-//     name: 'Áo thun nữ thời trang 04',
-//     image: 'assets/images/sp4.png',
-//     price: 125000,
-//     path: '/product-detail',
-//     isFavorite: false,
-//   ),
-//   Product(
-//     name: 'Áo thun nữ thời trang 05',
-//     image: 'assets/images/sp5.png',
-//     price: 125000,
-//     path: '/product-detail',
-//     isFavorite: false,
-//   ),
-//   Product(
-//     name: 'Áo thun nữ thời trang 06',
-//     image: 'assets/images/sp6.png',
-//     price: 125000,
-//     path: '/product-detail',
-//     isFavorite: true,
-//   ),
-// ];
 
 class Categories {
   final String name;

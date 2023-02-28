@@ -160,18 +160,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          IndexedStack(
-            index: _currentIndex,
-            children: [
-              Visibility(
-                visible: _isVisibleTab1,
-                child: const TabHome(),
-              ),
-              Visibility(
-                visible: _isVisibleTab2,
-                child: const TabCategories(),
-              ),
-            ],
+          Container(
+            padding: EdgeInsets.zero,
+            child: IndexedStack(
+              index: _currentIndex,
+              children: [
+                Visibility(
+                  visible: _isVisibleTab1,
+                  child: const TabHome(),
+                ),
+                Visibility(
+                  visible: _isVisibleTab2,
+                  child: const TabCategories(),
+                ),
+              ],
+            ),
           ),
         ],
       ),
