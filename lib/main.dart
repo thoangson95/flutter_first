@@ -1,109 +1,147 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/dropdown_alert.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:thoitrang/templates/user/page_user.dart';
+import 'package:thoitrang/templates/product/page_product_new.dart';
+import 'home.dart';
+import 'models/categories.dart';
+import 'templates/user/template_forget.dart';
+import 'templates/user/template_forget_code.dart';
+import 'templates/user/template_login.dart';
+import 'templates/user/template_register.dart';
+
+const categoriesLists = [
+  Categories("1", "Categories 1", "assets/images/categories.png"),
+  Categories("2", "Categories 2", "assets/images/categories.png"),
+  Categories("3", "Categories 3", "assets/images/categories.png"),
+  Categories("4", "Categories 4", "assets/images/categories.png"),
+  Categories("5", "Categories 5", "assets/images/categories.png"),
+  Categories("6", "Categories 6", "assets/images/categories.png"),
+  Categories("7", "Categories 7", "assets/images/categories.png"),
+  Categories("8", "Categories 8", "assets/images/categories.png"),
+  Categories("9", "Categories 9", "assets/images/categories.png"),
+  Categories("10", "Categories 10", "assets/images/categories.png"),
+  Categories("11", "Categories 11", "assets/images/categories.png"),
+  Categories("12", "Categories 12", "assets/images/categories.png"),
+];
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+final GoRouter _router = GoRouter(
+  initialLocation: '/login',
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/user',
+      builder: (BuildContext context, GoRouterState state) {
+        return const UserPage();
+      },
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (BuildContext context, GoRouterState state) {
+        return const LoginPage();
+      },
+    ),
+    GoRoute(
+      path: '/register',
+      builder: (BuildContext context, GoRouterState state) {
+        return const RegisterPage();
+      },
+    ),
+    GoRoute(
+      path: '/forget',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ForgetPage();
+      },
+    ),
+    GoRoute(
+      path: '/forget-code',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ForgetCodePage();
+      },
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (BuildContext context, GoRouterState state) {
+        return const HomePages();
+      },
+    ),
+    GoRoute(
+      path: '/product-new',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProductNewPage();
+      },
+    ),
+    // ShellRoute(
+    //   builder: (BuildContext context, GoRouterState state, Widget child) {
+    //     return const LoginPage();
+    //   },
+    //   routes: <RouteBase>[
+    //     /// The first screen to display in the bottom navigation bar.
+    //     GoRoute(
+    //       path: '/login',
+    //       builder: (BuildContext context, GoRouterState state) {
+    //         return const LoginPage();
+    //       },
+    //       // routes: <RouteBase>[
+    //       //   // The details screen to display stacked on the inner Navigator.
+    //       //   // This will cover screen A but not the application shell.
+    //       //   GoRoute(
+    //       //     path: 'home',
+    //       //     builder: (BuildContext context, GoRouterState state) {
+    //       //       return const HomePage();
+    //       //     },
+    //       //   ),
+    //       // ],
+    //     ),
+    //     GoRoute(
+    //       path: '/home',
+    //       builder: (BuildContext context, GoRouterState state) {
+    //         return const HomePage();
+    //       },
+    //       // routes: <RouteBase>[
+    //       //   /// Same as "/a/details", but displayed on the root Navigator by
+    //       //   /// specifying [parentNavigatorKey]. This will cover both screen B
+    //       //   /// and the application shell.
+    //       //   GoRoute(
+    //       //     path: 'details',
+    //       //     parentNavigatorKey: _rootNavigatorKey,
+    //       //     builder: (BuildContext context, GoRouterState state) {
+    //       //       return const DetailsScreen(label: 'B');
+    //       //     },
+    //       //   ),
+    //       // ],
+    //     ),
+    //   ],
+    // ),
+  ],
+);
+
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp.router(
+      title: 'Thời trang',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // useMaterial3: true,
-        textTheme: GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme),
+        primaryColor: const Color(0xFFFF7465),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      routerConfig: _router,
+      builder: (context, child) => Stack(
+        children: [child!, const DropdownAlert()],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
