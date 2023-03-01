@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 
-class OrderSuccessScreen extends StatefulWidget {
-  const OrderSuccessScreen({super.key});
+class OrderScreen extends StatefulWidget {
+  const OrderScreen({super.key});
 
   @override
-  State<OrderSuccessScreen> createState() => _OrderSuccessScreenState();
+  State<OrderScreen> createState() => _OrderScreenState();
 }
 
-class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
+class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

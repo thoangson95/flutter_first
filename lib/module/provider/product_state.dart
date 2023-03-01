@@ -4,8 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum ProductStatus { loading, liked, dislike }
-
 class ProductModel extends Equatable {
   const ProductModel({
     this.id,
@@ -20,7 +18,6 @@ class ProductModel extends Equatable {
     this.idList,
   });
 
-  // All properties should be `final` on our class.
   final String? id;
   final String? code;
   final String? namevi;
@@ -32,8 +29,6 @@ class ProductModel extends Equatable {
   final String? status;
   final String? idList;
 
-  // Since ProductModel is immutable, we implement a method that allows cloning the
-  // ProductModel with slightly different content.
   ProductModel copyWith({
     String? id,
     String? code,
@@ -71,7 +66,7 @@ class ProductModel extends Equatable {
         salePrice,
         discount,
         status,
-        idList,
+        idList
       ];
 }
 
@@ -83,15 +78,13 @@ class ProductState {
 
   ProductState copyWith({List<ProductModel>? listProducts, bool? isLoading}) {
     return ProductState(
-      isLoading: isLoading ?? this.isLoading,
-      listProducts: listProducts ?? this.listProducts,
-    );
+        isLoading: isLoading ?? this.isLoading,
+        listProducts: listProducts ?? this.listProducts);
   }
 }
 
 final productProviders = StateNotifierProvider<ProductControler, ProductState>(
-  (ref) => ProductControler(),
-);
+    (ref) => ProductControler());
 
 class ProductControler extends StateNotifier<ProductState> {
   ProductControler() : super(ProductState()) {
@@ -107,7 +100,7 @@ class ProductControler extends StateNotifier<ProductState> {
     final dio = Dio();
 
     final response =
-        await dio.get('http://demo41.ninavietnam.com.vn/api/product');
+        await dio.get('https://demo55.ninavietnam.com.vn/flutter/api/product');
 
     final data = json.decode(response.data) as List<dynamic>;
 
@@ -128,29 +121,4 @@ class ProductControler extends StateNotifier<ProductState> {
         )
         .toList();
   }
-
-  // void toggleFavorite(int id, String like) async {
-  //   state = state.copyWith(isLoading: true);
-  //   if (like.isNotEmpty) {
-  //     List<ProductModel> newList = [];
-  //     for (var element in state.listProducts!) {
-  //       if (int.parse(element.id.toString()) == id) {
-  //         element = element.copyWith(status: '');
-  //       }
-  //       newList.add(element);
-  //     }
-  //     await putData('/product', {'id': id, 'like': ''});
-  //     state = state.copyWith(listProducts: newList, isLoading: false);
-  //   } else {
-  //     List<ProductModel> newList = [];
-  //     for (var element in state.listProducts!) {
-  //       if (int.parse(element.id.toString()) == id) {
-  //         element = element.copyWith(status: 'like');
-  //       }
-  //       newList.add(element);
-  //     }
-  //     await putData('/product', {'id': id, 'like': 'like'});
-  //     state = state.copyWith(listProducts: newList, isLoading: false);
-  //   }
-  // }
 }

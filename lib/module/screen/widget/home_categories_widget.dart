@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../models/product.dart';
+import 'package:thoitrang/module/model/product_model.dart';
 
 List<Widget> categoriesWidgets = categories.map((item) {
   return Container(
@@ -35,8 +34,8 @@ List<Widget> categoriesWidgets = categories.map((item) {
   );
 }).toList();
 
-class TabCategories extends StatelessWidget {
-  const TabCategories({super.key});
+class HomeCategoriesWidget extends StatelessWidget {
+  const HomeCategoriesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

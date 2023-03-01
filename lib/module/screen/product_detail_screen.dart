@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/api/api_request.dart';
 import 'package:thoitrang/function.dart';
-import 'package:thoitrang/models/product.dart';
+import 'package:thoitrang/module/model/product_model.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String idProduct;
@@ -29,7 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   void initState() {
     super.initState();
-    productDetail = ApiService.fetchProduct(int.parse(widget.idProduct));
+    // productDetail = ApiService.fetchProduct(int.parse(widget.idProduct));
   }
 
   @override

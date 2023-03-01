@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/screens/product/grid_product.dart';
+import 'package:thoitrang/module/screen/widget/product_layout_widget.dart';
 
 const List<String> imageList = [
   "https://images.template.net/108414/fashion-sale-banner-template-85svg.jpg",
@@ -9,8 +9,8 @@ const List<String> imageList = [
   "https://img.freepik.com/premium-vector/fashion-week-banner-template-promotion-fashion-banner_122059-223.jpg",
 ];
 
-class TabHome extends StatelessWidget {
-  const TabHome({super.key});
+class HomeProductWidget extends StatelessWidget {
+  const HomeProductWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -69,7 +69,7 @@ class TabHome extends StatelessWidget {
       ),
       Container(
         padding: const EdgeInsets.all(20),
-        child: const GridProduct(),
+        child: const ProductLayerWidget(),
       ),
     ]);
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/screens/home/tab_categories.dart';
-import 'package:thoitrang/screens/home/tab_home.dart';
+import 'package:thoitrang/module/screen/widget/home_categories_widget.dart';
+import 'package:thoitrang/module/screen/widget/home_product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -167,11 +167,11 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Visibility(
                   visible: _isVisibleTab1,
-                  child: const TabHome(),
+                  child: const HomeProductWidget(),
                 ),
                 Visibility(
                   visible: _isVisibleTab2,
-                  child: const TabCategories(),
+                  child: const HomeCategoriesWidget(),
                 ),
               ],
             ),

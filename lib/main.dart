@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thoitrang/home_screen.dart';
-import 'package:thoitrang/screens/account/account.dart';
-import 'package:thoitrang/screens/account/forget_password.dart';
-import 'package:thoitrang/screens/account/forget_password_submit.dart';
-import 'package:thoitrang/screens/order/order_success.dart';
-import 'package:thoitrang/screens/product/filter.dart';
-import 'package:thoitrang/screens/product/products.dart';
+import 'package:thoitrang/module/screen/account/account.dart';
+import 'package:thoitrang/module/screen/account/forget_password.dart';
+import 'package:thoitrang/module/screen/account/forget_password_submit.dart';
+import 'package:thoitrang/module/screen/order_screen.dart';
+import 'package:thoitrang/module/screen/filter_screen.dart';
+import 'package:thoitrang/module/screen/products_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 final GoRouter _router = GoRouter(
@@ -55,7 +60,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'order-success',
           builder: (BuildContext context, GoRouterState state) {
-            return const OrderSuccessScreen();
+            return const OrderScreen();
           },
         ),
         GoRoute(
@@ -75,11 +80,11 @@ final GoRouter _router = GoRouter(
   ],
 );
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       routerConfig: _router,
       title: 'Fashion Store',

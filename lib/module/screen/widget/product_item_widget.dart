@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:thoitrang/function.dart';
-import 'package:thoitrang/models/product.dart';
-import 'package:thoitrang/screens/product/product_detail.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductItem extends StatelessWidget {
-  final Product product;
-  const ProductItem({Key? key, required this.product}) : super(key: key);
+class ProductItemWidget extends ConsumerWidget {
+  final String id;
+  final String namevi;
+  final String photo;
+  final String price;
+  // final String status;
+
+  const ProductItemWidget(this.id, this.namevi, this.photo, this.price,
+      {super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context, ref) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  ProductDetailScreen(idProduct: product.id ?? '')),
-        );
-      },
+      onTap: () {},
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -28,7 +26,7 @@ class ProductItem extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: Image.network(
-                product.photo ?? '',
+                photo,
                 width: double.infinity,
                 height: 205,
                 fit: BoxFit.cover,
@@ -43,7 +41,7 @@ class ProductItem extends StatelessWidget {
                   Flexible(
                     fit: FlexFit.tight,
                     child: Text(
-                      product.status ?? '',
+                      namevi,
                       maxLines: 2,
                       style: const TextStyle(
                         fontSize: 12,
@@ -56,6 +54,7 @@ class ProductItem extends StatelessWidget {
                       autofocus: true,
                       alignment: Alignment.topCenter,
                       icon: const Icon(
+                        // ignore: dead_code
                         true ? Icons.favorite : Icons.favorite_border,
                         color: Colors.red,
                         size: 18,
@@ -70,7 +69,7 @@ class ProductItem extends StatelessWidget {
               margin: const EdgeInsets.only(top: 5),
               width: double.infinity,
               child: Text(
-                formatCurrency(int.parse(product.regularPrice ?? '')),
+                formatCurrency(int.parse(price)),
                 textAlign: TextAlign.left,
                 style: const TextStyle(
                   fontSize: 14,

@@ -1,7 +1,5 @@
-// ignore_for_file: use_rethrow_when_possible
-
 import 'package:dio/dio.dart';
-import 'package:thoitrang/models/product.dart';
+import 'package:thoitrang/module/model/product_model.dart';
 
 class ApiService {
   static const String _baseUrl =
@@ -15,7 +13,7 @@ class ApiService {
       final products = data.map((item) => Product.fromJson(item)).toList();
       return products;
     } catch (error) {
-      throw Exception('Lỗi ${error}');
+      throw Exception('Lỗi $error');
     }
   }
 
