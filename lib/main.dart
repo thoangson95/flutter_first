@@ -54,9 +54,6 @@ final GoRouter _router = GoRouter(
         ),
         GoRoute(
           path: 'product-detail/:id',
-          // builder: (BuildContext context, GoRouterState state) {
-          //   return const ProductsScreen();
-          // },
           pageBuilder: (context, state) {
             final id = state.params['id'] as String;
             return CustomTransitionPage(

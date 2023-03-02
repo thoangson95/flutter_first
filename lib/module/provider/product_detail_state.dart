@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thoitrang/module/repository/product_repository.dart';
+import '../repository/product_repository.dart';
 
 class ProductDetailModel extends Equatable {
   const ProductDetailModel({
@@ -79,7 +79,7 @@ class ProductDetailModel extends Equatable {
 }
 
 class ProductDetailState {
-  final listProducts;
+  final List<dynamic>? listProducts;
   final bool isLoading;
 
   ProductDetailState({this.listProducts, this.isLoading = true});

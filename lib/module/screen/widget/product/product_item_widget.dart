@@ -23,7 +23,6 @@ class ProductItemWidget extends ConsumerWidget {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             child: InkWell(
               onTap: () {
-                // context.go('/product-detail/30');
                 GoRouter.of(context).push('/product-detail/$id');
               },
               splashColor: Colors.transparent,

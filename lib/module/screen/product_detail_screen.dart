@@ -3,7 +3,6 @@ import 'package:getwidget/getwidget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thoitrang/function.dart';
-import 'package:thoitrang/module/model/product_model.dart';
 import 'package:thoitrang/module/provider/product_detail_state.dart';
 import 'package:thoitrang/module/repository/product_repository.dart';
 
@@ -17,13 +16,6 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final List<String> imageList = [
-    "https://w0.peakpx.com/wallpaper/121/369/HD-wallpaper-beautiful-girl-flower-aesthetic-ultra-girls-flower-girl-style-beautiful-portrait-woman-design-human-background-charming-young-face-female-beauty-model-gerbera-fashion-look-pretty.jpg",
-    "https://w0.peakpx.com/wallpaper/636/411/HD-wallpaper-youth-ultra-girls-girl-style-beautiful-portrait-woman-design-human-background-young-face-female-beauty-model-fashion-cool-look-makeup-pretty-vogue-person-teenager-youth-aesthetic.jpg",
-    "https://w0.peakpx.com/wallpaper/125/492/HD-wallpaper-beautiful-stylish-girl-ultra-girls-girl-style-beautiful-portrait-woman-design-young-wind-urban-beauty-model-fashion-youth-aesthetic.jpg",
-    "https://w0.peakpx.com/wallpaper/159/233/HD-wallpaper-elle-fanning-american-actress.jpg",
-  ];
-
   late final Future<ProductDetailModel> productDetail;
   int groupValue = 0;
 
@@ -66,8 +58,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               if (snapshot.hasData) {
                 final product = snapshot.data;
                 List imageGallery = ["${product?.photo}"];
+                List listColor = [];
                 if (product?.gallery != null) {
                   imageGallery.addAll(product?.gallery as Iterable);
+                }
+                if (product?.color != null) {
+                  listColor.addAll(product?.color as Iterable);
                 }
 
                 if (product != null) {
@@ -194,118 +190,58 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       const Divider(
                         color: Color.fromRGBO(234, 234, 234, 1),
                       ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: Row(
-                          children: [
-                            const Text(
-                              'Màu sắc ',
-                              style: TextStyle(
-                                fontSize: 13,
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.only(bottom: 0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
+                      (listColor.isNotEmpty)
+                          ? Container(
+                              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    'Màu sắc ',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
                                       Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 0),
-                                        child: GFRadio(
-                                          type: GFRadioType.basic,
-                                          size: 26,
-                                          value: 1,
-                                          groupValue: groupValue,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              groupValue = value;
-                                            });
-                                          },
-                                          inactiveIcon: null,
-                                          customBgColor: GFColors.TRANSPARENT,
-                                          inactiveBorderColor:
-                                              GFColors.TRANSPARENT,
-                                          inactiveBgColor: GFColors.DANGER,
-                                          activeBorderColor: GFColors.WARNING,
-                                          activeBgColor: GFColors.DANGER,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 0),
-                                        child: GFRadio(
-                                          type: GFRadioType.basic,
-                                          size: 26,
-                                          value: 2,
-                                          groupValue: groupValue,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              groupValue = value;
-                                            });
-                                          },
-                                          inactiveIcon: null,
-                                          activeBorderColor: GFColors.SUCCESS,
-                                          customBgColor: GFColors.SUCCESS,
-                                          inactiveBorderColor: GFColors.SUCCESS,
-                                          inactiveBgColor: GFColors.SUCCESS,
-                                          activeBgColor: GFColors.SUCCESS,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 0),
-                                        child: GFRadio(
-                                          type: GFRadioType.basic,
-                                          size: 26,
-                                          value: 3,
-                                          groupValue: groupValue,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              groupValue = value;
-                                            });
-                                          },
-                                          inactiveIcon: null,
-                                          activeBorderColor: GFColors.PRIMARY,
-                                          customBgColor: GFColors.PRIMARY,
-                                          inactiveBorderColor: GFColors.PRIMARY,
-                                          inactiveBgColor: GFColors.PRIMARY,
-                                          activeBgColor: GFColors.PRIMARY,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 0),
-                                        child: GFRadio(
-                                          type: GFRadioType.basic,
-                                          size: 26,
-                                          value: 4,
-                                          groupValue: groupValue,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              groupValue = value;
-                                            });
-                                          },
-                                          inactiveIcon: null,
-                                          activeBorderColor: GFColors.WARNING,
-                                          customBgColor: GFColors.WARNING,
-                                          inactiveBorderColor: GFColors.WARNING,
-                                          inactiveBgColor: GFColors.WARNING,
-                                          activeBgColor: GFColors.WARNING,
+                                        padding:
+                                            const EdgeInsets.only(bottom: 0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: listColor
+                                              .map(
+                                                (color) => Container(
+                                                  padding:
+                                                      const EdgeInsets.all(5),
+                                                  margin: const EdgeInsets
+                                                      .symmetric(horizontal: 8),
+                                                  width: 26,
+                                                  height: 26,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFBB1414),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    border: Border.all(
+                                                      color: Colors.blue,
+                                                      width: 1,
+                                                      strokeAlign: 6,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                              .toList(),
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                                ],
+                              ),
+                            )
+                          : Container(),
                     ],
                   );
                 } else {
@@ -331,7 +267,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: IconButton(
                   icon: Image.asset('assets/images/icons/bag.png'),
                   iconSize: 22,
-                  onPressed: () => context.go('product-detail'),
+                  onPressed: () => context.go('/'),
                 ),
               ),
             ),
