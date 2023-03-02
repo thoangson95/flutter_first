@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/module/screen/widget/product/product_layout_widget.dart';
+
+import 'screen/widget/product_layout_widget.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});

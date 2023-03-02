@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../repository/product_repository.dart';
+
+import '../repository/home_repository.dart';
 
 class ProductModel extends Equatable {
   const ProductModel({

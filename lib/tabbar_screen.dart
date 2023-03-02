@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:thoitrang/module/screen/account/account.dart';
-import 'package:thoitrang/module/screen/home_screen.dart';
-import 'package:thoitrang/module/screen/products_screen.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+import 'home/home_screen.dart';
+import 'product/products_screen.dart';
+
+class TabBarScreen extends StatefulWidget {
+  const TabBarScreen({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<TabBarScreen> createState() => _TabBarScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _TabBarScreenState extends State<TabBarScreen> {
   dynamic modalData;
 
   int _selectedIndex = 0;
@@ -18,7 +18,10 @@ class _HomeState extends State<Home> {
     HomeScreen(),
     ProductsScreen(),
     HomeScreen(),
-    AccountScreen(),
+    HomeScreen(),
+    // ProductsScreen(),
+    // HomeScreen(),
+    // AccountScreen(),
   ];
 
   void _onItemTapped(int index) {

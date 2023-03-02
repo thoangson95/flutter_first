@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:thoitrang/module/provider/product_state.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:thoitrang/module/screen/widget/product/product_item_widget.dart';
+
+import '../../../../../provider/product_state.dart';
+import '../product_item_widget.dart';
 
 class ProductLayerWidget extends ConsumerWidget {
   const ProductLayerWidget({super.key});

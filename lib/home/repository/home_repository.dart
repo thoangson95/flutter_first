@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:thoitrang/module/provider/product_detail_state.dart';
-import 'package:thoitrang/module/provider/product_state.dart';
+
+import '../provider/product_state.dart';
 
 class ApiService {
   static const String _baseUrl =
@@ -34,28 +33,28 @@ class ApiService {
     }
   }
 
-  static Future<ProductDetailModel> fetchProduct(int id) async {
-    final response = await _dio.get('/product/$id');
+  // static Future<ProductDetailModel> fetchProduct(int id) async {
+  //   final response = await _dio.get('/product/$id');
 
-    final data = json.decode(response.data);
+  //   final data = json.decode(response.data);
 
-    if (response.statusCode == 200) {
-      return ProductDetailModel(
-        id: data[0]['id'],
-        code: data[0]['code'],
-        namevi: data[0]['namevi'],
-        descvi: data[0]['descvi'],
-        photo: data[0]['photo'],
-        regularPrice: data[0]['regular_price'],
-        salePrice: data[0]['sale_price'],
-        discount: data[0]['discount'],
-        status: data[0]['status'],
-        idList: data[0]['id_list'],
-        gallery: data[0]['gallery'],
-        color: data[0]['color'],
-      );
-    } else {
-      throw Exception('Failed to load product');
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     return ProductDetailModel(
+  //       id: data[0]['id'],
+  //       code: data[0]['code'],
+  //       namevi: data[0]['namevi'],
+  //       descvi: data[0]['descvi'],
+  //       photo: data[0]['photo'],
+  //       regularPrice: data[0]['regular_price'],
+  //       salePrice: data[0]['sale_price'],
+  //       discount: data[0]['discount'],
+  //       status: data[0]['status'],
+  //       idList: data[0]['id_list'],
+  //       gallery: data[0]['gallery'],
+  //       color: data[0]['color'],
+  //     );
+  //   } else {
+  //     throw Exception('Failed to load product');
+  //   }
+  // }
 }

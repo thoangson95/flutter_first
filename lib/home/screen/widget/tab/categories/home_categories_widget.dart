@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thoitrang/module/model/product_model.dart';
+
+import '../../../../model/home_model.dart';
 
 List<Widget> categoriesWidgets = categories.map((item) {
   return Container(

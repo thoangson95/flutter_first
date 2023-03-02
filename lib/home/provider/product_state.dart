@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../repository/product_repository.dart';
 
-class ProductDetailModel extends Equatable {
-  const ProductDetailModel({
+import '../repository/home_repository.dart';
+
+class ProductModel extends Equatable {
+  const ProductModel({
     this.id,
     this.code,
     this.namevi,
@@ -14,8 +15,6 @@ class ProductDetailModel extends Equatable {
     this.discount,
     this.status,
     this.idList,
-    this.gallery,
-    this.color,
   });
 
   final String? id;
@@ -28,10 +27,8 @@ class ProductDetailModel extends Equatable {
   final String? discount;
   final String? status;
   final String? idList;
-  final List<dynamic>? gallery;
-  final List<dynamic>? color;
 
-  ProductDetailModel copyWith({
+  ProductModel copyWith({
     String? id,
     String? code,
     String? namevi,
@@ -42,10 +39,8 @@ class ProductDetailModel extends Equatable {
     String? discount,
     String? status,
     String? idList,
-    List<dynamic>? gallery,
-    List<dynamic>? color,
   }) {
-    return ProductDetailModel(
+    return ProductModel(
       id: id ?? this.id,
       code: code ?? this.code,
       namevi: namevi ?? this.namevi,
@@ -56,8 +51,6 @@ class ProductDetailModel extends Equatable {
       discount: discount ?? this.discount,
       status: status ?? this.status,
       idList: idList ?? this.idList,
-      gallery: gallery ?? this.gallery,
-      color: color ?? this.color,
     );
   }
 
@@ -72,38 +65,34 @@ class ProductDetailModel extends Equatable {
         salePrice,
         discount,
         status,
-        idList,
-        gallery,
-        color
+        idList
       ];
 }
 
-class ProductDetailState {
-  final List<dynamic>? listProducts;
+class ProductState {
+  final List<ProductModel>? listProducts;
   final bool isLoading;
 
-  ProductDetailState({this.listProducts, this.isLoading = true});
+  ProductState({this.listProducts, this.isLoading = true});
 
-  ProductDetailState copyWith(
-      {List<ProductDetailModel>? listProducts, bool? isLoading}) {
-    return ProductDetailState(
+  ProductState copyWith({List<ProductModel>? listProducts, bool? isLoading}) {
+    return ProductState(
         isLoading: isLoading ?? this.isLoading,
         listProducts: listProducts ?? this.listProducts);
   }
 }
 
-class ProductDetailControler extends StateNotifier<ProductDetailState> {
-  ProductDetailControler() : super(ProductDetailState()) {
+class ProductControler extends StateNotifier<ProductState> {
+  ProductControler() : super(ProductState()) {
     _init();
   }
 
   _init() async {
-    final ProductDetailModel a = await ApiService.fetchProduct(139);
-    state = state.copyWith(listProducts: [a]);
+    final List<ProductModel>? a = await ApiService.fetchProducts();
+    state = state.copyWith(listProducts: a);
   }
 }
 
-final productDetailProviders =
-    StateNotifierProvider<ProductDetailControler, ProductDetailState>(
-  (ref) => ProductDetailControler(),
+final productProviders = StateNotifierProvider<ProductControler, ProductState>(
+  (ref) => ProductControler(),
 );

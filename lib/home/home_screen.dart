@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/module/screen/widget/home/home_categories_widget.dart';
-import 'package:thoitrang/module/screen/widget/home/home_product_widget.dart';
+
+import 'screen/widget/home_search_widget.dart';
+import 'screen/widget/home_wellcome_widget.dart';
+import 'screen/widget/tab/home/home_product_widget.dart';
+import 'screen/widget/tab/categories/home_categories_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,76 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
-                child: const Text(
-                  'Xin Chào Dũng Royal.',
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-                child: const Text(
-                  'Nhiều mẫu mã đang chờ bạn thị trường thời trang',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Container(
-            margin:
-                const EdgeInsets.only(top: 25, left: 25, right: 25, bottom: 10),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 45,
-                  child: TextField(
-                    cursorColor: Colors.grey,
-                    style: const TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 1),
-                      fontSize: 13.0,
-                      height: 1,
-                    ),
-                    textAlignVertical: TextAlignVertical.bottom,
-                    decoration: InputDecoration(
-                      fillColor: const Color.fromRGBO(242, 242, 242, 1),
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(100.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      hintText: ' Tìm kiếm sản phẩm',
-                      hintStyle: const TextStyle(
-                        color: Color.fromRGBO(106, 106, 106, 1),
-                        fontSize: 12.0,
-                        height: 1,
-                      ),
-                      suffixIcon: Container(
-                        padding: const EdgeInsets.all(14),
-                        margin: const EdgeInsets.only(right: 0),
-                        child: Image.asset(
-                          'assets/images/icons/search.png',
-                          width: 16,
-                          height: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const HomeWellcomeWidget(),
+          const HomeSearchWidget(),
           DefaultTabController(
             length: 2,
             child: TabBar(
