@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/module/screen/widget/home_categories_widget.dart';
-import 'package:thoitrang/module/screen/widget/home_product_widget.dart';
+import 'package:thoitrang/module/screen/widget/home/home_categories_widget.dart';
+import 'package:thoitrang/module/screen/widget/home/home_product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

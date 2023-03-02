@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/module/screen/widget/product_layout_widget.dart';
+import 'package:thoitrang/module/screen/widget/product/product_layout_widget.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
-
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
 }
@@ -76,7 +75,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
             color: Color.fromRGBO(234, 234, 234, 1),
           ),
           Container(
-            height: 1000,
             padding: const EdgeInsets.all(20),
             child: const ProductLayerWidget(),
           ),

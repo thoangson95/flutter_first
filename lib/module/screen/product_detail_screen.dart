@@ -4,6 +4,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thoitrang/function.dart';
 import 'package:thoitrang/module/model/product_model.dart';
+import 'package:thoitrang/module/provider/product_detail_state.dart';
+import 'package:thoitrang/module/repository/product_repository.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String idProduct;
@@ -22,13 +24,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     "https://w0.peakpx.com/wallpaper/159/233/HD-wallpaper-elle-fanning-american-actress.jpg",
   ];
 
-  late final Future<Product> productDetail;
+  late final Future<ProductDetailModel> productDetail;
   int groupValue = 0;
 
   @override
   void initState() {
     super.initState();
-    // productDetail = ApiService.fetchProduct(int.parse(widget.idProduct));
+    productDetail = ApiService.fetchProduct(int.parse(widget.idProduct));
   }
 
   @override
@@ -63,6 +65,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final product = snapshot.data;
+                List imageGallery = ["${product?.photo}"];
+                if (product?.gallery != null) {
+                  imageGallery.addAll(product?.gallery as Iterable);
+                }
+
                 if (product != null) {
                   return Column(
                     children: [
@@ -70,7 +77,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         autoPlay: true,
                         height: 370.0,
                         viewportFraction: 1.0,
-                        items: imageList.map(
+                        items: imageGallery.map(
                           (url) {
                             return Container(
                               margin: const EdgeInsets.all(0),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:thoitrang/module/screen/widget/product_layout_widget.dart';
+import 'package:thoitrang/module/screen/widget/product/product_layout_widget.dart';
 
 const List<String> imageList = [
   "https://images.template.net/108414/fashion-sale-banner-template-85svg.jpg",

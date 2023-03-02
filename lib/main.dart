@@ -7,6 +7,7 @@ import 'package:thoitrang/module/screen/account/forget_password.dart';
 import 'package:thoitrang/module/screen/account/forget_password_submit.dart';
 import 'package:thoitrang/module/screen/order_screen.dart';
 import 'package:thoitrang/module/screen/filter_screen.dart';
+import 'package:thoitrang/module/screen/product_detail_screen.dart';
 import 'package:thoitrang/module/screen/products_screen.dart';
 
 void main() {
@@ -40,6 +41,27 @@ final GoRouter _router = GoRouter(
             return CustomTransitionPage(
               key: state.pageKey,
               child: const ProductsScreen(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(
+                  opacity: CurveTween(curve: Curves.easeInOutCirc)
+                      .animate(animation),
+                  child: child,
+                );
+              },
+            );
+          },
+        ),
+        GoRoute(
+          path: 'product-detail/:id',
+          // builder: (BuildContext context, GoRouterState state) {
+          //   return const ProductsScreen();
+          // },
+          pageBuilder: (context, state) {
+            final id = state.params['id'] as String;
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: ProductDetailScreen(idProduct: id),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(
