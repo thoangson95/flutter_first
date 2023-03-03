@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
-import '../../../../../provider/product_state.dart';
-import '../product_item_widget.dart';
+import '../../provider/products_state.dart';
+import 'product_item_widget.dart';
 
 class ProductLayerWidget extends ConsumerWidget {
   const ProductLayerWidget({super.key});
@@ -25,6 +25,6 @@ class ProductLayerWidget extends ConsumerWidget {
                 )
                 .toList(),
           )
-        : const CircularProgressIndicator();
+        : const Center(child: CircularProgressIndicator());
   }
 }

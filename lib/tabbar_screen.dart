@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'home/home_screen.dart';
-import 'product/products_screen.dart';
+import 'account/layout_account.dart';
+import 'filter/layout_filter.dart';
+import 'products/layout_products.dart';
+import 'home/layout_home.dart';
 
 class TabBarScreen extends StatefulWidget {
   const TabBarScreen({super.key});
@@ -15,13 +16,10 @@ class _TabBarScreenState extends State<TabBarScreen> {
 
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    ProductsScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    // ProductsScreen(),
-    // HomeScreen(),
-    // AccountScreen(),
+    LayoutHome(),
+    LayoutProducts(),
+    LayoutFilter(),
+    LayoutAccount(),
   ];
 
   void _onItemTapped(int index) {

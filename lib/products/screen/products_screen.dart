@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 
-import 'screen/widget/product_layout_widget.dart';
+import 'widget/product_layout_widget.dart';
 
-class ProductsScreen extends StatefulWidget {
+class ProductsScreen extends ConsumerStatefulWidget {
   const ProductsScreen({super.key});
+
   @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _ProductsScreenState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _ProductsScreenState extends ConsumerState<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

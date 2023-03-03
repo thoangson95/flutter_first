@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/account/layout_account.dart';
 
-import 'product/products_screen.dart';
+import 'filter/layout_filter.dart';
+import 'product_detail/layout_product_detail.dart';
+import 'products/layout_products.dart';
 import 'tabbar_screen.dart';
 
 void main() {
@@ -21,36 +24,16 @@ final GoRouter _router = GoRouter(
         return const TabBarScreen();
       },
       routes: <RouteBase>[
+        LayoutAccount.goRoute(),
+        LayoutProductDetail.goRoute(),
+        LayoutProducts.goRoute(),
+        LayoutFilter.goRoute(),
         // GoRoute(
-        //   path: 'home',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const TabBarScreen();
-        //   },
-        // ),
-        GoRoute(
-          path: 'products',
-          pageBuilder: (context, state) {
-            return CustomTransitionPage(
-              key: state.pageKey,
-              child: const ProductsScreen(),
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(
-                  opacity: CurveTween(curve: Curves.easeInOutCirc)
-                      .animate(animation),
-                  child: child,
-                );
-              },
-            );
-          },
-        ),
-        // GoRoute(
-        //   path: 'product-detail/:id',
+        //   path: 'products',
         //   pageBuilder: (context, state) {
-        //     final id = state.params['id'] as String;
         //     return CustomTransitionPage(
         //       key: state.pageKey,
-        //       child: ProductDetailScreen(idProduct: id),
+        //       child: const ProductsScreen(),
         //       transitionsBuilder:
         //           (context, animation, secondaryAnimation, child) {
         //         return FadeTransition(
@@ -60,12 +43,6 @@ final GoRouter _router = GoRouter(
         //         );
         //       },
         //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: 'filter',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const FilterScreen();
         //   },
         // ),
         // GoRoute(

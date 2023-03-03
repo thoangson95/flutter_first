@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 
-import 'screen/widget/home_search_widget.dart';
-import 'screen/widget/home_wellcome_widget.dart';
-import 'screen/widget/tab/home/home_product_widget.dart';
-import 'screen/widget/tab/categories/home_categories_widget.dart';
+import 'widget/home_search_widget.dart';
+import 'widget/home_wellcome_widget.dart';
+import 'widget/tab/home/home_product_widget.dart';
+import 'widget/tab/categories/home_categories_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

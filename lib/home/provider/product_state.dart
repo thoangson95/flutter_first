@@ -88,7 +88,7 @@ class ProductControler extends StateNotifier<ProductState> {
   }
 
   _init() async {
-    final List<ProductModel>? a = await ApiService.fetchProducts();
+    final List<ProductModel>? a = await HomeRepository.fetchProducts();
     state = state.copyWith(listProducts: a);
   }
 }

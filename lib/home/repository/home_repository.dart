@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../provider/product_state.dart';
 
-class ApiService {
+class HomeRepository {
   static const String _baseUrl =
       'https://demo55.ninavietnam.com.vn/flutter/api';
   static final Dio _dio = Dio(BaseOptions(baseUrl: _baseUrl));
