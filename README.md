@@ -1,4 +1,4 @@
-# thoitrang
+# flutter_thoitrang
 
 A new Flutter project.
 
