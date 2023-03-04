@@ -1,0 +1,44 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 19 min SDK version: armeabi-v7a",
+    "file_": "C:\\Users\\NAPP001\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.0.2\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1539931093
+  },
+  {
+    "level_": 0,
+    "message_": "JSON \u0027C:\\Users\\NAPP001\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.0.2\\android\\.cxx\\Debug\\6x1s416o\\armeabi-v7a\\android_gradle_build.json\u0027 was up-to-date",
+    "file_": "C:\\Users\\NAPP001\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.0.2\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": -1399793728
+  },
+  {
+    "level_": 0,
+    "message_": "JSON generation completed without problems",
+    "file_": "C:\\Users\\NAPP001\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\rive_common-0.0.2\\android\\CMakeLists.txt",
+    "tag_": "debug|armeabi-v7a",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {},
+      "fieldsDescending": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 409058537
+  }
+]

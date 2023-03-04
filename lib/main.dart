@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropdown_alert/dropdown_alert.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:thoitrang/product_detail/layout_product_detail.dart';
+import 'package:thoitrang/loading/layout_loading.dart';
 import 'constants.dart';
+import 'forget/layout_forget.dart';
+import 'forget_code/layout_forget_code.dart';
 import 'home/layout_home.dart';
-import 'home/screen/loading_screen.dart';
-import 'user/screen/user_screen.dart';
-import 'user/screen/widget/forget_code_widget.dart';
-import 'user/screen/widget/forget_widget.dart';
-import 'user/screen/widget/login_widget.dart';
-import 'user/screen/widget/register_widget.dart';
+import 'login/layout_login.dart';
+import 'product_detail/layout_product_detail.dart';
+import 'register/layout_register.dart';
 
 void main() {
   runApp(
@@ -22,57 +20,15 @@ void main() {
 }
 
 final GoRouter _router = GoRouter(
-  initialLocation: '/loader',
+  initialLocation: '/',
   routes: <RouteBase>[
-    GoRoute(
-      path: '/loader',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LoadingScreen();
-      },
-    ),
-    GoRoute(
-      path: '/user',
-      builder: (BuildContext context, GoRouterState state) {
-        return const UserPage();
-      },
-    ),
-    GoRoute(
-      path: '/login',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LoginPage();
-      },
-    ),
-    GoRoute(
-      path: '/register',
-      builder: (BuildContext context, GoRouterState state) {
-        return const RegisterPage();
-      },
-    ),
-    GoRoute(
-      path: '/forget',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ForgetPage();
-      },
-    ),
-    GoRoute(
-      path: '/forget-code',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ForgetCodePage();
-      },
-    ),
-    GoRoute(
-      path: '/home',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LayoutHome();
-      },
-    ),
-    // GoRoute(
-    //   path: '/product-new',
-    //   builder: (BuildContext context, GoRouterState state) {
-    //     return const ProductNewPage();
-    //   },
-    // ),
+    LayoutLoading.goRoute(),
+    LayoutHome.goRoute(),
     LayoutProductDeatil.goRoute(),
+    LayoutLogin.goRoute(),
+    LayoutRegister.goRoute(),
+    LayoutForget.goRoute(),
+    LayoutForgetCode.goRoute()
   ],
 );
 
@@ -86,12 +42,15 @@ class MyApp extends ConsumerWidget {
       title: 'Thời trang',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.mulishTextTheme(Theme.of(context).textTheme),
+        fontFamily: 'UA',
         primaryColor: colorMain,
       ),
       routerConfig: _router,
       builder: (context, child) => Stack(
-        children: [child!, const DropdownAlert()],
+        children: [
+          child!,
+          const DropdownAlert(),
+        ],
       ),
     );
   }

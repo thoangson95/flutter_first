@@ -20,9 +20,7 @@ class ProductState {
 }
 
 class ProductControler extends StateNotifier<ProductState> {
-  ProductControler() : super(ProductState()) {
-    // init("/product");
-  }
+  ProductControler() : super(ProductState());
 
   init(String url) async {
     final List<ProductModel>? items = await fetchProducts(url);
@@ -37,19 +35,6 @@ class ProductControler extends StateNotifier<ProductState> {
       newList.add(ProductModel.fromJson(product));
     }
     return newList;
-    // return data
-    //     .map((product) => ProductModel(
-    //           id: product['id'],
-    //           name: product['name'],
-    //           photo: product['photo'],
-    //           regularPrice: product['regular_price'],
-    //           salePrice: product['sale_price'],
-    //           discount: product['discount'],
-    //           status: product['status'],
-    //           idList: product['id_list'],
-    //           gallery: product['gallery'],
-    //         ))
-    //     .toList();
   }
 
   void toggleFavorite(int id, String like) async {

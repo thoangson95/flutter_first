@@ -140,8 +140,8 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "curved_navigation_bar",
-      "rootUri": "file:///C:/Users/NAPP001/AppData/Local/Pub/Cache/hosted/pub.dev/curved_navigation_bar-1.0.3",
+      "name": "custom_navigation_bar",
+      "rootUri": "file:///C:/Users/NAPP001/AppData/Local/Pub/Cache/hosted/pub.dev/custom_navigation_bar-0.8.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -210,6 +210,12 @@
       "rootUri": "file:///C:/Users/NAPP001/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///C:/Users/NAPP001/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "flutter_riverpod",
@@ -656,7 +662,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-03-02T07:26:18.665204Z",
+  "generated": "2023-03-03T09:06:37.834888Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }

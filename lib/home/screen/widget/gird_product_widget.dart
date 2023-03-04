@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../../../product_detail/layout_product_detail.dart';
+import '../../../product_detail/provider/product_detail_provider.dart';
 import '../../model/product_model.dart';
-import '../../provider/product_home_provider.dart';
+import '../../../loading/screen/widget/loading_widget.dart';
+import 'favorite_widget.dart';
 
 class GridProductWidget extends ConsumerWidget {
   const GridProductWidget({
@@ -15,9 +16,15 @@ class GridProductWidget extends ConsumerWidget {
   });
 
   final List<ProductModel> products;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(productDetailProviders, (previous, next) {
+      if (next.isLoading == false) {
+        context.push(
+            '${LayoutProductDeatil.pathRoute}/${next.listProducts?.first.id}');
+        ref.read(isLoadingProvider.notifier).state = false;
+      }
+    });
     return Stack(
       children: [
         LayoutGrid(
@@ -32,8 +39,10 @@ class GridProductWidget extends ConsumerWidget {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.push(
-                            '${LayoutProductDeatil.pathRoute}/${item.id}');
+                        ref
+                            .read(productDetailProviders.notifier)
+                            .init('/product?id=${item.id}');
+                        ref.read(isLoadingProvider.notifier).state = true;
                       },
                       child: AspectRatio(
                         aspectRatio: 33 / 40,
@@ -71,30 +80,7 @@ class GridProductWidget extends ConsumerWidget {
                                     softWrap: true,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: TextButton(
-                                    onPressed: () {
-                                      ref
-                                          .read(productHomeProviders.notifier)
-                                          .toggleFavorite(int.parse(item.id),
-                                              item.status.toString());
-                                    },
-                                    style: TextButton.styleFrom(
-                                      minimumSize: Size.zero,
-                                      padding: EdgeInsets.zero,
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    child: Icon(
-                                      (item.status.isNotEmpty)
-                                          ? Icons.favorite
-                                          : Icons.favorite_border,
-                                      size: 15,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                  ),
-                                )
+                                FavoriteWidget(product: item),
                               ],
                             ),
                             Container(
@@ -121,14 +107,6 @@ class GridProductWidget extends ConsumerWidget {
                 ),
               )
               .toList(),
-        ),
-        Container(
-          color: Colors.white24,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: const Center(
-            child: CupertinoActivityIndicator(),
-          ),
         ),
       ],
     );

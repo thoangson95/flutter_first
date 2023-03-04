@@ -1,77 +1,80 @@
 import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../home/provider/product_home_provider.dart';
+import '../../loading/screen/widget/loading_widget.dart';
 import '../model/product_model.dart';
 import '../repository/repository.dart';
 
-class ProductState {
+class ProductDetailState {
   final List<ProductModel>? listProducts;
   bool? isLoading;
 
-  ProductState({this.listProducts, this.isLoading = true});
+  ProductDetailState({this.listProducts, this.isLoading = true});
 
-  ProductState copyWith({List<ProductModel>? listProducts, bool? isLoading}) {
-    return ProductState(
+  ProductDetailState copyWith(
+      {List<ProductModel>? listProducts, bool? isLoading}) {
+    return ProductDetailState(
         isLoading: isLoading ?? this.isLoading,
         listProducts: listProducts ?? this.listProducts);
   }
 }
 
-class ProductControler extends StateNotifier<ProductState> {
-  ProductControler() : super(ProductState());
+class ProductDetailControler extends StateNotifier<ProductDetailState> {
+  ProductDetailControler() : super(ProductDetailState());
 
   init(String url) async {
-    Future.delayed(const Duration(seconds: 1), () async {
-      final List<ProductModel>? items = await fetchProducts(url);
-      state = state.copyWith(listProducts: items, isLoading: false);
-    });
+    final List<ProductModel>? items = await fetchProducts(url);
+    state = state.copyWith(listProducts: items, isLoading: false);
   }
 
   Future<List<ProductModel>?> fetchProducts(String url) async {
     final response = await apiProvider.get(url);
     final data = json.decode(response.data) as List<dynamic>;
-    return data
-        .map((product) => ProductModel(
-              id: product['id'],
-              name: product['name'],
-              photo: product['photo'],
-              regularPrice: product['regular_price'],
-              salePrice: product['sale_price'],
-              discount: product['discount'],
-              status: product['status'],
-              idList: product['id_list'],
-              gallery: product['gallery'],
-            ))
-        .toList();
+    List<ProductModel>? newList = [];
+    for (var product in data) {
+      newList.add(ProductModel.fromJson(product));
+    }
+    return newList;
   }
 
-  void toggleFavorite(int id, String like) async {
+  void toggleFavorite(int id, String like, WidgetRef ref) async {
+    final List<ProductModel>? items = await fetchProducts('/product?id=$id');
     state = state.copyWith(isLoading: true);
+    ref.read(isLoadingProvider.notifier).state = true;
+    List<ProductModel> newList = [];
     if (like.isNotEmpty) {
-      List<ProductModel> newList = [];
-      for (var element in state.listProducts!) {
-        if (int.parse(element.id.toString()) == id) {
-          element = element.copyWith(status: '');
-        }
-        newList.add(element);
-      }
+      newList.add(items!.first.copyWith(status: ''));
       await putData('/product', {'id': id, 'like': ''});
-      state = state.copyWith(listProducts: newList, isLoading: false);
+      ref.read(productHomeProviders.notifier).toggleFavorite(id, 'like');
     } else {
-      List<ProductModel> newList = [];
-      for (var element in state.listProducts!) {
-        if (int.parse(element.id.toString()) == id) {
-          element = element.copyWith(status: 'like');
-        }
-        newList.add(element);
-      }
+      newList.add(items!.first.copyWith(status: 'like'));
       await putData('/product', {'id': id, 'like': 'like'});
-      state = state.copyWith(listProducts: newList, isLoading: false);
+      ref.read(productHomeProviders.notifier).toggleFavorite(id, '');
+    }
+    state = state.copyWith(listProducts: newList, isLoading: false);
+    ref.read(isLoadingProvider.notifier).state = false;
+  }
+
+  void handleRating(String idProduct, String star, WidgetRef ref) async {
+    state = state.copyWith(isLoading: true);
+    ref.read(isLoadingProvider.notifier).state = true;
+    if (star.isNotEmpty) {
+      await putData('/product', {'id_product': idProduct, 'star': star});
+      init('/product?id=$idProduct');
+      ref.read(isLoadingProvider.notifier).state = false;
     }
   }
 }
 
 final productDetailProviders =
-    StateNotifierProvider.family<ProductControler, ProductState, String>(
-        (ref, url) {
-  return ProductControler()..init(url);
-});
+    StateNotifierProvider<ProductDetailControler, ProductDetailState>(
+        (ref) => ProductDetailControler());
+
+final productDetailFavoriteProviders = StateNotifierProvider.autoDispose<
+    ProductDetailControler,
+    ProductDetailState>((ref) => ProductDetailControler());
+
+final productDetailRatingProviders = StateNotifierProvider.autoDispose<
+    ProductDetailControler,
+    ProductDetailState>((ref) => ProductDetailControler());

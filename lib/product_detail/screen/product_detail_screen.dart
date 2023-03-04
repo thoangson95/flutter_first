@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
+import '../../constants.dart';
 import '../../icons/AppFonts_icons.dart';
 import '../provider/product_detail_provider.dart';
+import 'widget/favorite_widget.dart';
+import 'widget/pic_widget.dart';
+import 'widget/price_and_rating_widget.dart';
 
 class ProductDetailPage extends ConsumerStatefulWidget {
   final String id;
@@ -18,18 +20,16 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
   @override
   void initState() {
     super.initState();
-    // ref.read(productDetailProviders.notifier).init('/product?id=${widget.id}');
   }
 
   @override
   Widget build(BuildContext context) {
-    final products =
-        ref.watch(productDetailProviders('/product?id=${widget.id}'));
+    final products = ref.watch(productDetailProviders);
 
-    final product = products.listProducts?.first;
+    final product = products.listProducts!.first;
     final List<String> gallerys = [
-      product?.photo ?? '',
-      ...?product?.gallery,
+      product.photo,
+      ...product.gallery,
     ];
     return Scaffold(
       backgroundColor: Colors.white,
@@ -53,35 +53,27 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PhotoViewGallery.builder(
-                      itemCount: gallerys.length,
-                      builder: (BuildContext context, int index) {
-                        return PhotoViewGalleryPageOptions(
-                          imageProvider: NetworkImage(gallerys[index]),
-                          initialScale: PhotoViewComputedScale.contained * 0.8,
-                          minScale: PhotoViewComputedScale.contained * 0.8,
-                          maxScale: PhotoViewComputedScale.covered * 1.1,
-                        );
-                      },
-                      scrollPhysics: const BouncingScrollPhysics(),
-                    ),
+            PicWidget(gallerys: gallerys, widget: widget, product: product),
+            Padding(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        product.name,
+                        style: const TextStyle(
+                          color: Color(0xFF222222),
+                          fontSize: 20,
+                        ),
+                      ),
+                      FavoriteWidget(product: product),
+                    ],
                   ),
-                );
-              },
-              child: Hero(
-                tag: widget.id,
-                child: Image.network(
-                  product?.photo ?? '',
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return Image.asset('assets/images/spacer.png');
-                  },
-                ),
+                  const Padding(padding: EdgeInsets.only(top: 15)),
+                  PriceAndRatingWidget(product: product),
+                ],
               ),
             ),
           ],
