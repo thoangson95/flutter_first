@@ -50,12 +50,15 @@ class ProductDetailScreen extends ConsumerWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                width: double.infinity,
-                height: 370,
-                child: Image.network(
-                  data.photo,
-                  fit: BoxFit.cover,
+              Hero(
+                tag: 'product-animation-${data.id}',
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 370,
+                  child: Image.network(
+                    data.photo,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
 
@@ -72,8 +75,7 @@ class ProductDetailScreen extends ConsumerWidget {
                   ),
                 ),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                   child: Column(
                     children: [
                       Container(
@@ -146,8 +148,7 @@ class ProductDetailScreen extends ConsumerWidget {
 
               // Màu sắc
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 margin: const EdgeInsets.only(top: 21, bottom: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -190,15 +191,8 @@ class ProductDetailScreen extends ConsumerWidget {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          ref.read(cartChangeProvider.notifier).addToCart(
-                              item: CartModel(
-                                  price: data.regularPrice,
-                                  name: data.namevi,
-                                  photo: data.photo,
-                                  productId: data.id),
-                              qty: 1);
-                          alert(context, const Text("Thêm thành công"),
-                              const Text("Đã thêm vào giỏ hàng"), [
+                          ref.read(cartChangeProvider.notifier).addToCart(item: CartModel(price: data.regularPrice, name: data.namevi, photo: data.photo, productId: data.id), qty: 1);
+                          alert(context, const Text("Thêm thành công"), const Text("Đã thêm vào giỏ hàng"), [
                             TextButton(
                                 onPressed: () {
                                   context.pop();
@@ -218,27 +212,13 @@ class ProductDetailScreen extends ConsumerWidget {
                       height: 46,
                       child: ElevatedButton(
                         onPressed: () {
-                          ref.read(cartChangeProvider.notifier).addToCart(
-                              item: CartModel(
-                                  price: data.regularPrice,
-                                  name: data.namevi,
-                                  photo: data.photo,
-                                  productId: data.id),
-                              qty: 1);
+                          ref.read(cartChangeProvider.notifier).addToCart(item: CartModel(price: data.regularPrice, name: data.namevi, photo: data.photo, productId: data.id), qty: 1);
                           context.push("/cart");
                         },
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: const Color(0xFFFF7465),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                        style: ElevatedButton.styleFrom(elevation: 0, backgroundColor: const Color(0xFFFF7465), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                         child: const Text(
                           "Mua ngay",
-                          style: TextStyle(
-                              color: Color(0xFFFFFFFF),
-                              fontSize: 14,
-                              height: 1.4,
-                              fontWeight: FontWeight.w700),
+                          style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14, height: 1.4, fontWeight: FontWeight.w700),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -262,8 +242,7 @@ class ProductDetailScreen extends ConsumerWidget {
   }
 }
 
-Future<void> alert(
-    BuildContext context, Text title, Text content, List<Widget>? action) {
+Future<void> alert(BuildContext context, Text title, Text content, List<Widget>? action) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {

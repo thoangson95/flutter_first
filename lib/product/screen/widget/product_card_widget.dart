@@ -31,19 +31,20 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           Consumer(builder: (context, ref, child) {
             return InkWell(
               onTap: () {
-                ref
-                    .read(productDetailIdProvier.notifier)
-                    .update((state) => widget.model.id);
+                ref.read(productDetailIdProvier.notifier).update((state) => widget.model.id);
                 context.push("/product-detail");
               },
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20),
-                ),
-                child: Image.network(
-                  widget.model.photo,
-                  fit: BoxFit.cover,
-                  height: 200,
+              child: Hero(
+                tag: 'product-animation-${widget.model.id}',
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  child: Image.network(
+                    widget.model.photo,
+                    fit: BoxFit.cover,
+                    height: 200,
+                  ),
                 ),
               ),
             );
@@ -72,17 +73,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                     margin: const EdgeInsets.only(left: 10),
                     child: InkWell(
                       onTap: () {
-                        ref
-                            .read(productState.notifier)
-                            .toggleFav(model: widget.model);
+                        ref.read(productState.notifier).toggleFav(model: widget.model);
                         setState(() {});
                       },
                       child: Icon(
-                        ref
-                                .watch(productState.notifier)
-                                .checkFav(id: widget.model.id)
-                            ? Icons.favorite
-                            : Custom.heart,
+                        ref.watch(productState.notifier).checkFav(id: widget.model.id) ? Icons.favorite : Custom.heart,
                         color: const Color(0xffFF7465),
                       ),
                     ),

@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'custom_icons.dart';
 
 class MainBottomNavBarWidget extends StatefulWidget {
-  const MainBottomNavBarWidget({Key? key, required this.body})
-      : super(key: key);
+  const MainBottomNavBarWidget({Key? key, required this.body}) : super(key: key);
 
   final Widget body;
 
@@ -65,8 +64,7 @@ class _MainBottomNavBarWidgetState extends State<MainBottomNavBarWidget> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Custom.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Custom.heart), label: "Favorite"),
-          BottomNavigationBarItem(
-              icon: Icon(Custom.bell), label: "Notification"),
+          BottomNavigationBarItem(icon: Icon(Custom.bell), label: "Notification"),
           BottomNavigationBarItem(icon: Icon(Custom.user), label: "Account"),
         ],
       ),

@@ -32,18 +32,20 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
           Consumer(builder: (context, ref, child) {
             return InkWell(
               onTap: () {
-                ref.read(productDetailIdProvier.notifier).state =
-                    widget.model.id;
+                ref.read(productDetailIdProvier.notifier).state = widget.model.id;
                 context.push("/product-detail");
               },
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20),
-                ),
-                child: Image.network(
-                  widget.model.photo,
-                  fit: BoxFit.cover,
-                  height: 200,
+              child: Hero(
+                tag: 'product-animation-${widget.model.id}',
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                  child: Image.network(
+                    widget.model.photo,
+                    fit: BoxFit.cover,
+                    height: 200,
+                  ),
                 ),
               ),
             );
@@ -84,11 +86,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                         setState(() {});
                       },
                       child: Icon(
-                        ref
-                                .watch(productState.notifier)
-                                .checkFav(id: widget.model.id)
-                            ? Icons.favorite
-                            : Custom.heart,
+                        ref.watch(productState.notifier).checkFav(id: widget.model.id) ? Icons.favorite : Custom.heart,
                         color: const Color(0xffFF7465),
                       ),
                     ),

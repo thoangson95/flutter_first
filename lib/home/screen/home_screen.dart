@@ -79,11 +79,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Xin Chào Bảo Ngọc",
-                  style: TextStyle(
-                      fontSize: 13,
-                      height: 1.46,
-                      color: Color(0xFF222222),
-                      fontWeight: FontWeight.w700),
+                  style: TextStyle(fontSize: 13, height: 1.46, color: Color(0xFF222222), fontWeight: FontWeight.w700),
                 ),
               ),
               const Padding(
@@ -115,9 +111,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       height: 1.3,
                       color: Color(0xFF6A6A6A),
                     ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide.none),
                   ),
                 ),
               ),
@@ -175,8 +169,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         Visibility(
                           visible: _tabIndex == 1,
                           child: const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 0),
+                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                             child: CategoriTabWidget(),
                           ),
                         ),

@@ -12,11 +12,7 @@ class AccountScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Tài khoản",
-          style: TextStyle(
-              fontSize: 16,
-              height: 23 / 16,
-              color: Color(0xff222222),
-              fontWeight: FontWeight.w700),
+          style: TextStyle(fontSize: 16, height: 23 / 16, color: Color(0xff222222), fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
         bottom: PreferredSize(
@@ -44,8 +40,7 @@ class AccountScreen extends StatelessWidget {
                           margin: const EdgeInsets.only(right: 13),
                           child: const CircleAvatar(
                             radius: 30,
-                            backgroundImage:
-                                AssetImage("assets/images/avatar.png"),
+                            backgroundImage: AssetImage("assets/images/avatar.png"),
                           ),
                         ),
                         Column(
@@ -53,11 +48,7 @@ class AccountScreen extends StatelessWidget {
                           children: const [
                             Text(
                               "Thạc Bảo Ngọc",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  height: 20 / 14,
-                                  color: Color(0xff222222),
-                                  fontWeight: FontWeight.w700),
+                              style: TextStyle(fontSize: 14, height: 20 / 14, color: Color(0xff222222), fontWeight: FontWeight.w700),
                             ),
                             Text(
                               "Chỉnh sửa",
