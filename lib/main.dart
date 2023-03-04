@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:thoitrang/cart.dart';
-import 'package:thoitrang/login.dart';
-import 'package:thoitrang/purchase.dart';
-import 'package:thoitrang/redemcode.dart';
-import 'package:thoitrang/splash.dart';
-import 'package:thoitrang/successpurchase.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:thoitrang/cart/screen/cart_screen.dart';
+import 'package:thoitrang/login/screen/login_screen.dart';
+import 'package:thoitrang/purchase/screen/purchase_screen.dart';
+import 'package:thoitrang/redeemcode/screen/redemcode_screen.dart';
+import 'package:thoitrang/splash/screen/splash_screen.dart';
+import 'package:thoitrang/success/screen/successpurchase_screen.dart';
+
+import 'home/screen/testscreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 List items = [
@@ -166,7 +168,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Color(0xFFFF7465),
+      color: const Color(0xFFFF7465),
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
@@ -191,16 +193,17 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
+        '/asdasd': (context) => const TestScreen(),
         '/': (context) => SplashScreen(
               list: items,
             ),
-        '/login/redeem': (context) => const Redemcode(phonenumber: "01"),
-        '/login': (context) => Login(list: items),
-        '/mot': (context) => Cart(
+        '/login/redeem': (context) => const RedemcodeScreen(phonenumber: "01"),
+        '/login': (context) => LoginScreen(),
+        '/mot': (context) => CartScreen(
               list: items,
             ),
-        '/hai': (context) => Purchase(list: items),
-        '/hai/ba': (context) => const SuccessPurchase(),
+        '/hai': (context) => PurchaseScreen(list: items),
+        '/hai/ba': (context) => const SuccessPurchaseScreen(),
       },
     );
   }
