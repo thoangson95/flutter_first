@@ -3,6 +3,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 import '../../function.dart';
 import '../provider/product_detail_state.dart';
@@ -28,6 +30,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final productDetail = ref.watch(productDetailProviders);
+
     final product = productDetail.productItem?.first;
 
     List imageGallery = ["${product?.photo}"];
@@ -38,8 +41,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     if (product?.color != null) {
       listColor.addAll(product?.color as Iterable);
     }
-    if (product != null) {
+    if (product != null && productDetail.isLoading == false) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: GFAppBar(
           leading: GFIconButton(
             icon: const Icon(
@@ -66,28 +70,39 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           children: [
             Column(
               children: [
-                GFCarousel(
-                  autoPlay: true,
-                  height: 370.0,
-                  viewportFraction: 1.0,
-                  items: imageGallery.map(
-                    (url) {
-                      return Container(
-                        margin: const EdgeInsets.all(0),
-                        child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(0)),
-                          child: Image.network(url,
-                              fit: BoxFit.cover, width: 1200.0),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.zero,
+                      height: 370,
+                      child: PhotoViewGallery.builder(
+                        itemCount: imageGallery.length,
+                        builder: (BuildContext context, int index) {
+                          return PhotoViewGalleryPageOptions(
+                            imageProvider: NetworkImage(imageGallery[index]),
+                            initialScale: PhotoViewComputedScale.contained * 1,
+                            minScale: PhotoViewComputedScale.covered * 1,
+                            maxScale: PhotoViewComputedScale.covered * 1,
+                            heroAttributes: PhotoViewHeroAttributes(tag: index),
+                          );
+                        },
+                        scrollPhysics: const BouncingScrollPhysics(),
+                        loadingBuilder: (context, event) => Center(
+                          child: Container(
+                            padding: EdgeInsets.zero,
+                            width: 20.0,
+                            height: 20.0,
+                            child: const CircularProgressIndicator(),
+                          ),
                         ),
-                      );
-                    },
-                  ).toList(),
-                  onPageChanged: (index) {
-                    setState(() {
-                      index;
-                    });
-                  },
+                        backgroundDecoration: BoxDecoration(
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        customSize: const Size(500, 550),
+                        allowImplicitScrolling: true,
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -279,8 +294,11 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         ),
       );
     }
-    return const Center(
-      child: CircularProgressIndicator(),
+    return Container(
+      color: Colors.white,
+      child: const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

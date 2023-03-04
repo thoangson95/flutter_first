@@ -23,11 +23,12 @@ class ProductDetailControler extends StateNotifier<ProductDetailState> {
   init(String id) async {
     final List<ProductDetailModel>? a =
         await ProductDetailRepository.fetchProduct(id);
-    state = state.copyWith(productItem: a);
+
+    state = state.copyWith(productItem: a, isLoading: false);
   }
 }
 
-final productDetailProviders =
-    StateNotifierProvider<ProductDetailControler, ProductDetailState>(
+final productDetailProviders = StateNotifierProvider.autoDispose<
+    ProductDetailControler, ProductDetailState>(
   (ref) => ProductDetailControler(),
 );

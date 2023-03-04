@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'account/layout_account.dart';
-import 'filter/layout_filter.dart';
+import 'forget_password/layout_forget_password.dart';
 import 'products/layout_products.dart';
 import 'home/layout_home.dart';
 
@@ -18,7 +18,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     LayoutHome(),
     LayoutProducts(),
-    LayoutFilter(),
+    LayoutForgetPassword(),
     LayoutAccount(),
   ];
 

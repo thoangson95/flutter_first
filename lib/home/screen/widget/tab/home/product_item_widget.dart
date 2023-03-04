@@ -26,11 +26,14 @@ class ProductItemWidget extends ConsumerWidget {
                 GoRouter.of(context).push('/product-detail/$id');
               },
               splashColor: Colors.transparent,
-              child: Image.network(
-                photo,
-                width: double.infinity,
-                height: 205,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: id,
+                child: Image.network(
+                  photo,
+                  width: double.infinity,
+                  height: 205,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

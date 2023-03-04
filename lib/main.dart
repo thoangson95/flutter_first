@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:thoitrang/account/layout_account.dart';
+import 'package:thoitrang/verification_code/layout_verification_code.dart';
 
 import 'filter/layout_filter.dart';
+import 'forget_password/layout_forget_password.dart';
 import 'product_detail/layout_product_detail.dart';
 import 'products/layout_products.dart';
 import 'tabbar_screen.dart';
@@ -28,6 +30,8 @@ final GoRouter _router = GoRouter(
         LayoutProductDetail.goRoute(),
         LayoutProducts.goRoute(),
         LayoutFilter.goRoute(),
+        LayoutForgetPassword.goRoute(),
+        LayoutVerificationCode.goRoute(),
         // GoRoute(
         //   path: 'products',
         //   pageBuilder: (context, state) {
@@ -80,7 +84,8 @@ class MyApp extends ConsumerWidget {
       showSemanticsDebugger: false,
       checkerboardRasterCacheImages: false,
       debugShowMaterialGrid: false,
-      theme: ThemeData(useMaterial3: true, fontFamily: 'UTMAvo'),
+      theme: ThemeData(
+          useMaterial3: true, fontFamily: 'UTMAvo', canvasColor: Colors.white),
     );
   }
 }
