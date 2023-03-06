@@ -70,4 +70,14 @@ class HomeRepository {
       throw Exception('Failed to load Categories');
     }
   }
+
+  static Future<List> appInfo() async {
+    final response = await _dio.get('/app-info');
+    final data = json.decode(response.data);
+    if (response.statusCode == 200) {
+      return data;
+    } else {
+      throw Exception('Failed to load App Info');
+    }
+  }
 }

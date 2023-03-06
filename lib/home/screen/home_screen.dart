@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:thoitrang/home/repository/home_repository.dart';
 
 import 'widget/home_search_widget.dart';
 import 'widget/home_wellcome_widget.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   bool _isVisibleTab1 = true;
   bool _isVisibleTab2 = false;
+  List<dynamic> appInfo = [];
 
   void _onTabChanged(int index) {
     setState(() {
