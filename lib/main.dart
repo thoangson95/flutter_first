@@ -32,41 +32,6 @@ final GoRouter _router = GoRouter(
         LayoutFilter.goRoute(),
         LayoutForgetPassword.goRoute(),
         LayoutVerificationCode.goRoute(),
-        // GoRoute(
-        //   path: 'products',
-        //   pageBuilder: (context, state) {
-        //     return CustomTransitionPage(
-        //       key: state.pageKey,
-        //       child: const ProductsScreen(),
-        //       transitionsBuilder:
-        //           (context, animation, secondaryAnimation, child) {
-        //         return FadeTransition(
-        //           opacity: CurveTween(curve: Curves.easeInOutCirc)
-        //               .animate(animation),
-        //           child: child,
-        //         );
-        //       },
-        //     );
-        //   },
-        // ),
-        // GoRoute(
-        //   path: 'order-success',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const OrderScreen();
-        //   },
-        // ),
-        // GoRoute(
-        //   path: 'forget-password',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const ForgetPasswordScreen();
-        //   },
-        // ),
-        // GoRoute(
-        //   path: 'check-code',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const CheckCodeScreen();
-        //   },
-        // ),
       ],
     ),
   ],

@@ -22,6 +22,7 @@ class ProductItemWidget extends ConsumerWidget {
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
             child: InkWell(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               onTap: () {
                 GoRouter.of(context).push('/product-detail/$id');
               },

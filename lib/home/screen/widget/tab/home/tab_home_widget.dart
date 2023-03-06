@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
 
-import 'product_layout_widget.dart';
+import 'banner/home_banner_widget.dart';
+import 'product/product_layout_widget.dart';
 
 const List<String> imageList = [
   "https://images.template.net/108414/fashion-sale-banner-template-85svg.jpg",
@@ -10,32 +10,12 @@ const List<String> imageList = [
   "https://img.freepik.com/premium-vector/fashion-week-banner-template-promotion-fashion-banner_122059-223.jpg",
 ];
 
-class HomeProductWidget extends StatelessWidget {
-  const HomeProductWidget({super.key});
+class TabHomeWidget extends StatelessWidget {
+  const TabHomeWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Container(
-        padding: const EdgeInsets.all(20),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          child: Column(
-            children: [
-              GFCarousel(
-                autoPlay: true,
-                height: 150.0,
-                viewportFraction: 1.0,
-                items: imageList.map(
-                  (url) {
-                    return Image.network(url, fit: BoxFit.cover, width: 1200.0);
-                  },
-                ).toList(),
-                onPageChanged: (index) {},
-              ),
-            ],
-          ),
-        ),
-      ),
+      const HomeBannerWidget(),
       Padding(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
         child: Row(

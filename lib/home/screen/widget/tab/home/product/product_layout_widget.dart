@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
-import '../../../../provider/product_state.dart';
+import '../../../../../provider/home_product_state.dart';
 import 'product_item_widget.dart';
 
 class ProductLayerWidget extends ConsumerWidget {
@@ -10,7 +10,7 @@ class ProductLayerWidget extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final products = ref.watch(productProviders);
+    final products = ref.watch(homeProductProviders);
     return (products.listProducts != null && products.listProducts!.isNotEmpty)
         ? LayoutGrid(
             columnGap: 20,

@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'widget/home_search_widget.dart';
 import 'widget/home_wellcome_widget.dart';
-import 'widget/tab/home/home_product_widget.dart';
-import 'widget/tab/categories/home_categories_widget.dart';
+import 'widget/tab/categories/tab_categories_widget.dart';
+import 'widget/tab/home/tab_home_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'assets/images/icons/bag.png',
               width: 20,
             ),
-            onPressed: () => context.go('/home'),
+            onPressed: () => context.go('/'),
           )
         ],
         backgroundColor: Colors.white,
@@ -90,9 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               tabs: const [
-                Tab(text: ' Home '),
-                Tab(text: ' Categories '),
+                Tab(text: 'Home'),
+                Tab(text: 'Categories'),
               ],
+              indicatorPadding: const EdgeInsets.symmetric(horizontal: -15),
             ),
           ),
           Container(
@@ -102,11 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Visibility(
                   visible: _isVisibleTab1,
-                  child: const HomeProductWidget(),
+                  child: const TabHomeWidget(),
                 ),
                 Visibility(
                   visible: _isVisibleTab2,
-                  child: const HomeCategoriesWidget(),
+                  child: const TabCategoriesWidget(),
                 ),
               ],
             ),

@@ -1,10 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../repository/home_repository.dart';
-
-class ProductModel extends Equatable {
-  const ProductModel({
+class HomeCategoriesModel extends Equatable {
+  const HomeCategoriesModel({
     this.id,
     this.code,
     this.namevi,
@@ -28,7 +25,7 @@ class ProductModel extends Equatable {
   final String? status;
   final String? idList;
 
-  ProductModel copyWith({
+  HomeCategoriesModel copyWith({
     String? id,
     String? code,
     String? namevi,
@@ -40,7 +37,7 @@ class ProductModel extends Equatable {
     String? status,
     String? idList,
   }) {
-    return ProductModel(
+    return HomeCategoriesModel(
       id: id ?? this.id,
       code: code ?? this.code,
       namevi: namevi ?? this.namevi,
@@ -68,31 +65,3 @@ class ProductModel extends Equatable {
         idList
       ];
 }
-
-class ProductState {
-  final List<ProductModel>? listProducts;
-  final bool isLoading;
-
-  ProductState({this.listProducts, this.isLoading = true});
-
-  ProductState copyWith({List<ProductModel>? listProducts, bool? isLoading}) {
-    return ProductState(
-        isLoading: isLoading ?? this.isLoading,
-        listProducts: listProducts ?? this.listProducts);
-  }
-}
-
-class ProductControler extends StateNotifier<ProductState> {
-  ProductControler() : super(ProductState()) {
-    _init();
-  }
-
-  _init() async {
-    final List<ProductModel>? a = await HomeRepository.fetchProducts();
-    state = state.copyWith(listProducts: a);
-  }
-}
-
-final productProviders = StateNotifierProvider<ProductControler, ProductState>(
-  (ref) => ProductControler(),
-);
