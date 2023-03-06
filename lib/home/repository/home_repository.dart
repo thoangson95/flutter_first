@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
+import '../model/home_model.dart';
 import '../model/home_banner_model.dart';
 import '../model/home_categories_model.dart';
 import '../model/home_product_model.dart';
@@ -13,23 +14,12 @@ class HomeRepository {
   static Future<List<HomeProductModel>?> homeProduct() async {
     final response = await _dio.get('/product');
     final data = json.decode(response.data) as List<dynamic>;
+    List<HomeProductModel> listProducts = [];
     if (response.statusCode == 200) {
-      return data
-          .map(
-            (product) => HomeProductModel(
-              id: product['id'],
-              code: product['code'],
-              namevi: product['namevi'],
-              descvi: product['descvi'],
-              photo: product['photo'],
-              regularPrice: product['regular_price'],
-              salePrice: product['sale_price'],
-              discount: product['discount'],
-              status: product['status'],
-              idList: product['id_list'],
-            ),
-          )
-          .toList();
+      for (var e in data) {
+        listProducts.add(HomeProductModel.fromJson(e));
+      }
+      return listProducts;
     } else {
       throw Exception('Failed to load Product');
     }
@@ -38,16 +28,12 @@ class HomeRepository {
   static Future<List<HomeBannerModel>?> homeBanner() async {
     final response = await _dio.get('/banner');
     final data = json.decode(response.data) as List<dynamic>;
+    List<HomeBannerModel>? listBanner = [];
     if (response.statusCode == 200) {
-      return data
-          .map(
-            (product) => HomeBannerModel(
-              id: product['id'],
-              namevi: product['namevi'],
-              photo: product['photo'],
-            ),
-          )
-          .toList();
+      for (var e in data) {
+        listBanner.add(HomeBannerModel.fromJson(e));
+      }
+      return listBanner;
     } else {
       throw Exception('Failed to load Banner');
     }
@@ -56,28 +42,29 @@ class HomeRepository {
   static Future<List<HomeCategoriesModel>?> homeCategories() async {
     final response = await _dio.get('/categories');
     final data = json.decode(response.data) as List<dynamic>;
+
+    List<HomeCategoriesModel>? listCategories = [];
     if (response.statusCode == 200) {
-      return data
-          .map(
-            (product) => HomeCategoriesModel(
-              id: product['id'],
-              namevi: product['namevi'],
-              photo: product['photo'],
-            ),
-          )
-          .toList();
+      for (var e in data) {
+        listCategories.add(HomeCategoriesModel.fromJson(e));
+      }
+      return listCategories;
     } else {
       throw Exception('Failed to load Categories');
     }
   }
 
-  static Future<List> appInfo() async {
+  static Future<List<HomeModel>?> homeInfo() async {
     final response = await _dio.get('/app-info');
-    final data = json.decode(response.data);
+    final data = json.decode(response.data) as List<dynamic>;
+    List<HomeModel>? listData = [];
     if (response.statusCode == 200) {
-      return data;
+      for (var e in data) {
+        listData.add(HomeModel.fromJson(e));
+      }
+      return listData;
     } else {
-      throw Exception('Failed to load App Info');
+      throw Exception('Failed to load Categories');
     }
   }
 }

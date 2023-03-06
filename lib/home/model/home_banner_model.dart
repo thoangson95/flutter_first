@@ -1,32 +1,17 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-class HomeBannerModel extends Equatable {
-  const HomeBannerModel({
-    this.id,
-    this.namevi,
-    this.photo,
-  });
+part 'home_banner_model.freezed.dart';
+part 'home_banner_model.g.dart';
 
-  final String? id;
-  final String? namevi;
-  final String? photo;
+@freezed
+class HomeBannerModel with _$HomeBannerModel {
+  const factory HomeBannerModel({
+    required String id,
+    required String namevi,
+    required String photo,
+  }) = _HomeBannerModel;
 
-  HomeBannerModel copyWith({
-    String? id,
-    String? namevi,
-    String? photo,
-  }) {
-    return HomeBannerModel(
-      id: id ?? this.id,
-      namevi: namevi ?? this.namevi,
-      photo: photo ?? this.photo,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        id,
-        namevi,
-        photo,
-      ];
+  factory HomeBannerModel.fromJson(Map<String, Object?> json) =>
+      _$HomeBannerModelFromJson(json);
 }

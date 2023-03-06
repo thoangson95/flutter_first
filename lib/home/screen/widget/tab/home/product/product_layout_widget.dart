@@ -20,8 +20,8 @@ class ProductLayerWidget extends ConsumerWidget {
                 repeat((products.listProducts!.length / 2).ceil(), [auto]),
             children: products.listProducts!
                 .map(
-                  (item) => ProductItemWidget(item.id ?? '', item.namevi ?? '',
-                      item.photo ?? '', item.regularPrice ?? ''),
+                  (item) => ProductItemWidget(
+                      item.id, item.namevi, item.photo, item.regularPrice),
                 )
                 .toList(),
           )

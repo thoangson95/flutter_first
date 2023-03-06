@@ -30,7 +30,6 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final productDetail = ref.watch(productDetailProviders);
-
     final product = productDetail.productItem?.first;
 
     List imageGallery = ["${product?.photo}"];

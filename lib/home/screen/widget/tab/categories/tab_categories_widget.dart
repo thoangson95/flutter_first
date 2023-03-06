@@ -17,8 +17,8 @@ class TabCategoriesWidget extends ConsumerWidget {
             child: Column(
               children: categories.listCategories!
                   .map(
-                    (item) => CategoriesItemWidget(
-                        item.id ?? '', item.namevi ?? '', item.photo ?? ''),
+                    (item) =>
+                        CategoriesItemWidget(item.id, item.namevi, item.photo),
                   )
                   .toList(),
             ),

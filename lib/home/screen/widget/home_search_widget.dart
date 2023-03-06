@@ -42,6 +42,10 @@ class HomeSearchWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              onSubmitted: (value) {
+                // ignore: avoid_print
+                print(value);
+              },
             ),
           ),
         ],
