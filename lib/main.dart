@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'account/layout_account.dart';
 import 'home/model/favorite_product_model.dart';
 import 'verification_code/layout_verification_code.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'filter/layout_filter.dart';
 import 'forget_password/layout_forget_password.dart';
@@ -17,7 +17,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(FavoriteProductModelAdapter());
   await Hive.openBox('favorite_products');
-
   runApp(
     const ProviderScope(
       child: MyApp(),

@@ -36,9 +36,7 @@ class _FavoriteProductWidgetState extends ConsumerState<FavoriteProductWidget> {
   @override
   Widget build(context) {
     late final isFav = FavoriteProducts().isFavorite(widget.id);
-    Key key = ValueKey(isFav);
     return FutureBuilder(
-      key: key,
       future: isFav,
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
@@ -47,6 +45,7 @@ class _FavoriteProductWidgetState extends ConsumerState<FavoriteProductWidget> {
             return SizedBox(
               width: 35,
               height: 35,
+              key: ValueKey(snapshot.data),
               child: IconButton(
                 autofocus: true,
                 alignment: Alignment.topCenter,
@@ -64,6 +63,7 @@ class _FavoriteProductWidgetState extends ConsumerState<FavoriteProductWidget> {
             return SizedBox(
               width: 35,
               height: 35,
+              key: ValueKey(snapshot.data),
               child: IconButton(
                 autofocus: true,
                 alignment: Alignment.topCenter,
