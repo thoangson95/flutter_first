@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
@@ -10,7 +10,7 @@ class ProductLayerWidget extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final products = ref.watch(homeProductProviders);
+    late final products = ref.watch(homeProductProviders);
     return (products.listProducts != null && products.listProducts!.isNotEmpty)
         ? LayoutGrid(
             columnGap: 20,
@@ -25,6 +25,9 @@ class ProductLayerWidget extends ConsumerWidget {
                 )
                 .toList(),
           )
-        : const CircularProgressIndicator();
+        : const Padding(
+            padding: EdgeInsets.all(20),
+            child: Center(child: CupertinoActivityIndicator()),
+          );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../provider/home_state.dart';
 import 'widget/home_search_widget.dart';
@@ -126,7 +127,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Container(
       color: Colors.white,
       child: const Center(
-        child: CircularProgressIndicator(),
+        child: CupertinoActivityIndicator(),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:getwidget/getwidget.dart';
@@ -44,6 +45,9 @@ class HomeBannerWidget extends ConsumerWidget {
               ),
             ),
           )
-        : const CircularProgressIndicator();
+        : const Padding(
+            padding: EdgeInsets.all(20),
+            child: Center(child: CupertinoActivityIndicator()),
+          );
   }
 }

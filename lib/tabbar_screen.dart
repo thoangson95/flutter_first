@@ -12,8 +12,6 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
-  dynamic modalData;
-
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     LayoutHome(),
@@ -30,31 +28,21 @@ class _TabBarScreenState extends State<TabBarScreen> {
 
   final List<BottomNavigationBarItem> _navItems = [
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'assets/images/icons/tab/home.png',
-        width: 24,
-        height: 24,
-      ),
-      activeIcon: Image.asset(
-        'assets/images/icons/tab/home_active.png',
-        width: 24,
-        height: 24,
-      ),
+      icon: Image.asset('assets/images/icons/tab/home.png',
+          width: 24, height: 24),
+      activeIcon: Image.asset('assets/images/icons/tab/home_active.png',
+          width: 24, height: 24),
       label: 'Home',
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'assets/images/icons/tab/favorite.png',
-        width: 24,
-        height: 24,
-      ),
-      activeIcon: Image.asset(
-        'assets/images/icons/tab/favorite_active.png',
-        width: 24,
-        height: 24,
-      ),
-      label: 'Favorite',
-    ),
+        icon: Image.asset('assets/images/icons/tab/favorite.png',
+            width: 24, height: 24),
+        activeIcon: Image.asset(
+          'assets/images/icons/tab/favorite_active.png',
+          width: 24,
+          height: 24,
+        ),
+        label: 'Favorite'),
     BottomNavigationBarItem(
       icon: Image.asset(
         'assets/images/icons/tab/notifications.png',
@@ -62,10 +50,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
         height: 24,
       ),
       activeIcon: Image.asset(
-        'assets/images/icons/tab/notifications_active.png',
-        width: 24,
-        height: 24,
-      ),
+          'assets/images/icons/tab/notifications_active.png',
+          width: 24,
+          height: 24),
       label: 'Notifications',
     ),
     BottomNavigationBarItem(
@@ -74,11 +61,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
         width: 24,
         height: 24,
       ),
-      activeIcon: Image.asset(
-        'assets/images/icons/tab/user_active.png',
-        width: 24,
-        height: 24,
-      ),
+      activeIcon: Image.asset('assets/images/icons/tab/user_active.png',
+          width: 24, height: 24),
       label: 'Account',
     ),
   ];

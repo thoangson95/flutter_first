@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../provider/home_categories_state.dart';
@@ -24,7 +24,8 @@ class TabCategoriesWidget extends ConsumerWidget {
             ),
           )
         : const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Center(child: CircularProgressIndicator()));
+            padding: EdgeInsets.all(20),
+            child: Center(child: CupertinoActivityIndicator()),
+          );
   }
 }

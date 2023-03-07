@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:thoitrang/function.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'favorite_product_widget.dart';
+
 class ProductItemWidget extends ConsumerWidget {
   final String id;
   final String namevi;
@@ -55,21 +57,7 @@ class ProductItemWidget extends ConsumerWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 35,
-                  height: 35,
-                  child: IconButton(
-                    autofocus: true,
-                    alignment: Alignment.topCenter,
-                    icon: const Icon(
-                      // ignore: dead_code
-                      false ? Icons.favorite : Icons.favorite_border,
-                      color: Colors.red,
-                      size: 18,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
+                FavoriteProductWidget(id),
               ],
             ),
           ),
